@@ -82,18 +82,50 @@ main h2 {
 /* 
   NUEVO: Estilos para el footer negro.
 */
+/*
+  NUEVO: Estilos para el footer negro.
+  AJUSTE: Hacemos que se parezca más al header y centramos el bloque de texto.
+*/
 footer {
     background-color: #000000;
     color: #ffffff;
     text-align: center;
-    padding: 2rem; /* Más espaciado para que se vea bien */
+
+    /*
+      CAMBIO 1: Ajustamos el padding.
+      Ahora tendrá un espacio generoso arriba y abajo (2rem),
+      pero 0 en los lados, igual que el header.
+    */
+    padding: 2.5rem 0; 
 }
 
 footer p {
-    margin: 0;
-    font-style: italic; /* La cursiva le va bien a las citas */
-    font-size: 0.9rem;
-    line-height: 1.5; /* Mejora la legibilidad */
+    font-style: italic;
+    font-size: 1rem; /* Un poco más grande para mejor legibilidad */
+    line-height: 1.6;
+
+    /* 
+      CAMBIO 2: Centrado perfecto del bloque de texto.
+      - Le damos un ancho máximo para que la cita no se estire demasiado en pantallas grandes.
+      - 'margin: 0 auto;' es el truco clave para centrar un bloque que tiene un ancho definido.
+    */
+    max-width: 700px; /* Ancho máximo del texto */
+    margin: 0 auto;   /* Centra el bloque horizontalmente */
+    padding: 0 20px;  /* Un pequeño padding lateral para que el texto no toque los bordes en pantallas muy pequeñas */
+}
+
+
+/* Ajustes para pantallas pequeñas (sin cambios, pero lo incluyo por contexto) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    main h2 {
+        font-size: 2rem;
+    }
+    footer {
+        padding: 2rem 0; /* Un poco menos de padding en móvil */
+    }
 }
 
 
