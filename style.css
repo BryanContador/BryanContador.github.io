@@ -1,64 +1,69 @@
 /* 
-  --- VIBE CODE ---
-  Sketch to code by your AI assistant.
+  --- VIBE CODE v2 ---
+  Ajustado según tus indicaciones.
 */
 
-/* General page setup */
+/* Configuración general */
 body {
     margin: 0;
-    /* The main background is white */
     background-color: #ffffff; 
-    /* We hide overflow on the x-axis to prevent scrollbars during animation */
     overflow-x: hidden;
 }
 
-/* The black header bar */
+/* El encabezado negro */
 header {
     background-color: #000000;
     padding: 20px 0;
-    
-    /* 
-      ANIMATION SETUP:
-      1. We position the header off the top of the screen (-100%).
-      2. We define the animation: 'slideDown' name, 0.7s duration, 'ease-out' for a nice slowdown, and 'forwards' to keep it in place after finishing.
-    */
     transform: translateY(-100%);
-    animation: slideDown 0.7s ease-out forwards;
+
+    /* 
+      CAMBIO 1: La animación del encabezado ahora es más lenta.
+      Se ha cambiado la duración de 0.7s a 2s.
+    */
+    animation: slideDown 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .logo-container {
     text-align: center;
 }
 
-/* The "BENJAMIN COUNTER" text styling */
+/* Estilo del texto "BENJAMIN COUNTER" */
 header h1 {
     color: #ffffff;
-    font-family: 'ElectroBazar-Regular', sans-serif; /* Use the special font */
-    font-size: 4rem; /* You can adjust this size */
+    /* CAMBIO 2: Corregida la fuente a 'ND Logos' */
+    font-family: 'ND Logos', sans-serif;
+    font-size: 4rem; 
     margin: 0;
     letter-spacing: 2px;
 }
 
-/* The main content area */
+/* Área principal del contenido */
 main {
     text-align: center;
-    padding-top: 100px; /* Push the text down from the header */
+    padding-top: 100px;
 }
 
-/* The "HELLO, AND WELCOME" text styling */
+/* Estilo del texto "HELLO, AND WELCOME" */
 main h2 {
     color: #000000;
-    font-family: 'Patrick Hand', cursive; /* Use the handwritten font */
-    font-size: 3rem; /* You can adjust this size */
-    font-weight: normal; /* Handwritten fonts often look better without bolding */
+    font-family: 'Patrick Hand', cursive;
+    font-size: 3rem;
+    font-weight: normal;
+
+    /* 
+      CAMBIO 3: Nueva animación de desvanecido (fade-in).
+      - Empieza invisible (opacity: 0).
+      - La animación dura 1.5s.
+      - Tiene un retraso de 1.8s para empezar justo cuando el encabezado termina de bajar.
+      - Termina visible y se queda así (forwards).
+    */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in 1.8s forwards;
 }
 
-/*
-  THE ANIMATION KEYFRAMES:
-  This tells the 'slideDown' animation what to do.
-  - It starts at 'from' (0%): positioned off-screen.
-  - It ends at 'to' (100%): positioned exactly where it should be.
-*/
+/* ----- DEFINICIÓN DE LAS ANIMACIONES ----- */
+
+/* Animación para que el encabezado baje */
 @keyframes slideDown {
     from {
         transform: translateY(-100%);
@@ -68,28 +73,23 @@ main h2 {
     }
 }
 
-/* Media Query for smaller screens (like mobile) */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2.5rem; /* Make the logo font smaller on mobile */
+/* Nueva animación para que el texto aparezca */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-    main h2 {
-        font-size: 2rem; /* Make the welcome text smaller on mobile */
+    to {
+        opacity: 1;
     }
 }
 
-/*
-### **Your Next Steps**
 
-1.  **Save** both of these files in your project folder in VS Code.
-2.  **Commit and push** the changes to GitHub using your terminal.
-
-    ```bash
-    git add .
-    git commit -m "Create initial layout based on sketch"
-    git push
-    ```
-3.  **Wait a minute** for GitHub Pages to update, and then refresh your website. You should see your design come to life, complete with the slide-down animation.
-
-Let me know what you think and what you'd like to adjust or build next
-*/
+/* Ajustes para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    main h2 {
+        font-size: 2rem;
+    }
+}
