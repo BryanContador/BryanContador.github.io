@@ -1,0 +1,95 @@
+/* 
+  --- VIBE CODE ---
+  Sketch to code by your AI assistant.
+*/
+
+/* General page setup */
+body {
+    margin: 0;
+    /* The main background is white */
+    background-color: #ffffff; 
+    /* We hide overflow on the x-axis to prevent scrollbars during animation */
+    overflow-x: hidden;
+}
+
+/* The black header bar */
+header {
+    background-color: #000000;
+    padding: 20px 0;
+    
+    /* 
+      ANIMATION SETUP:
+      1. We position the header off the top of the screen (-100%).
+      2. We define the animation: 'slideDown' name, 0.7s duration, 'ease-out' for a nice slowdown, and 'forwards' to keep it in place after finishing.
+    */
+    transform: translateY(-100%);
+    animation: slideDown 0.7s ease-out forwards;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+/* The "BENJAMIN COUNTER" text styling */
+header h1 {
+    color: #ffffff;
+    font-family: 'ElectroBazar-Regular', sans-serif; /* Use the special font */
+    font-size: 4rem; /* You can adjust this size */
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+/* The main content area */
+main {
+    text-align: center;
+    padding-top: 100px; /* Push the text down from the header */
+}
+
+/* The "HELLO, AND WELCOME" text styling */
+main h2 {
+    color: #000000;
+    font-family: 'Patrick Hand', cursive; /* Use the handwritten font */
+    font-size: 3rem; /* You can adjust this size */
+    font-weight: normal; /* Handwritten fonts often look better without bolding */
+}
+
+/*
+  THE ANIMATION KEYFRAMES:
+  This tells the 'slideDown' animation what to do.
+  - It starts at 'from' (0%): positioned off-screen.
+  - It ends at 'to' (100%): positioned exactly where it should be.
+*/
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Media Query for smaller screens (like mobile) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem; /* Make the logo font smaller on mobile */
+    }
+    main h2 {
+        font-size: 2rem; /* Make the welcome text smaller on mobile */
+    }
+}
+
+/*
+### **Your Next Steps**
+
+1.  **Save** both of these files in your project folder in VS Code.
+2.  **Commit and push** the changes to GitHub using your terminal.
+
+    ```bash
+    git add .
+    git commit -m "Create initial layout based on sketch"
+    git push
+    ```
+3.  **Wait a minute** for GitHub Pages to update, and then refresh your website. You should see your design come to life, complete with the slide-down animation.
+
+Let me know what you think and what you'd like to adjust or build next
+*/

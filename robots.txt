@@ -1,0 +1,11 @@
+User-agent: Googlebot
+Disallow:
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: *
+Disallow:
