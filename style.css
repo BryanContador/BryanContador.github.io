@@ -1,143 +1,185 @@
-/* --- VIBE CODE v3 --- */
+/* --- VIBE CODE v4 - CON MODO NOCHE --- */
 
 /* 
-  NUEVO: Definimos nuestra propia fuente local.
-  Esto le dice al navegador que cuando vea 'ND Logos', 
-  debe usar el archivo que hemos guardado en la carpeta /fonts.
+  Paso 1: Definir las variables de color.
+  - ':root' contiene las variables para el MODO CLARO.
+  - 'body.dark-mode' anula esas variables cuando el modo oscuro está activo.
 */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --header-bg: #f1f1f1;
+  --header-text: #000000;
+  --footer-bg: #f1f1f1;
+  --footer-text: #000000;
+}
+
+body.dark-mode {
+  --bg-color: #121212; /* Un negro no tan puro, más suave a la vista */
+  --text-color: #ffffff;
+  --header-bg: #000000;
+  --header-text: #ffffff;
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+}
+
 @font-face {
     font-family: 'ND Logos';
     src: url('fonts/ND LOGOS REGULAR.ttf') format('truetype');
 }
 
-
 /* 
-  Configuración del body para que el footer se quede abajo.
-  - min-height: 100vh -> El body ocupa como mínimo toda la altura de la pantalla.
-  - display: flex -> Activa el layout flexible.
-  - flex-direction: column -> Organiza los elementos (header, main, footer) en una columna.
+  Paso 2: Aplicar las variables a los elementos.
+  Ahora usamos 'var(--nombre-variable)' en lugar de colores fijos.
 */
 body {
     margin: 0;
-    background-color: #ffffff; 
-    font-family: sans-serif; /* Fuente por defecto para el texto del footer */
+    background-color: var(--bg-color);
+    color: var(--text-color); /* Color de texto general */
+    font-family: sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease; /* Transición suave entre modos */
 }
 
-/* El encabezado negro */
 header {
-    background-color: #000000;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     padding: 20px 0;
-    /* ELIMINADO: Ya no hay animación ni transformación aquí */
+    transition: background-color 0.3s ease;
 }
 
-.logo-container {
-    text-align: center;
-}
-
-/* Estilo del texto "BENJAMIN COUNTER" */
 header h1 {
-    color: #ffffff;
-    /* AHORA SÍ: Usamos la fuente local que hemos definido */
     font-family: 'ND Logos', sans-serif;
     font-size: 4rem; 
     margin: 0;
     letter-spacing: 2px;
 }
 
-/* 
-  Área principal del contenido.
-  - flex: 1; -> Esto hace que la sección 'main' crezca y ocupe todo el
-    espacio vertical disponible, empujando el footer hacia abajo.
-*/
 main {
     text-align: center;
-    padding-top: 100px;
+    padding-top: 40px; /* Reducimos el padding para dar espacio al toggle */
     flex: 1;
+    position: relative; /* Necesario para posicionar el toggle */
 }
 
-/* Estilo del texto "HELLO, AND WELCOME" */
 main h2 {
-    color: #000000;
     font-family: 'Patrick Hand', cursive;
     font-size: 3rem;
     font-weight: normal;
+    color: var(--text-color); /* Aplicamos variable */
     opacity: 0;
-    /* AJUSTADO: El desvanecido dura 2s y empieza casi de inmediato */
     animation: fadeIn 2s ease-in 0.5s forwards;
 }
 
-/* Animación para que el texto aparezca (sin cambios) */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* 
-  NUEVO: Estilos para el footer negro.
-*/
-/*
-  NUEVO: Estilos para el footer negro.
-  AJUSTE: Hacemos que se parezca más al header y centramos el bloque de texto.
-*/
 footer {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
-
-    /*
-      CAMBIO 1: Ajustamos el padding.
-      Ahora tendrá un espacio generoso arriba y abajo (2rem),
-      pero 0 en los lados, igual que el header.
-    */
-    padding: 2.5rem 0; 
+    padding: 2.5rem 0;
+    transition: background-color 0.3s ease;
 }
 
 footer p {
     font-style: italic;
-    font-size: 1rem; /* Un poco más grande para mejor legibilidad */
+    font-size: 1rem;
     line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-    /* 
-      CAMBIO 2: Centrado perfecto del bloque de texto.
-      - Le damos un ancho máximo para que la cita no se estire demasiado en pantallas grandes.
-      - 'margin: 0 auto;' es el truco clave para centrar un bloque que tiene un ancho definido.
-    */
-    max-width: 700px; /* Ancho máximo del texto */
-    margin: 0 auto;   /* Centra el bloque horizontalmente */
-    padding: 0 20px;  /* Un pequeño padding lateral para que el texto no toque los bordes en pantallas muy pequeñas */
+/*
+  Paso 3: Estilos para el interruptor (toggle).
+  Posicionado arriba a la izquierda del 'main'.
+*/
+.theme-switch-wrapper {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+/* En modo oscuro, el toggle está activado por defecto (al revés) */
+body.dark-mode input:checked + .slider {
+  background-color: #ccc;
+}
+body.dark-mode input + .slider {
+  background-color: #2196F3;
 }
 
 
-/* Ajustes para pantallas pequeñas (sin cambios, pero lo incluyo por contexto) */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2.5rem;
-    }
-    main h2 {
-        font-size: 2rem;
-    }
-    footer {
-        padding: 2rem 0; /* Un poco menos de padding en móvil */
-    }
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+body.dark-mode input:checked + .slider:before {
+    transform: translateX(0px);
+}
+body.dark-mode input + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 
-/* Ajustes para pantallas pequeñas */
+/* -- Fin de estilos del toggle -- */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 2.5rem;
-    }
-    main h2 {
-        font-size: 2rem;
-    }
-    footer {
-        padding: 1.5rem;
-    }
+    header h1 { font-size: 2.5rem; }
+    main h2 { font-size: 2rem; }
+    footer { padding: 2rem 0; }
 }

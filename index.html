@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- CAMBIO 1: Añadimos la clase 'dark-mode' aquí para que sea el modo por defecto -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,13 @@
     
     <link rel="stylesheet" href="style.css">
 
-    <!-- FUENTES PERSONALIZADAS -->
-    <!-- Hemos quitado el enlace a la fuente ND Logos que no funcionaba -->
+    <link href="https://db.onlinewebfonts.com/c/2b785ad5f435817acd9c12140439f0a6?family=ND+Logos" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
-<body>
+<!-- CAMBIO 2: Aplicamos la clase aquí para establecer el estado inicial -->
+<body class="dark-mode">
 
     <header>
         <div class="logo-container">
@@ -22,13 +23,22 @@
     </header>
 
     <main>
+        <!-- CAMBIO 3: Aquí está el nuevo interruptor (toggle) -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+
         <h2>HELLO, AND WELCOME</h2>
     </main>
 
-    <!-- NUEVO: Añadido el footer que solicitaste -->
     <footer>
         <p>"Imagine, design, create. Everything in this life is impossible until someone comes and does it."</p>
     </footer>
 
+    <!-- CAMBIO 4: Enlazamos nuestro archivo JavaScript justo antes de cerrar el body -->
+    <script src="script.js"></script>
 </body>
 </html>
