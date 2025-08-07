@@ -1,23 +1,20 @@
-/* --- VIBE CODE v4 - CON MODO NOCHE --- */
+/* --- CSS v5 - CORREGIDO Y SIMPLIFICADO --- */
 
-/* 
-  Paso 1: Definir las variables de color.
-  - ':root' contiene las variables para el MODO CLARO.
-  - 'body.dark-mode' anula esas variables cuando el modo oscuro está activo.
-*/
+/* 1. Definición de variables de color (paletas) */
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
-  --header-bg: #f1f1f1;
-  --header-text: #000000;
-  --footer-bg: #f1f1f1;
-  --footer-text: #000000;
+  --header-bg: #000000;
+  --header-text: #ffffff;
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
 }
 
+/* Cuando el body tiene la clase .dark-mode, se usan estas variables */
 body.dark-mode {
-  --bg-color: #121212; /* Un negro no tan puro, más suave a la vista */
+  --bg-color: #121212;
   --text-color: #ffffff;
-  --header-bg: #000000;
+  --header-bg: #000000; /* Header y footer ya eran negros, así que no cambian */
   --header-text: #ffffff;
   --footer-bg: #000000;
   --footer-text: #ffffff;
@@ -28,47 +25,85 @@ body.dark-mode {
     src: url('fonts/ND LOGOS REGULAR.ttf') format('truetype');
 }
 
-/* 
-  Paso 2: Aplicar las variables a los elementos.
-  Ahora usamos 'var(--nombre-variable)' en lugar de colores fijos.
-*/
+/* 2. Aplicación de las variables a los elementos */
 body {
     margin: 0;
     background-color: var(--bg-color);
-    color: var(--text-color); /* Color de texto general */
+    color: var(--text-color);
     font-family: sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background-color 0.3s ease; /* Transición suave entre modos */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
     background-color: var(--header-bg);
-    color: var(--header-text);
     padding: 20px 0;
-    transition: background-color 0.3s ease;
+    /* CORRECCIÓN: Hacemos que el header sea un contexto de posicionamiento */
+    position: relative;
 }
 
 header h1 {
     font-family: 'ND Logos', sans-serif;
-    font-size: 4rem; 
+    font-size: 4rem;
+    color: var(--header-text);
+    text-align: center;
     margin: 0;
-    letter-spacing: 2px;
 }
 
+/* 3. Estilos del interruptor - Posicionamiento corregido */
+.theme-switch-wrapper {
+  position: absolute;
+  top: 50%; /* Centrado verticalmente */
+  left: 20px; /* Pegado a la izquierda */
+  transform: translateY(-50%); /* Ajuste fino para el centrado vertical */
+}
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.theme-switch input { display: none; } /* El checkbox se oculta */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0; /* Abarca todo el espacio del label (top, right, bottom, left) */
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #2196F3; /* Color azul cuando está activado (modo oscuro) */
+}
+input:checked + .slider:before {
+  transform: translateX(26px); /* El círculo se mueve a la derecha */
+}
+
+/* Resto del CSS (main, footer, etc.) - Prácticamente sin cambios */
 main {
     text-align: center;
-    padding-top: 40px; /* Reducimos el padding para dar espacio al toggle */
+    padding: 100px 20px;
     flex: 1;
-    position: relative; /* Necesario para posicionar el toggle */
 }
 
 main h2 {
     font-family: 'Patrick Hand', cursive;
     font-size: 3rem;
     font-weight: normal;
-    color: var(--text-color); /* Aplicamos variable */
+    color: var(--text-color);
     opacity: 0;
     animation: fadeIn 2s ease-in 0.5s forwards;
 }
@@ -78,7 +113,6 @@ footer {
     color: var(--footer-text);
     text-align: center;
     padding: 2.5rem 0;
-    transition: background-color 0.3s ease;
 }
 
 footer p {
@@ -90,89 +124,6 @@ footer p {
     padding: 0 20px;
 }
 
-/*
-  Paso 3: Estilos para el interruptor (toggle).
-  Posicionado arriba a la izquierda del 'main'.
-*/
-.theme-switch-wrapper {
-  position: absolute;
-  top: 15px;
-  left: 20px;
-}
-
-.theme-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.theme-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-/* En modo oscuro, el toggle está activado por defecto (al revés) */
-body.dark-mode input:checked + .slider {
-  background-color: #ccc;
-}
-body.dark-mode input + .slider {
-  background-color: #2196F3;
-}
-
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-body.dark-mode input:checked + .slider:before {
-    transform: translateX(0px);
-}
-body.dark-mode input + .slider:before {
-    transform: translateX(26px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-
-/* -- Fin de estilos del toggle -- */
-
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -181,5 +132,8 @@ body.dark-mode input + .slider:before {
 @media (max-width: 768px) {
     header h1 { font-size: 2.5rem; }
     main h2 { font-size: 2rem; }
-    footer { padding: 2rem 0; }
+    .theme-switch-wrapper {
+      /* En móvil, lo separamos un poco más para que no esté tan pegado */
+      left: 15px; 
+    }
 }
