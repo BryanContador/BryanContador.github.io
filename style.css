@@ -1,26 +1,36 @@
-/* 
-  --- VIBE CODE v2 ---
-  Ajustado según tus indicaciones.
-*/
+/* --- VIBE CODE v3 --- */
 
-/* Configuración general */
+/* 
+  NUEVO: Definimos nuestra propia fuente local.
+  Esto le dice al navegador que cuando vea 'ND Logos', 
+  debe usar el archivo que hemos guardado en la carpeta /fonts.
+*/
+@font-face {
+    font-family: 'ND Logos';
+    src: url('fonts/ND LOGOS REGULAR.ttf') format('truetype');
+}
+
+
+/* 
+  Configuración del body para que el footer se quede abajo.
+  - min-height: 100vh -> El body ocupa como mínimo toda la altura de la pantalla.
+  - display: flex -> Activa el layout flexible.
+  - flex-direction: column -> Organiza los elementos (header, main, footer) en una columna.
+*/
 body {
     margin: 0;
     background-color: #ffffff; 
-    overflow-x: hidden;
+    font-family: sans-serif; /* Fuente por defecto para el texto del footer */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* El encabezado negro */
 header {
     background-color: #000000;
     padding: 20px 0;
-    transform: translateY(-100%);
-
-    /* 
-      CAMBIO 1: La animación del encabezado ahora es más lenta.
-      Se ha cambiado la duración de 0.7s a 2s.
-    */
-    animation: slideDown 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    /* ELIMINADO: Ya no hay animación ni transformación aquí */
 }
 
 .logo-container {
@@ -30,17 +40,22 @@ header {
 /* Estilo del texto "BENJAMIN COUNTER" */
 header h1 {
     color: #ffffff;
-    /* CAMBIO 2: Corregida la fuente a 'ND Logos' */
+    /* AHORA SÍ: Usamos la fuente local que hemos definido */
     font-family: 'ND Logos', sans-serif;
     font-size: 4rem; 
     margin: 0;
     letter-spacing: 2px;
 }
 
-/* Área principal del contenido */
+/* 
+  Área principal del contenido.
+  - flex: 1; -> Esto hace que la sección 'main' crezca y ocupe todo el
+    espacio vertical disponible, empujando el footer hacia abajo.
+*/
 main {
     text-align: center;
     padding-top: 100px;
+    flex: 1;
 }
 
 /* Estilo del texto "HELLO, AND WELCOME" */
@@ -49,31 +64,12 @@ main h2 {
     font-family: 'Patrick Hand', cursive;
     font-size: 3rem;
     font-weight: normal;
-
-    /* 
-      CAMBIO 3: Nueva animación de desvanecido (fade-in).
-      - Empieza invisible (opacity: 0).
-      - La animación dura 1.5s.
-      - Tiene un retraso de 1.8s para empezar justo cuando el encabezado termina de bajar.
-      - Termina visible y se queda así (forwards).
-    */
     opacity: 0;
-    animation: fadeIn 1.5s ease-in 1.8s forwards;
+    /* AJUSTADO: El desvanecido dura 2s y empieza casi de inmediato */
+    animation: fadeIn 2s ease-in 0.5s forwards;
 }
 
-/* ----- DEFINICIÓN DE LAS ANIMACIONES ----- */
-
-/* Animación para que el encabezado baje */
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-/* Nueva animación para que el texto aparezca */
+/* Animación para que el texto aparezca (sin cambios) */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -83,13 +79,33 @@ main h2 {
     }
 }
 
+/* 
+  NUEVO: Estilos para el footer negro.
+*/
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem; /* Más espaciado para que se vea bien */
+}
 
-/* Ajustes para pantallas pequeñas (móviles) */
+footer p {
+    margin: 0;
+    font-style: italic; /* La cursiva le va bien a las citas */
+    font-size: 0.9rem;
+    line-height: 1.5; /* Mejora la legibilidad */
+}
+
+
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2.5rem;
     }
     main h2 {
         font-size: 2rem;
+    }
+    footer {
+        padding: 1.5rem;
     }
 }
