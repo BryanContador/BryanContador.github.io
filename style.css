@@ -1,12 +1,6 @@
-
-@font-face {
-    font-family: 'ND Logos';
-    src: url('fonts/ND LOGOS REGULAR.ttf') format('truetype');
-}
-
 body {
     margin: 0;
-    background-color: #ffffff; /* Fondo blanco por defecto */
+    background-color: #ffffff;
     font-family: sans-serif;
     min-height: 100vh;
     display: flex;
@@ -16,38 +10,151 @@ body {
 header {
     background-color: #000000;
     padding: 20px 0;
-}
-
-.logo-container {
     text-align: center;
 }
 
-header h1 {
+.logo-container h1 {
     color: #ffffff;
     font-family: 'ND Logos', sans-serif;
-    font-size: 4rem; 
+    font-size: 4rem;
     margin: 0;
     letter-spacing: 2px;
 }
 
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}
+
+/* Diferenciar padding para la página de inicio y galerías */
 main {
     text-align: center;
-    padding: 100px 20px; /* Padding original */
+    padding: 100px 20px; /* Para index.html */
     flex: 1;
 }
 
+main.gallery-page {
+    padding: 20px 20px; /* Para drawings.html y fanart.html */
+}
+
 main h2 {
-    color: #000000; /* Texto negro por defecto */
+    color: #000000;
     font-family: 'Patrick Hand', cursive;
     font-size: 3rem;
     font-weight: normal;
+    margin: 0; /* Eliminar margen predeterminado del h2 */
     opacity: 0;
     animation: fadeIn 2s ease-in 0.5s forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.gallery {
+    margin-top: 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    height: 250px; /* Fixed height for thumbnails */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crops image to fit while maintaining aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 70%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.modal-info {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.modal-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+.modal-info p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.logo-footer {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-logo {
+    max-width: 150px;
+    height: auto;
 }
 
 footer {
@@ -67,13 +174,34 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    header h1 {
+    .logo-container h1 {
         font-size: 2.5rem;
+    }
+    nav ul li {
+        display: block;
+        margin: 10px 0;
     }
     main h2 {
         font-size: 2rem;
     }
+    main {
+        padding: 50px 20px; /* Ajuste general para pantallas pequeñas */
+    }
     footer {
         padding: 2rem 0;
     }
+    .gallery-item {
+        height: 200px; /* Adjusted for smaller screens */
+    }
+    .modal-info {
+        width: 90%;
+    }
+    .footer-logo {
+        max-width: 120px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

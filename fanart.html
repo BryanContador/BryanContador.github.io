@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benjamin Counter's Fanart</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://db.onlinewebfonts.com/c/2b785ad5f435817acd9c12140439f0a6?family=ND+Logos" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>BENJAMIN COUNTER</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="fanart.html">FANART FOR OTHERS</a></li>
+                <li><a href="drawings.html">WORKS/DRAWINGS</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Made fanart</h2>
+        <div class="gallery">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="fanart/fanart1.jpg" alt="Fan Art 1" onclick="showModal(this.src, 'No title', 'No description')">
+                </div>
+                <div class="gallery-item">
+                    <img src="fanart/fanart2.jpg" alt="Fan Art 2" onclick="showModal(this.src, 'No title', 'No description')">
+                </div>
+                <!-- Add more fan art images -->
+            </div>
+        </div>
+    </main>
+    <div class="logo-footer">
+        <img src="logo.png" alt="Benjamin Counter Logo" class="footer-logo">
+    </div>
+    <footer>
+        <p>"Everything in this life is impossible until someone comes and does it."</p>
+    </footer>
+    <div class="modal" id="modal" onclick="closeModal(event)">
+        <span class="modal-close" onclick="closeModal(event)">&times;</span>
+        <img id="modal-img" src="">
+        <div class="modal-info">
+            <h3 id="modal-title">No title</h3>
+            <p id="modal-description">No description</p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(src, title, description) {
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            modalImg.src = src;
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            modal.style.display = 'flex';
+        }
+        function closeModal(event) {
+            event.stopPropagation();
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
