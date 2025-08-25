@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'ND Logos';
+    src: url('fonts/ND LOGOS REGULAR.ttf') format('truetype');
+}
+
 body {
     margin: 0;
     background-color: #ffffff;
@@ -15,7 +20,7 @@ header {
 
 .logo-container h1 {
     color: #ffffff;
-    font-family: 'ND Logos', sans-serif;
+    font-family: 'ND Logos', 'Arial', sans-serif; /* Fuente local con fallback */
     font-size: 4rem;
     margin: 0;
     letter-spacing: 2px;
@@ -178,8 +183,9 @@ footer p {
         font-size: 2.5rem;
     }
     nav ul li {
-        display: block;
+        display: block; /* Apilado vertical en móvil */
         margin: 10px 0;
+        text-align: center; /* Centrar los enlaces */
     }
     main h2 {
         font-size: 2rem;
