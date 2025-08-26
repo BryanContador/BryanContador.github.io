@@ -26,15 +26,27 @@
         <h2>made fanart</h2>
         <div class="gallery">
             <div class="gallery-grid">
+
                 <div class="gallery-item">
-                    <img src="fanart/fanart2.jpg" alt="Fan Art 1" onclick="showModal(this.src, 'No title', 'No description')">
+                    <img src="fanart/Liam_feet_love.png" alt="Liam's Twix" onclick="showModal(this.src, 'Art Trade (FEET)', 'Art Trade with Goulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers')">
                 </div>
+
                 <div class="gallery-item">
-                    <img src="fanart/fanart2.jpg" alt="Fan Art 2" onclick="showModal(this.src, 'No title', 'No description')">
+                    <img src="fanart/HIM.png" alt="Rudy3r" onclick="showModal(this.src, 'El Rudy', ' Inspired by the early 2000´s aesthetic and reinforcedby Lucy Bedroque’s song Hot Boy. \nFeaturing Rudy3rASMR on YouTube.')">
                 </div>
+                
+                <div class="gallery-item">
+                    <img src="fanart/lamb.png" alt="Faulthy Heart" onclick="showModal(this.src, 'Faulthy Heart', 'Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube')">
+                </div>     
+                
+                <div class="gallery-item">
+                    <img src="fanart/Meowfurshot_final.png" alt="Meowfurshot" onclick="showModal(this.src, 'MeowFurShot', 'Sona property of MeowFurShot. \nInpired my the song Expression On Your Face')">
+                </div>
+                
                 <!-- Add more fan art images -->
             </div>
         </div>
+
     </main>
     <div class="logo-footer">
         <img src="logo.png" alt="Benjamin Counter Logo" class="footer-logo">
@@ -42,9 +54,13 @@
     <footer>
         <p>"Everything in this life is impossible until someone comes and does it."</p>
     </footer>
+    
     <div class="modal" id="modal" onclick="closeModal(event)">
         <span class="modal-close" onclick="closeModal(event)">&times;</span>
-        <img id="modal-img" src="">
+        <!-- Contenedor añadido para el zoom -->
+         <div id="modal-image-container">
+            <img id="modal-img" src="">
+        </div>
         <div class="modal-info">
             <h3 id="modal-title">No title</h3>
             <p id="modal-description">No description</p>
@@ -52,20 +68,70 @@
     </div>
 
     <script>
-        function showModal(src, title, description) {
-            const modal = document.getElementById('modal');
-            const modalImg = document.getElementById('modal-img');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDescription = document.getElementById('modal-description');
-            modalImg.src = src;
-            modalTitle.textContent = title;
-            modalDescription.textContent = description;
-            modal.style.display = 'flex';
+    // Referencias a los elementos de la modal
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const imageContainer = document.getElementById('modal-image-container');
+
+    // Función para mostrar la modal (sin cambios)
+    function showModal(src, title, description) {
+        modalImg.src = src;
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+        modal.style.display = 'flex';
+    }
+
+    // Función para cerrar la modal (con un pequeño añadido)
+    function closeModal(event) {
+        // Asegurarse de que el clic no fue en la imagen cuando está en zoom
+        if (event.target.id === 'modal-img' && imageContainer.classList.contains('zoomed')) {
+            return;
         }
-        function closeModal(event) {
-            event.stopPropagation();
-            document.getElementById('modal').style.display = 'none';
+        event.stopPropagation();
+        modal.style.display = 'none';
+        // Importante: resetear el zoom al cerrar
+        imageContainer.classList.remove('zoomed');
+        modalImg.style.transformOrigin = 'center center';
+    }
+
+    // --- LÓGICA DEL ZOOM ---
+
+    // Evento de clic en el contenedor de la imagen para activar/desactivar el zoom
+    imageContainer.addEventListener('click', function(event) {
+        // No queremos que el clic en la imagen cierre la modal
+        event.stopPropagation();
+        // Alternar la clase 'zoomed'
+        this.classList.toggle('zoomed');
+        // Si ya no tiene zoom, resetear el punto de origen
+        if (!this.classList.contains('zoomed')) {
+            modalImg.style.transformOrigin = 'center center';
         }
+    });
+
+    // Evento para mover la imagen (panning) cuando está en zoom
+    imageContainer.addEventListener('mousemove', function(event) {
+        // Solo ejecutar si la imagen tiene zoom
+        if (this.classList.contains('zoomed')) {
+            // Obtenemos las dimensiones y posición del contenedor
+            const rect = this.getBoundingClientRect();
+            // Calculamos la posición del cursor como un porcentaje dentro del contenedor
+            const x = ((event.clientX - rect.left) / rect.width) * 100;
+            const y = ((event.clientY - rect.top) / rect.height) * 100;
+            
+            // Usamos la posición del cursor para cambiar el punto de origen del zoom, creando el efecto de paneo
+            modalImg.style.transformOrigin = `${x}% ${y}%`;
+        }
+    });
+
+    // Resetear el origen cuando el ratón sale del contenedor para evitar saltos raros
+    imageContainer.addEventListener('mouseleave', function() {
+        if (!this.classList.contains('zoomed')) {
+            modalImg.style.transformOrigin = 'center center';
+        }
+    });
     </script>
+    
 </body>
 </html>
