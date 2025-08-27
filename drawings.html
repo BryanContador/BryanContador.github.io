@@ -63,7 +63,7 @@
     const modalDescription = document.getElementById('modal-description');
     const imageContainer = document.getElementById('modal-image-container');
 
-    // Función para mostrar la modal (sin cambios)
+    // Func
     function showModal(src, title, description) {
         modalImg.src = src;
         modalTitle.textContent = title;
@@ -71,49 +71,44 @@
         modal.style.display = 'flex';
     }
 
-    // Función para cerrar la modal (con un pequeño añadido)
+    // Función para cerrar la modal
     function closeModal(event) {
-        // Asegurarse de que el clic no fue en la imagen cuando está en zoom
         if (event.target.id === 'modal-img' && imageContainer.classList.contains('zoomed')) {
             return;
         }
         event.stopPropagation();
         modal.style.display = 'none';
-        // Importante: resetear el zoom al cerrar
+        
+        // Reset classes @ closin
         imageContainer.classList.remove('zoomed');
+        modal.classList.remove('is-zoomed'); 
         modalImg.style.transformOrigin = 'center center';
     }
 
-    // --- LÓGICA DEL ZOOM ---
-
-    // Evento de clic en el contenedor de la imagen para activar/desactivar el zoom
+    // Event
     imageContainer.addEventListener('click', function(event) {
-        // No queremos que el clic en la imagen cierre la modal
         event.stopPropagation();
-        // Alternar la clase 'zoomed'
+
+        // Alterna
         this.classList.toggle('zoomed');
-        // Si ya no tiene zoom, resetear el punto de origen
+        modal.classList.toggle('is-zoomed');
+
         if (!this.classList.contains('zoomed')) {
             modalImg.style.transformOrigin = 'center center';
         }
     });
 
-    // Evento para mover la imagen (panning) cuando está en zoom
+    // panning 
     imageContainer.addEventListener('mousemove', function(event) {
-        // Solo ejecutar si la imagen tiene zoom
         if (this.classList.contains('zoomed')) {
-            // Obtenemos las dimensiones y posición del contenedor
             const rect = this.getBoundingClientRect();
-            // Calculamos la posición del cursor como un porcentaje dentro del contenedor
             const x = ((event.clientX - rect.left) / rect.width) * 100;
             const y = ((event.clientY - rect.top) / rect.height) * 100;
-            
-            // Usamos la posición del cursor para cambiar el punto de origen del zoom, creando el efecto de paneo
             modalImg.style.transformOrigin = `${x}% ${y}%`;
         }
     });
 
-    // Resetear el origen cuando el ratón sale del contenedor para evitar saltos raros
+    // Reset mouse origin
     imageContainer.addEventListener('mouseleave', function() {
         if (!this.classList.contains('zoomed')) {
             modalImg.style.transformOrigin = 'center center';

@@ -262,8 +262,7 @@ footer p {
     to { opacity: 1; }
 }
 
-/* Contenedor de la imagen en la modal */
-
+/* --- ESTILOS PARA LA FUNCIÓN DE ZOOM (corrección) --- */
 
 #modal-image-container {
     max-width: 90%;
@@ -275,8 +274,8 @@ footer p {
     cursor: zoom-in;
     border-radius: 8px;
     margin-bottom: 10px;
-    /* Añadimos una transición para que el cambio de tamaño sea suave */
-    transition: max-width 0.3s ease, max-height 0.3s ease;
+    /* Transición suave para el contenedor */
+    transition: all 0.3s ease;
 }
 
 #modal-img {
@@ -287,16 +286,29 @@ footer p {
     transform-origin: center center;
 }
 
-/* NUEVA REGLA: Estilos para el CONTENEDOR cuando tiene zoom */
-#modal-image-container.zoomed {
-    /* El contenedor se expande para ocupar casi toda la pantalla */
-    max-width: 100vw;
-    max-height: 100vh;
-    cursor: grab; /* El cursor de arrastrar ahora está en el contenedor */
-    border-radius: 0; /* Opcional: quita los bordes redondeados en pantalla completa */
+/* 1. Cuando la modal está en modo zoom, anulamos el centrado de Flexbox */
+.modal.is-zoomed {
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-/* REGLA MODIFICADA: Estilos para la IMAGEN cuando tiene zoom */
-#modal-image-container.zoomed #modal-img {
-    transform: scale(2.5); 
+/* 2. Hacemos que el contenedor de la imagen ocupe TODA la pantalla */
+.modal.is-zoomed #modal-image-container {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    cursor: grab;
+}
+
+/* 3. Escalamamos la imagen DENTRO del contenedor ya expandido */
+.modal.is-zoomed #modal-img {
+    transform: scale(2.5);
+}
+
+/* 4. Ocultamos el texto durante el zoom */
+.modal.is-zoomed .modal-info {
+    display: none;
 }
