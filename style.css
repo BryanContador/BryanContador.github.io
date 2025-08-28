@@ -312,3 +312,16 @@ footer p {
 .modal.is-zoomed .modal-info {
     display: none;
 }
+
+/* --- intro estilo index --- */
+.intro-text {
+    font-size: 1.1rem; 
+    color: #333;       
+    line-height: 1.6;  
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Patrick Hand', cursive;
+    padding: 0 20px;
+    margin-top: 100px; /* <-- linea de separación */
+}
