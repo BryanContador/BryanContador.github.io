@@ -277,8 +277,7 @@ footer p {
     cursor: zoom-in;
     border-radius: 8px;
     margin-bottom: 10px;
-    /* Transición suave para el contenedor */
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Transición suave para el contenedor */
 }
 
 #modal-img {
@@ -324,4 +323,66 @@ footer p {
     max-width: 700px;           
     font-family: 'Patrick Hand', cursive;
     text-align: center;
+}
+
+/* --- 'ABOUT' --- */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto; 
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 0%; 
+    object-fit: cover; 
+    margin-bottom: 20px;
+    /*border: 3px solid #ffffff; */ /*borde  */
+}
+
+/* Estilo para los párrafos de texto */
+.about-text {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.7;
+    font-family: 'Patrick Hand', cursive;
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio entre párrafos */
+}
+
+/* Estilos para la sección de redes sociales */
+.social-links {
+    margin-top: 40px;
+}
+
+.social-links h3 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.social-links ul {
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+    margin: 0;
+}
+
+.social-links ul li {
+    display: inline-block; 
+    margin: 0 15px;
+}
+
+.social-links ul li a {
+    text-decoration: none;
+    color: #000;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.social-links ul li a:hover {
+    color: #555; 
 }
