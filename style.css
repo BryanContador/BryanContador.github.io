@@ -13,7 +13,7 @@ header h1 {
     margin-bottom: 15px; /* Añade un espacio debajo del título, antes del menú */
 }
 
-/* --- SOLUCIÓN PARA EL MENÚ DE NAVEGACIÓN --- */
+/* --- menú --- */
 header nav ul {
     list-style: none;      /* Quita los puntos de la lista */
     padding: 0;            /* Quita el espaciado interior que traen las listas por defecto */
