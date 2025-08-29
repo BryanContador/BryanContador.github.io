@@ -340,6 +340,9 @@ footer p {
     object-fit: cover; 
     margin-bottom: 20px;
     /*border: 3px solid #ffffff; */ /*borde  */
+    /* --- anim--- */
+    opacity: 0; /* La imagen empieza invisible por defecto */
+    animation: fadeInImage 1.2s ease-out 0.3s forwards; /* Nombre, duración, timing, delay, fill-mode */
 }
 
 /* Estilo para los párrafos de texto */
@@ -351,7 +354,6 @@ footer p {
     text-align: center; /* Centra el texto */
     margin-bottom: 20px; /* Espacio entre párrafos */
 }
-
 /* Estilos para la sección de redes sociales */
 .social-links {
     margin-top: 40px;
@@ -364,7 +366,7 @@ footer p {
 }
 
 .social-links ul {
-    list-style: none; /* Quita los puntos de la lista */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
@@ -385,4 +387,16 @@ footer p {
 
 .social-links ul li a:hover {
     color: #555; 
+}
+
+/* --- anim para about --- */
+@keyframes fadeInImage {
+    from {
+        opacity: 0; 
+        transform: scale(0.95); 
+    }
+    to {
+        opacity: 1; 
+        transform: scale(1);
+    }
 }
