@@ -341,7 +341,7 @@ footer p {
     margin-bottom: 20px;
     /*border: 3px solid #ffffff; */ /*borde  */
     /* --- anim--- */
-    opacity: 0; /* La imagen empieza invisible por defecto */
+    opacity: 0; 
     animation: fadeInImage 1.2s ease-out 0.3s forwards; /* Nombre, duración, timing, delay, fill-mode */
 }
 
