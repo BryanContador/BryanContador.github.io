@@ -1,11 +1,11 @@
 User-agent: Googlebot
-Disallow:
+Allow: /
 
-User-agent: AhrefsBot
-Disallow: /
+User-agent: ChatGPT-User
+Allow: /
 
-User-agent: SemrushBot
-Disallow: /
+User-agent: CCBot
+Allow: /
 
 User-agent: *
-Disallow:
+Disallow: /
