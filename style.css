@@ -400,3 +400,37 @@ footer p {
         transform: scale(1);
     }
 }
+
+/* --- ESTILOS NAVEGACION DE LA MODAL --- */
+.modal-nav {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding: 16px;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    z-index: 1001; 
+}
+
+.modal-nav.prev {
+    left: 10px;
+}
+
+.modal-nav.next {
+    right: 10px;
+}
+
+.modal-nav:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+/* ocultar flechas zoom */
+.modal.is-zoomed .modal-nav,
+.modal.is-zoomed .modal-close {
+    display: none;
+}
