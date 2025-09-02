@@ -1,39 +1,39 @@
 /* --- ESTILO PARA LA CABECERA --- */
 header {
-    background-color: #000; /* Fondo negro */
-    color: #fff;             /* Texto blanco */
-    padding: 20px 10px;       /* Espaciado interior (20px arriba/abajo, 10px a los lados) */
-    text-align: center;       /* Centra todo el texto dentro de la cabecera */
+    background-color: #000; 
+    color: #fff;             
+    padding: 20px 10px;      
+    text-align: center;      
 }
 
 /* --- ESTILO PARA EL TÍTULO 'BENJAMIN COUNTER' --- */
 header h1 {
-    font-family: 'ND Logos', sans-serif; /* Aplica tu fuente personalizada */
+    font-family: 'ND Logos', sans-serif; 
     margin: 0;
-    margin-bottom: 15px; /* Añade un espacio debajo del título, antes del menú */
+    margin-bottom: 15px; 
 }
 
 /* --- menú --- */
 header nav ul {
-    list-style: none;      /* Quita los puntos de la lista */
-    padding: 0;            /* Quita el espaciado interior que traen las listas por defecto */
-    margin: 0;             /* Quita los márgenes por defecto */
+    list-style: none;     
+    padding: 0;           
+    margin: 0;            
     
     display: flex;         
-    justify-content: center; /* Centra los elementos del menú horizontalmente */
-    flex-wrap: wrap;       /* Permite que los elementos pasen a otra línea si la pantalla es muy estrecha */
+    justify-content: center; 
+    flex-wrap: wrap; 
 }
 
 header nav ul li {
-    margin: 0 10px; /* Crea un espacio horizontal de 10px a cada lado de los elementos del menú */
+    margin: 0 10px; 
 }
 
 /* --- ESTILO PARA LOS ENLACES DEL MENÚ --- */
 header nav ul li a {
-    color: #fff;              /* Texto en color blanco */
-    text-decoration: none;    /* Quita el subrayado de los enlaces */
-    font-family: 'Patrick Hand', sans-serif; /* Aplica tu otra fuente si lo deseas */
-    text-transform: uppercase; /* Opcional: convierte el texto a mayúsculas como en 'HOME' */
+    color: #fff;    
+    text-decoration: none;  
+    font-family: 'Patrick Hand', sans-serif;
+    text-transform: uppercase; 
 }
 
 @font-face {
@@ -232,14 +232,23 @@ footer p {
     .logo-container h1 {
         font-size: 2.5rem;
     }
+
     nav ul {
-        flex-direction: column;
-        padding: 0 20px;
+        flex-wrap: nowrap;
+        padding: 0 10px; 
     }
+
     nav ul li {
-        margin: 8px 0;
-        text-align: center;
+        
+        margin: 0 5px; 
     }
+
+    /* tamaño de la fuente de los enlaces del menú */
+    nav ul li a {
+        font-size: 0.8rem;
+    }
+
+
     main h2 {
         font-size: 2rem;
     }
@@ -288,13 +297,11 @@ footer p {
     transform-origin: center center;
 }
 
-/* 1. Cuando la modal está en modo zoom, anulamos el centrado de Flexbox */
 .modal.is-zoomed {
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-/* 2. Hacemos que el contenedor de la imagen ocupe TODA la pantalla */
 .modal.is-zoomed #modal-image-container {
     width: 100%;
     height: 100%;
@@ -305,12 +312,10 @@ footer p {
     cursor: grab;
 }
 
-/* 3. Escalamamos la imagen DENTRO del contenedor ya expandido */
 .modal.is-zoomed #modal-img {
     transform: scale(2.5);
 }
 
-/* 4. Ocultamos el texto durante el zoom */
 .modal.is-zoomed .modal-info {
     display: none;
 }
