@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-T">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketches - Benjamin Counter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="resources/logo_white.png">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1 id="header-title">BENJAMIN COUNTER</h1>
+        </div>
+        <nav>
+            <ul>
+                <!-- El menú ya está actualizado aquí -->
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="fanart.html">FANART FOR OTHERS</a></li>
+                <li><a href="drawings.html">WORKS / DRAWINGS</a></li>
+                <li><a href="sketches.html">SKETCHES</a></li> 
+                <li><a href="about.html">ABOUT</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>SKETCHES & WIPs</h2>
+        <div class="gallery">
+            <div class="gallery-grid">
+            
+                <div class="gallery-item">
+                    <img src="sketches/thumb/24 sin título2_thumb.jpg" alt="sketch_24" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/24 sin título2.jpg"
+                    data-title="No title"
+                    data-description="No description">
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="sketches/thumb/137 sin título_thumb.jpg" alt="sketch_124" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/137 sin título.jpg"
+                    data-title="No title"
+                    data-description="Maybe one day i'll finish this one...
+                    maybe.">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/Feelings_from_the_heart_thumb.jpg" alt="jamol heart" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/Feelings_from_the_heart.jpg"
+                    data-title="No title"
+                    data-description="Magma drawing made on Pilferpup Draws' stream">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/Berkut_Kalashnikov_thumb.jpg" alt="berkut" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/Berkut_Kalashnikov.jpg"
+                    data-title="Berkut Kalashnikov"
+                    data-description="Original Character
+                    WOULD.">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/BERKUT_FEMININE_2_thumb.jpg" alt="Berkut body" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/BERKUT_FEMININE_2.jpg"
+                    data-title="Berkut fullbody"
+                    data-description="Original Character
+                    Look at him man, look at those grippers dude just look at his chest and tell me you wont rub yourself all over him come on i dare you.">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/BERKUT_FEMININE_femboy_real_thumb.jpg" alt="berkut FEMBOY" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/BERKUT_FEMININE_femboy_real.jpg"
+                    data-title="DERANGED "
+                    data-description="Original Character
+                    No need for descriptions on this one.">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/him_thumb.jpg" alt="Berkut" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/him.jpg"
+                    data-title="Shirtless"
+                    data-description="Magma drawing made on Pilferpup Draws' stream.
+                    Man i love this damn OC.">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/670 sin título (1)_thumb.jpg" alt="Demon girl unfinished" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/670 sin título (1).jpg"
+                    data-title="No title"
+                    data-description="Not planning on finishing this one.
+                    From 2019-2020">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/126 sin título_20250210134808_thumb.jpg" alt="demon girl bust" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/126 sin título_20250210134808.jpg"
+                    data-title="No title"
+                    data-description="No description">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="sketches/thumb/768 sin título_thumb.jpg" alt="sketch_24" class="gallery-image" loading="lazy"
+                    data-high-res-src="sketches/768 sin título.jpg"
+                    data-title="No title"
+                    data-description="No description">
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p id="footer-quote">"Everything in this life is impossible until someone comes and does it."</p>
+    </footer>
+
+    <div class="modal" id="modal">
+        <span class="modal-close" id="modal-close">&times;</span>
+        <span class="modal-nav prev" id="modal-prev">&#10094;</span>
+        <span class="modal-nav next" id="modal-next">&#10095;</span>
+        <div id="modal-image-container">
+            <img id="modal-img" src="">
+        </div>
+        <div class="modal-info">
+            <h3 id="modal-title">No title</h3>
+            <p id="modal-description">No description</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // ---elementos del DOM ---
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const imageContainer = document.getElementById('modal-image-container');
+        const closeModalBtn = document.getElementById('modal-close');
+        const prevBtn = document.getElementById('modal-prev');
+        const nextBtn = document.getElementById('modal-next');
+
+        // --- Variables Globales para la Galería ---
+        const galleryItems = [];
+        let currentImageIndex = 0;
+
+        // ---colectar todas las imágenes de la galería ---
+        const galleryImageElements = document.querySelectorAll('.gallery-image');
+        galleryImageElements.forEach((img, index) => {
+            galleryItems.push({
+                highResSrc: img.dataset.highResSrc,
+                title: img.dataset.title,
+                description: img.dataset.description
+            });
+
+            // --- 2. Añadir un listener a cada imagen para abrir la modal ---
+            img.addEventListener('click', () => {
+                openModalAtIndex(index);
+            });
+        });
+
+        // --- abrir y actualizar la modal ---
+        function openModalAtIndex(index) {
+            imageContainer.classList.remove('zoomed');
+            modal.classList.remove('is-zoomed');
+            modalImg.style.transformOrigin = 'center center';
+            
+            currentImageIndex = index;
+            const item = galleryItems[currentImageIndex];
+            
+            modalImg.src = item.highResSrc;
+            modalTitle.textContent = item.title;
+            modalDescription.textContent = item.description;
+            
+            modal.style.display = 'flex';
+        }
+
+        // ---para cerrar la modal ---
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // ---navegacion ---
+        function showNextImage() {
+            const nextIndex = (currentImageIndex + 1) % galleryItems.length;
+            openModalAtIndex(nextIndex);
+        }
+
+        function showPrevImage() {
+            const prevIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+            openModalAtIndex(prevIndex);
+        }
+
+        // ---vent Listeners para botones y cierre ---
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+        prevBtn.addEventListener('click', showPrevImage);
+        nextBtn.addEventListener('click', showNextImage);
+
+        // ---para el SWIPE ---
+        let touchStartX = 0;
+        modal.addEventListener('touchstart', (event) => {
+            if (imageContainer.classList.contains('zoomed')) return;
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+
+        modal.addEventListener('touchend', (event) => {
+            if (imageContainer.classList.contains('zoomed')) return;
+            const touchEndX = event.changedTouches[0].screenX;
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) showNextImage();
+            if (touchEndX > touchStartX + swipeThreshold) showPrevImage();
+        });
+        
+        // --- ZOOM ---
+        imageContainer.addEventListener('click', function(event) {
+            event.stopPropagation();
+            this.classList.toggle('zoomed');
+            modal.classList.toggle('is-zoomed');
+            if (!this.classList.contains('zoomed')) {
+                modalImg.style.transformOrigin = 'center center';
+            }
+        });
+
+        imageContainer.addEventListener('mousemove', function(event) {
+            if (this.classList.contains('zoomed')) {
+                const rect = this.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) / rect.width) * 100;
+                const y = ((event.clientY - rect.top) / rect.height) * 100;
+                modalImg.style.transformOrigin = `${x}% ${y}%`;
+            }
+        });
+
+        imageContainer.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('zoomed')) {
+                modalImg.style.transformOrigin = 'center center';
+            }
+        });
+        
+        // --- teclado ---
+        document.addEventListener('keydown', (event) => {
+            if (modal.style.display === 'flex' && !imageContainer.classList.contains('zoomed')) {
+                if (event.key === 'ArrowRight') showNextImage();
+                if (event.key === 'ArrowLeft') showPrevImage();
+                if (event.key === 'Escape') closeModal();
+            }
+        });
+    });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
