@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "I used to be an adventurer like you. Then I took an arrow in the knee...",
             "War... War never changes.",
             "FUCK MINNESOTA.",
-            "FUCK YOU IN PARTICULAR"
+            "FUCK YOU IN PARTICULAR",
+            "As i break apart."
             // ...
         ];
 
