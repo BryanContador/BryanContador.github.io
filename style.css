@@ -228,7 +228,7 @@ footer p {
     margin: 0 auto;
     padding: 0 20px;
 }
-/*
+
 @media (max-width: 768px) {
     .logo-container h1 {
         font-size: 2.5rem;
@@ -246,7 +246,7 @@ footer p {
     }
 
     /* tamaño de la fuente de los enlaces del menú */
-    /*
+
     nav ul li a {
         font-size: 0.8rem;
     }
@@ -270,15 +270,22 @@ footer p {
         max-width: 120px;
     }
 }
-*/
 
+/*
 @media (max-width: 768px) {
     header {
         padding: 1rem 1rem;
     }
 
+    .logo-container {
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
     .logo-container h1 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        white-space: nowrap;
     }
 
     main h2 {
@@ -296,10 +303,9 @@ footer p {
     .modal-info {
         width: 90%;
     }
-
-    /* --- responsive styles--- */
-
-    #hamburger-btn {
+*/
+        /* --- responsive styles--- */
+    /*#hamburger-btn {
         display: block;
     }
 
@@ -334,7 +340,7 @@ footer p {
         font-size: 1.5rem;
         color: white;
     }
-}
+}*/
 
 @keyframes fadeIn {
     from { opacity: 0; }
