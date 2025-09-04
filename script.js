@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "War... War never changes.",
             "FUCK MINNESOTA.",
             "FUCK YOU IN PARTICULAR",
-            "As i break apart."
+            "As I break apart."
             // ...
         ];
 
@@ -69,4 +69,28 @@ if (headerTitleElement) {
             headerTitleElement.textContent = alternativeTitles[randomIndex];
         }
     }
+
+// --- menu hamburger ---
+
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navMenu = document.getElementById('nav-menu');
+
+if (hamburgerBtn && navMenu) {
+    hamburgerBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('show-menu');
+
+        if (navMenu.classList.contains('show-menu')) {
+            hamburgerBtn.innerHTML = '&times;';
+        } else {
+            hamburgerBtn.innerHTML = '&#9776;';
+        }
+    });
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('show-menu');
+            hamburgerBtn.innerHTML = '&#9776;';
+        });
+    });
+}
 });
