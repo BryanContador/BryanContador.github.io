@@ -500,6 +500,11 @@ footer p {
     color: #555; 
 }
 
+/* --- link style --- */
+.underline-link {
+    text-decoration: underline;
+}
+
 /* --- anim para about --- */
 @keyframes fadeInImage {
     from {
@@ -547,8 +552,7 @@ footer p {
 }
 
 /* --- menu hamburger --- */
-
-#hamburger-btn {
+/*#hamburger-btn {
     display: none;
     background: none;
     border: none;
@@ -556,4 +560,28 @@ footer p {
     font-size: 2rem;
     cursor: pointer;
     z-index: 1001; 
+}*/
+
+/* --- menu float anim --- */
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
+
+nav ul li {
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+/* efecto de onda */
+nav ul li:nth-child(1) { animation-delay: 0s; }
+nav ul li:nth-child(2) { animation-delay: 0.2s; }
+nav ul li:nth-child(3) { animation-delay: 0.4s; }
+nav ul li:nth-child(4) { animation-delay: 0.6s; }
+nav ul li:nth-child(5) { animation-delay: 0.8s; }
