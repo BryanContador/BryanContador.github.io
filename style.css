@@ -229,7 +229,40 @@ footer p {
     padding: 0 20px;
 }
 
+/*final @media*/
 @media (max-width: 768px) {
+    .logo-container h1 {
+        font-size: 1.4rem;
+        white-space: nowrap;
+    }
+
+    nav ul li {
+        margin: 0 2px;
+    }
+
+    nav ul li a {
+        font-size: 0.75rem;
+        padding: 5px 3px;
+    }
+
+    main h2 {
+        font-size: 2rem;
+    }
+    main {
+        padding: 50px 20px;
+    }
+    footer {
+        padding: 2rem 0;
+    }
+    .gallery-item {
+        height: 200px;
+    }
+    .modal-info {
+        width: 90%;
+    }
+}
+
+/*@media (max-width: 768px) {
     .logo-container h1 {
         font-size: 2.5rem;
     }
@@ -244,10 +277,9 @@ footer p {
         
         margin: 0 5px; 
     }
-
     /* tamaño de la fuente de los enlaces del menú */
 
-    nav ul li a {
+    /*nav ul li a {
         font-size: 0.8rem;
     }
 
@@ -269,7 +301,7 @@ footer p {
     .footer-logo {
         max-width: 120px;
     }
-}
+}*/
 
 /*
 @media (max-width: 768px) {
