@@ -285,6 +285,17 @@
                 openModalAtIndex(index);
             });
         });
+        // --- Función para convertir texto de URL en enlaces clicables ---
+        function linkify(text) {
+            const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\b[a-z0-9.-]+\.(com|org|net|io|co)\b(\/[^ \t\n\r<]*)?)/ig;
+            return text.replace(urlPattern, function(url) {
+                let href = url;
+                if (!href.startsWith('http')) {
+                    href = 'https://' + href;
+                }
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="underline-link">${url}</a>`;
+            });
+        }
 
         // ---para abrir y actualizar la modal ---
         function openModalAtIndex(index) {
@@ -301,7 +312,6 @@
             tempImg.onload = () => {
                 modalImg.src = item.highResSrc;
             };
-            
             modalTitle.textContent = item.title;
             /*modalDescription.textContent = item.description;*/
             modalDescription.innerHTML = linkify(item.description);
