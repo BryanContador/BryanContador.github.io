@@ -280,7 +280,7 @@
                 description: img.dataset.description
             });
 
-            // --- 2. Añadir un listener a cada imagen para abrir la modal ---
+            // --- listener a cada imagen para abrir la modal ---
             img.addEventListener('click', () => {
                 openModalAtIndex(index);
             });
@@ -303,7 +303,8 @@
             };
             
             modalTitle.textContent = item.title;
-            modalDescription.textContent = item.description;
+            /*modalDescription.textContent = item.description;*/
+            modalDescription.innerHTML = linkify(item.description);
             
             modal.style.display = 'flex';
         }

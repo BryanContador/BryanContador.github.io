@@ -585,3 +585,15 @@ nav ul li:nth-child(2) { animation-delay: 0.2s; }
 nav ul li:nth-child(3) { animation-delay: 0.4s; }
 nav ul li:nth-child(4) { animation-delay: 0.6s; }
 nav ul li:nth-child(5) { animation-delay: 0.8s; }
+
+
+/* --- Estilo para enlaces en desc. --- */
+.modal-info p a {
+    color: #0056b3;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.modal-info p a:hover {
+    color: #003d82;
+}
