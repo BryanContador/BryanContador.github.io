@@ -1,20 +1,20 @@
 /* --- ESTILO PARA LA CABECERA --- */
-header {
+/*header {
     background-color: #000; 
     color: #fff;             
     padding: 20px 10px;      
     text-align: center;      
-}
+}*/
 
 /* --- ESTILO PARA EL TÍTULO 'BENJAMIN COUNTER' --- */
-header h1 {
+/*header h1 {
     font-family: 'ND Logos', sans-serif; 
     margin: 0;
     margin-bottom: 15px; 
-}
+}*/
 
 /* --- menú --- */
-header nav ul {
+/*header nav ul {
     list-style: none;     
     padding: 0;           
     margin: 0;            
@@ -22,19 +22,29 @@ header nav ul {
     display: flex;         
     justify-content: center; 
     flex-wrap: wrap; 
-}
+}*/
 
-header nav ul li {
+/*header nav ul li {
     margin: 0 10px; 
-}
+}*/
 
 /* --- ESTILO PARA LOS ENLACES DEL MENÚ --- */
-header nav ul li a {
+/*header nav ul li a {
     color: #fff;    
     text-decoration: none;  
     font-family: 'Patrick Hand', sans-serif;
     text-transform: uppercase; 
-}
+}*/
+
+/* --- barra sticky --- */
+/*header nav {
+    position: -webkit-sticky; /* damn safari compatibility */
+    /*position: sticky;
+    top: 0;
+    background-color: #000; /* Needs its own background */
+    /*padding: 10px 0; /* Adds some spacing */
+    /*z-index: 999; /* Ensures it stays on top of other content */
+/*}*/
 
 @font-face {
     font-family: 'ND Logos';
@@ -55,10 +65,22 @@ body {
     flex-direction: column;
 }
 
+/* --- sticky bar --- */
+nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #000;
+    padding: 10px 0;
+    z-index: 999;
+}
+
+/* --- Start of Corrected Header Styles --- */
+
 header {
     background-color: #000000;
-    padding: 20px 0;
     text-align: center;
+    padding: 20px 0 0; /* Creates space above the title, but NO space at the bottom */
 }
 
 .logo-container h1 {
@@ -67,12 +89,24 @@ header {
     font-size: 4rem;
     margin: 0;
     letter-spacing: 2px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    
+    background-color: #000000; 
+    /*padding: 0 0 20px 0; Creates space bellow the menu links*/
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 10px 0 0;
+    margin: 0; 
     display: flex;
     justify-content: center;
 }
@@ -86,6 +120,8 @@ nav ul li a {
     text-decoration: none;
     font-size: 1.2rem;
     padding: 5px 3px;
+    font-family: 'Patrick Hand', sans-serif;
+    text-transform: uppercase;
 }
 
 nav ul li a:hover {
@@ -242,7 +278,8 @@ footer p {
 
     nav ul li a {
         /*0.75*/
-        font-size: 0.5rem;
+        /*0.5*/
+        font-size: 0.9rem;
         padding: 5px 3px;
     }
 
@@ -575,9 +612,9 @@ footer p {
     }
 }
 
-nav ul li {
+/*nav ul li {
     animation: floatAnimation 3s ease-in-out infinite;
-}
+}*/
 
 /* efecto de onda */
 nav ul li:nth-child(1) { animation-delay: 0s; }
