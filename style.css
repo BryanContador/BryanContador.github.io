@@ -73,15 +73,15 @@ nav {
     z-index: 999;
     padding: 10px 0;
 
-    background-color: rgba(220, 220, 225, 0.4); /* color */    /*de 0.6 a 0.4 */
-    -webkit-backdrop-filter: blur(15px); /*de 10px a 15 */
-    backdrop-filter: blur(10px);
+    background-color: rgba(220, 220, 225, 0.4); /* color */    /*de 0.6 og*/
+    -webkit-backdrop-filter: blur(15px); /*de 10px og*/
+    backdrop-filter: blur(10px); /*10px og*/
     
     /* Sombras para el efecto 3D del cristal */
     box-shadow: 
-        inset 0 0 0 1px rgba(255, 255, 255, 0.4), /*0.2 a 0.4 */
-        inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9), /*.8 a .9 */
-        inset 0 2px 5px -3px rgba(0, 0, 0, 0.5),/*.6 a .5 */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4), /*0.2 og */
+        inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9), /*.8 og */
+        inset 0 2px 5px -3px rgba(0, 0, 0, 0.5),/*.6 og */
         0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -254,7 +254,18 @@ main h2 {
     padding: 20px 0;
 }
 
+.logo-footer,
+.index-logo-container {
+    text-align: center;
+    padding: 20px 0;
+}
 .footer-logo {
+    max-width: 150px;
+    height: auto;
+}
+
+.footer-logo,
+.index-logo {
     max-width: 150px;
     height: auto;
 }
@@ -283,13 +294,13 @@ footer p {
 
 .cta-button {
     display: inline-block;
-    background-color: #000000; /* Fondo */
-    color: #ffffff; /* blanco */
+    background-color: var(--text-color); /*var para el color de fondo */
+    color: var(--bg-color);              /*var para el color del texto */
     padding: 12px 25px;
     font-family: 'Patrick Hand', sans-serif; 
     text-transform: uppercase; 
     text-decoration: none; 
-    border: 2px solid #000000; 
+    border: 2px solid var(--text-color);
     border-radius: 5px; 
     transition: all 0.3s ease; 
     font-size: 1.1rem; 
@@ -297,8 +308,8 @@ footer p {
 
 /* Efecto raton por encima */
 .cta-button:hover {
-    background-color: #ffffff; 
-    color: #000000; 
+    background-color: var(--bg-color);
+    color: var(--text-color); 
     cursor: pointer; 
 }
 
@@ -700,4 +711,124 @@ nav ul li:nth-child(5) { animation-delay: 0.8s; }
     /* Transición suave para el movimiento */
     transition: left 0.4s cubic-bezier(0.5, 0, 0, 1), 
                 width 0.4s cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* --- ESTILOS PARA EL TEMA CLARO Y OSCURO --- */
+
+/* 1. Variables de color (Tema Claro por defecto) */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-color-light: #333;
+    --nav-bg: rgba(220, 220, 225, 0.4);
+    --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+    --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9);
+    --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.5);
+    --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --indicator-bg: rgba(255, 255, 255, 0.5);
+    --modal-info-bg: #ffffff;
+    --footer-bg: #000000;
+    --footer-text: #ffffff;
+}
+
+/* 2. Variables de color para el Tema Oscuro */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --text-color-light: #cccccc;
+    --nav-bg: rgba(20, 20, 20, 0.5);
+    --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.1);
+    --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.7);
+    --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --indicator-bg: rgba(255, 255, 255, 0.15);
+    --modal-info-bg: #2b2b2b;
+    --footer-bg: #1c1c1c;
+    --footer-text: #cccccc;
+}
+
+/* 3. Aplicar las variables a tus elementos existentes */
+body {
+    background-color: var(--bg-color);
+}
+
+nav {
+    background-color: var(--nav-bg);
+    box-shadow: 
+        var(--nav-shadow-inset1),
+        var(--nav-shadow-inset2),
+        var(--nav-shadow-inset3),
+        var(--nav-shadow-outer);
+}
+
+nav ul li a {
+    color: var(--text-color);
+}
+
+#nav-indicator {
+    background-color: var(--indicator-bg);
+}
+
+main h2, .social-links h3 {
+    color: var(--text-color);
+}
+
+.intro-text, .about-text, .modal-info p, .social-links ul li a {
+    color: var(--text-color-light);
+}
+
+.modal-info {
+    background-color: var(--modal-info-bg);
+}
+
+.modal-info h3 {
+     color: var(--text-color);
+}
+
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+}
+
+
+/* --- dark/light mode--- */
+#theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    
+    /* stilos */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* liquid ass */
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        var(--nav-shadow-inset1),
+        var(--nav-shadow-inset2),
+        var(--nav-shadow-inset3),
+        var(--nav-shadow-outer);
+        
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#theme-switcher:hover {
+    transform: scale(1.1);
+}
+
+/* estilo ícono SVG dentro del botón */
+#theme-switcher svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
