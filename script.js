@@ -94,3 +94,51 @@ if (hamburgerBtn && navMenu) {
     });
 }
 });
+
+// --- Nav activa indicador ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionamos los elementos necesarios
+    const navLinks = document.querySelectorAll('#nav-menu li a');
+    const indicator = document.getElementById('nav-indicator');
+    const navContainer = document.querySelector('.nav-container'); // El contenedor de referencia
+
+    // Función para posicionar el indicador
+    function positionIndicator() {
+
+        if (!navContainer || !indicator) {
+            console.error("Navigation container or indicator not found.");
+            return; 
+        }
+
+        let currentPage = window.location.pathname.split('/').pop();
+        if (currentPage === '' || currentPage === 'index.html') {
+            currentPage = 'index.html';
+        }
+        
+        let activeLink = null;
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                activeLink = link;
+            }
+        });
+
+        if (activeLink) {
+            const linkRect = activeLink.getBoundingClientRect();
+            const containerRect = navContainer.getBoundingClientRect();
+
+            const left = linkRect.left - containerRect.left;
+            const width = linkRect.width;
+
+            indicator.style.left = `${left}px`;
+            indicator.style.width = `${width}px`;
+        } else {
+            indicator.style.width = '0px'; 
+            console.warn(`No active link found for page: ${currentPage}`);
+        }
+    }
+    document.fonts.ready.then(() => {
+        positionIndicator();
+    });
+    window.addEventListener('resize', positionIndicator);
+});
