@@ -265,6 +265,33 @@ footer p {
     padding: 0 20px;
 }
 
+/* --- call to action --- */
+
+.cta-container {
+    margin-top: 30px; /* espacio entre el texto de bienvenida y el botón */
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #000000; /* Fondo */
+    color: #ffffff; /* blanco */
+    padding: 12px 25px;
+    font-family: 'Patrick Hand', sans-serif; 
+    text-transform: uppercase; 
+    text-decoration: none; 
+    border: 2px solid #000000; 
+    border-radius: 5px; 
+    transition: all 0.3s ease; 
+    font-size: 1.1rem; 
+}
+
+/* Efecto raton por encima */
+.cta-button:hover {
+    background-color: #ffffff; 
+    color: #000000; 
+    cursor: pointer; 
+}
+
 /*final @media*/
 @media (max-width: 768px) {
     .logo-container h1 {
