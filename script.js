@@ -33,13 +33,52 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('show-menu');
             hamburgerBtn.innerHTML = navMenu.classList.contains('show-menu') ? '&times;' : '&#9776;';
         });
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
+        const navLinksInMenu = navMenu.querySelectorAll('a');
+        navLinksInMenu.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('show-menu');
                 hamburgerBtn.innerHTML = '&#9776;';
             });
         });
+    }
+
+    //  INDICADOR DE NAVEGACIÓN CON ANIMACIÓN
+    const navLinksForIndicator = document.querySelectorAll('#nav-menu li a');
+    const indicator = document.getElementById('nav-indicator');
+    const navContainer = document.querySelector('.nav-container');
+    if (indicator && navContainer && navLinksForIndicator.length > 0) {
+        function moveIndicatorTo(targetLink) {
+            if (!targetLink) return;
+            const linkRect = targetLink.getBoundingClientRect();
+            const containerRect = navContainer.getBoundingClientRect();
+            const left = linkRect.left - containerRect.left;
+            const width = linkRect.width;
+            indicator.style.left = `${left}px`;
+            indicator.style.width = `${width}px`;
+        }
+
+        function setInitialPosition() {
+            let currentPage = window.location.pathname.split('/').pop();
+            if (currentPage === '' || currentPage === 'index.html') {
+                currentPage = 'index.html';
+            }
+            const activeLink = Array.from(navLinksForIndicator).find(link => link.getAttribute('href') === currentPage);
+            document.fonts.ready.then(() => moveIndicatorTo(activeLink));
+        }
+
+        navLinksForIndicator.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetUrl = link.href;
+                moveIndicatorTo(link);
+                indicator.addEventListener('transitionend', () => {
+                    window.location.href = targetUrl;
+                }, { once: true });
+            });
+        });
+
+        setInitialPosition();
+        window.addEventListener('resize', setInitialPosition);
     }
 
     //  INTERRUPTOR DE TEMA
@@ -56,13 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const applyTheme = (theme) => {
             body.classList.toggle('dark-mode', theme === 'dark');
             themeSwitcher.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-
             if (theme === 'dark') {
                 if (indexLogo) indexLogo.src = 'resources/C_white.png';
                 if (footerLogo) footerLogo.src = 'resources/logo_v2.png';
                 if (profilePicture) profilePicture.src = 'resources/logo_v2.png';
-
-            } else { // Light mode
+            } else {
                 if (indexLogo) indexLogo.src = 'resources/C.png';
                 if (footerLogo) footerLogo.src = 'resources/logo.png';
                 if (profilePicture) profilePicture.src = 'resources/logo.png';
