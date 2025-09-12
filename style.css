@@ -660,9 +660,9 @@ footer p {
     }
 }
 
-/*nav ul li {
+nav ul li {  /*anim nav menu*/
     animation: floatAnimation 3s ease-in-out infinite;
-}*/
+}
 
 /* efecto de onda */
 nav ul li:nth-child(1) { animation-delay: 0s; }
@@ -715,12 +715,12 @@ nav ul li:nth-child(5) { animation-delay: 0.8s; }
 
 /* --- ESTILOS PARA EL TEMA CLARO Y OSCURO --- */
 
-/* 1. Variables de color (Tema Claro por defecto) */
+/* Tema Claro por defecto */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --text-color-light: #333;
-    --nav-bg: rgba(220, 220, 225, 0.4);
+    --nav-bg: rgba(220, 220, 225, 0.3); /*OG .4*/ 
     --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
     --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9);
     --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.5);
@@ -731,12 +731,12 @@ nav ul li:nth-child(5) { animation-delay: 0.8s; }
     --footer-text: #ffffff;
 }
 
-/* 2. Variables de color para el Tema Oscuro */
+/* Tema Oscuro */
 body.dark-mode {
     --bg-color: #121212;
     --text-color: #ffffff;
     --text-color-light: #cccccc;
-    --nav-bg: rgba(20, 20, 20, 0.5);
+    --nav-bg: rgba(20, 20, 20, 0.2); /*transparency OG .5*/
     --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.1);
     --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.7);
@@ -747,7 +747,6 @@ body.dark-mode {
     --footer-text: #cccccc;
 }
 
-/* 3. Aplicar las variables a tus elementos existentes */
 body {
     background-color: var(--bg-color);
 }
