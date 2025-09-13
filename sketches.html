@@ -248,7 +248,7 @@
         <img id="modal-img" src="">
         <div class="modal-warning-overlay" id="modal-warning">
             <div class="modal-warning-content">
-                <p>This post may contain images that some viewers find offensive or unsettling.
+                <p>This post may contain images that some viewers <br> find offensive or unsettling.<br>
                     Do you wish to proceed?</p>
                 <button id="warning-continue-btn">View</button>
             </div>
@@ -327,18 +327,18 @@ function openModalAtIndex(index) {
     currentImageIndex = index;
     const item = galleryItems[currentImageIndex];
 
-    // Limpiar los estados de la imagen y la advertencia al abrir
-    modalImg.classList.remove('blurred');
-    modal.classList.remove('show-warning');
-
     const tempImg = new Image();
     tempImg.src = item.highResSrc;
+    
     tempImg.onload = () => {
         modalImg.src = item.highResSrc;
 
         if (item.isSensitive && !hasConfirmedSensitiveContent) {
             modalImg.classList.add('blurred');
             modal.classList.add('show-warning');
+        } else {
+            modalImg.classList.remove('blurred');
+            modal.classList.remove('show-warning');
         }
     };
 

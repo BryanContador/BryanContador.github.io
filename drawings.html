@@ -357,18 +357,18 @@ function openModalAtIndex(index) {
     currentImageIndex = index;
     const item = galleryItems[currentImageIndex];
 
-    // Limpiar los estados de la imagen y la advertencia al abrir
-    modalImg.classList.remove('blurred');
-    modal.classList.remove('show-warning');
-
     const tempImg = new Image();
     tempImg.src = item.highResSrc;
+    
     tempImg.onload = () => {
         modalImg.src = item.highResSrc;
 
         if (item.isSensitive && !hasConfirmedSensitiveContent) {
             modalImg.classList.add('blurred');
             modal.classList.add('show-warning');
+        } else {
+            modalImg.classList.remove('blurred');
+            modal.classList.remove('show-warning');
         }
     };
 
