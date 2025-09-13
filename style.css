@@ -99,8 +99,8 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 5px;
-    animation: floatAnimation 3s ease-in-out infinite;
+    margin: 0 20px; /*original 5px*/
+    animation: floatAnimation 3s ease-in-out infinite; /* <--ANIMATION ANIMACIÓN  */
 }
 
 nav ul li:nth-child(1) { animation-delay: 0s; }
