@@ -1,96 +1,60 @@
-/* --- ESTILO PARA LA CABECERA --- */
-/*header {
-    background-color: #000; 
-    color: #fff;             
-    padding: 20px 10px;      
-    text-align: center;      
-}*/
+/* ==========================================================================
+   BENJAMIN COUNTER WEBSITE STYLES
+   ========================================================================== */
 
-/* --- ESTILO PARA EL TÍTULO 'BENJAMIN COUNTER' --- */
-/*header h1 {
-    font-family: 'ND Logos', sans-serif; 
-    margin: 0;
-    margin-bottom: 15px; 
-}*/
-
-/* --- menú --- */
-/*header nav ul {
-    list-style: none;     
-    padding: 0;           
-    margin: 0;            
-    
-    display: flex;         
-    justify-content: center; 
-    flex-wrap: wrap; 
-}*/
-
-/*header nav ul li {
-    margin: 0 10px; 
-}*/
-
-/* --- ESTILO PARA LOS ENLACES DEL MENÚ --- */
-/*header nav ul li a {
-    color: #fff;    
-    text-decoration: none;  
-    font-family: 'Patrick Hand', sans-serif;
-    text-transform: uppercase; 
-}*/
-
-/* --- barra sticky --- */
-/*header nav {
-    position: -webkit-sticky; /* damn safari compatibility */
-    /*position: sticky;
-    top: 0;
-    background-color: #000; /* Needs its own background */
-    /*padding: 10px 0; /* Adds some spacing */
-    /*z-index: 999; /* Ensures it stays on top of other content */
-/*}*/
-
+/* Font Face Declarations */
 @font-face {
     font-family: 'ND Logos';
     src: url('fonts/ND LOGOS REGULAR.ttf') format('truetype');
 }
 
-#modal-description {
-  white-space: pre-line;
+/* CSS Variables for Theme Management */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-color-light: #333;
+    --nav-bg: rgba(220, 220, 225, 0.3);
+    --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+    --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9);
+    --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.5);
+    --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --indicator-bg: rgba(255, 255, 255, 0.5);
+    --modal-info-bg: #ffffff;
+    --footer-bg: #000000;
+    --footer-text: #ffffff;
 }
 
+/* Dark Theme Variables */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --text-color-light: #cccccc;
+    --nav-bg: rgba(20, 20, 20, 0.2);
+    --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.1);
+    --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.7);
+    --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --indicator-bg: rgba(255, 255, 255, 0.15);
+    --modal-info-bg: #2b2b2b;
+    --footer-bg: #1c1c1c;
+    --footer-text: #cccccc;
+}
 
+/* Base Styles */
 body {
     margin: 0;
-    background-color: #ffffff;
+    background-color: var(--bg-color);
     font-family: sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* --- sticky bar con liquid ass --- */
-nav {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    padding: 10px 0;
-
-    background-color: rgba(220, 220, 225, 0.4); /* color */    /*de 0.6 og*/
-    -webkit-backdrop-filter: blur(15px); /*de 10px og*/
-    backdrop-filter: blur(10px); /*10px og*/
-    
-    /* Sombras para el efecto 3D del cristal */
-    box-shadow: 
-        inset 0 0 0 1px rgba(255, 255, 255, 0.4), /*0.2 og */
-        inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9), /*.8 og */
-        inset 0 2px 5px -3px rgba(0, 0, 0, 0.5),/*.6 og */
-        0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Start of Corrected Header Styles --- */
-
+/* Header Styles */
 header {
     background-color: #000000;
     text-align: center;
-    padding: 20px 0 0; /* Creates space above the title, but NO space at the bottom */
+    padding: 20px 0 0;
 }
 
 .logo-container h1 {
@@ -103,30 +67,50 @@ header {
     margin-bottom: 15px;
 }
 
-/*nav { commented bc of new liquid ass nav
+/* Navigation Styles */
+nav {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 999;
-    
-    background-color: #000000; 
-    /*padding: 0 0 20px 0; Creates space bellow the menu links*/
-/*}*/
+    padding: 10px 0;
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        var(--nav-shadow-inset1),
+        var(--nav-shadow-inset2),
+        var(--nav-shadow-inset3),
+        var(--nav-shadow-outer);
+}
+
+.nav-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0; 
+    margin: 0;
     display: flex;
     justify-content: center;
 }
 
 nav ul li {
     margin: 0 5px;
+    animation: floatAnimation 3s ease-in-out infinite;
 }
 
+nav ul li:nth-child(1) { animation-delay: 0s; }
+nav ul li:nth-child(2) { animation-delay: 0.2s; }
+nav ul li:nth-child(3) { animation-delay: 0.4s; }
+nav ul li:nth-child(4) { animation-delay: 0.6s; }
+nav ul li:nth-child(5) { animation-delay: 0.8s; }
+
 nav ul li a {
-    color: #000000;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 1.2rem;
     padding: 5px 3px;
@@ -138,14 +122,31 @@ nav ul li a:hover {
     color: #7b7b7b;
 }
 
-/* Diferenciar padding para la página de inicio y galerías */
+/* Navigation Indicator */
+#nav-indicator {
+    position: absolute;
+    bottom: -8px;
+    height: 38px;
+    background-color: var(--indicator-bg);
+    border-radius: 99em;
+    z-index: -1;
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+        inset 0 2px 3px -1px rgba(255, 255, 255, 1),
+        inset 0 -2px 3px -1px rgba(0, 0, 0, 0.4),
+        0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: left 0.4s cubic-bezier(0.5, 0, 0, 1), 
+                width 0.4s cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* Main Content Styles */
 main {
-    flex: 1;                      
-    display: flex;              
-    flex-direction: column;      
-    justify-content: space-between; 
-    align-items: center;          
-    padding: 50px 20px;           
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
 }
 
 main.gallery-page {
@@ -153,7 +154,7 @@ main.gallery-page {
 }
 
 main h2 {
-    color: #000000;
+    color: var(--text-color);
     font-family: 'Patrick Hand', cursive;
     font-size: 3rem;
     font-weight: normal;
@@ -162,6 +163,7 @@ main h2 {
     animation: fadeIn 2s ease-in 0.5s forwards;
 }
 
+/* Gallery Styles */
 .gallery {
     margin-top: 20px;
 }
@@ -177,7 +179,7 @@ main h2 {
 
 .gallery-item {
     flex-grow: 1;
-    flex-basis: 300px; /* Ajusta este valor si quieres que las imágenes base sean más grandes o pequeñas */
+    flex-basis: 300px;
     position: relative;
     overflow: hidden;
     height: 250px;
@@ -197,6 +199,7 @@ main h2 {
     transform: scale(1.05);
 }
 
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -211,262 +214,6 @@ main h2 {
     flex-direction: column;
 }
 
-/*.modal img {
-    max-width: 90%;
-    max-height: 70%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-*/
-
-.modal-info {
-    background-color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 600px;
-    text-align: center;
-}
-
-.modal-info h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #000000;
-}
-
-.modal-info p {
-    margin: 5px 0 0;
-    font-size: 1rem;
-    color: #333;
-}
-
-.modal-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 2em;
-    cursor: pointer;
-}
-
-.logo-footer {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.logo-footer,
-.index-logo-container {
-    text-align: center;
-    padding: 20px 0;
-}
-.footer-logo {
-    max-width: 150px;
-    height: auto;
-}
-
-.footer-logo,
-.index-logo {
-    max-width: 150px;
-    height: auto;
-}
-
-footer {
-    background-color: #000000;
-    color: #ffffff;
-    text-align: center;
-    padding: 2.5rem 0;
-}
-
-footer p {
-    font-style: italic;
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- call to action --- */
-
-.cta-container {
-    margin-top: 30px; /* espacio entre el texto de bienvenida y el botón */
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: var(--text-color); /*var para el color de fondo */
-    color: var(--bg-color);              /*var para el color del texto */
-    padding: 12px 25px;
-    font-family: 'Patrick Hand', sans-serif; 
-    text-transform: uppercase; 
-    text-decoration: none; 
-    border: 2px solid var(--text-color);
-    border-radius: 5px; 
-    transition: all 0.3s ease; 
-    font-size: 1.1rem; 
-}
-
-/* Efecto raton por encima */
-.cta-button:hover {
-    background-color: var(--bg-color);
-    color: var(--text-color); 
-    cursor: pointer; 
-}
-
-/*final @media*/
-@media (max-width: 768px) {
-    .logo-container h1 {
-        font-size: 1.4rem;
-        white-space: nowrap;
-    }
-
-    nav ul li {
-        margin: 0 15px; /*OG 0 02px*/ 
-    }
-
-    nav ul li a {
-        /*0.75*/
-        /*0.5*/
-        font-size: 0.9rem;
-        padding: 5px 3px;
-    }
-
-    main h2 {
-        font-size: 2rem;
-    }
-    main {
-        padding: 50px 20px;
-    }
-    footer {
-        padding: 2rem 0;
-    }
-    .gallery-item {
-        height: 200px;
-    }
-    .modal-info {
-        width: 90%;
-    }
-}
-
-/*@media (max-width: 768px) {
-    .logo-container h1 {
-        font-size: 2.5rem;
-    }
-
-
-    nav ul {
-        flex-wrap: nowrap;
-        padding: 0 10px; 
-    }
-
-    nav ul li {
-        
-        margin: 0 5px; 
-    }
-    /* tamaño de la fuente de los enlaces del menú */
-
-    /*nav ul li a {
-        font-size: 0.8rem;
-    }
-
-    main h2 {
-        font-size: 2rem;
-    }
-    main {
-        padding: 50px 20px;
-    }
-    footer {
-        padding: 2rem 0;
-    }
-    .gallery-item {
-        height: 200px;
-    }
-    .modal-info {
-        width: 90%;
-    }
-    .footer-logo {
-        max-width: 120px;
-    }
-}*/
-
-/*
-@media (max-width: 768px) {
-    header {
-        padding: 1rem 1rem;
-    }
-
-    .logo-container {
-        flex-shrink: 1;
-        min-width: 0;
-        overflow: hidden;
-    }
-
-    .logo-container h1 {
-        font-size: 1.2rem;
-        white-space: nowrap;
-    }
-
-    main h2 {
-        font-size: 2rem;
-    }
-    main {
-        padding: 50px 20px;
-    }
-    footer {
-        padding: 2rem 0;
-    }
-    .gallery-item {
-        height: 200px;
-    }
-    .modal-info {
-        width: 90%;
-    }
-*/
-        /* --- responsive styles--- */
-    /*#hamburger-btn {
-        display: block;
-    }
-
-    nav {
-        display: none;
-    }
-
-    #nav-menu {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.95);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: left 0.3s ease-in-out;
-        z-index: 1000;
-    }
-
-    #nav-menu.show-menu {
-        left: 0;
-    }
-
-    #nav-menu li {
-        margin: 20px 0;
-    }
-
-    #nav-menu li a {
-        font-size: 1.5rem;
-        color: white;
-    }
-}*/
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* --- ESTILOS PARA LA FUNCIÓN DE ZOOM (corrección) --- */
-
 #modal-image-container {
     position: relative;
     max-width: 90%;
@@ -478,7 +225,7 @@ footer p {
     cursor: zoom-in;
     border-radius: 8px;
     margin-bottom: 10px;
-    transition: all 0.3s ease; /* Transición suave para el contenedor */
+    transition: all 0.3s ease;
 }
 
 #modal-img {
@@ -512,98 +259,48 @@ footer p {
     display: none;
 }
 
-/* --- intro estilo index --- */
-.intro-text {
-    font-size: 1.1rem; 
-    color: #333;       
-    line-height: 1.6;  
-    max-width: 700px;           
-    font-family: 'Patrick Hand', cursive;
+.modal-info {
+    background-color: var(--modal-info-bg);
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
     text-align: center;
 }
 
-/* --- 'ABOUT' --- */
-.about-content {
-    max-width: 800px;
-    margin: 0 auto; 
-    padding: 20px;
-    text-align: center;
-}
-
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 0%; 
-    object-fit: cover; 
-    margin-bottom: 20px;
-    /*border: 3px solid #ffffff; */ /*borde  */
-    /* --- anim--- */
-    opacity: 0; 
-    animation: fadeInImage 1.2s ease-out 0.3s forwards; /* Nombre, duración, timing, delay, fill-mode */
-}
-
-/* Estilo para los párrafos de texto */
-.about-text {
-    font-size: 1.1rem;
-    color: #333;
-    line-height: 1.7;
-    font-family: 'Patrick Hand', cursive;
-    text-align: center; /* Centra el texto */
-    margin-bottom: 20px; /* Espacio entre párrafos */
-}
-/* Estilos para la sección de redes sociales */
-.social-links {
-    margin-top: 40px;
-}
-
-.social-links h3 {
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.social-links ul {
-    list-style: none;
-    padding: 0;
+.modal-info h3 {
     margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
 }
 
-.social-links ul li {
-    display: inline-block; 
-    margin: 0 15px;
+.modal-info p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: var(--text-color-light);
+    white-space: pre-line;
 }
 
-.social-links ul li a {
-    text-decoration: none;
-    color: #000;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.2rem;
+.modal-info p a {
+    color: #0056b3;
     font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.social-links ul li a:hover {
-    color: #555; 
-}
-
-/* --- link style --- */
-.underline-link {
     text-decoration: underline;
 }
 
-/* --- anim para about --- */
-@keyframes fadeInImage {
-    from {
-        opacity: 0; 
-        transform: scale(0.95); 
-    }
-    to {
-        opacity: 1; 
-        transform: scale(1);
-    }
+.modal-info p a:hover {
+    color: #003d82;
 }
 
-/* --- ESTILOS NAVEGACION DE LA MODAL --- */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+/* Modal Navigation */
 .modal-nav {
     cursor: pointer;
     position: absolute;
@@ -615,7 +312,7 @@ footer p {
     padding: 16px;
     user-select: none;
     transition: background-color 0.3s ease;
-    z-index: 1001; 
+    z-index: 1001;
 }
 
 .modal-nav.prev {
@@ -631,247 +328,43 @@ footer p {
     border-radius: 5px;
 }
 
-/* ocultar flechas zoom */
 .modal.is-zoomed .modal-nav,
 .modal.is-zoomed .modal-close {
     display: none;
 }
 
-/* --- menu hamburger --- */
-/*#hamburger-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 1001; 
-}*/
-
-/* --- menu float anim --- */
-@keyframes floatAnimation {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-4px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-nav ul li {  /*anim nav menu*/
-    animation: floatAnimation 3s ease-in-out infinite;
-}
-
-/* efecto de onda */
-nav ul li:nth-child(1) { animation-delay: 0s; }
-nav ul li:nth-child(2) { animation-delay: 0.2s; }
-nav ul li:nth-child(3) { animation-delay: 0.4s; }
-nav ul li:nth-child(4) { animation-delay: 0.6s; }
-nav ul li:nth-child(5) { animation-delay: 0.8s; }
-
-
-/* --- Estilo para enlaces en desc. --- */
-.modal-info p a {
-    color: #0056b3;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.modal-info p a:hover {
-    color: #003d82;
-}
-
-/* --- ESTILOS PARA EL INDICADOR DE NAVEGACIÓN --- */
-
-/* Contenedor para posicionar el indicador */
-.nav-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-/* El indicador (la burbuja) */
-#nav-indicator {
-    position: absolute;
-    bottom: -8px; /* Lo posicionamos ligeramente debajo de los links */
-    height: 38px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 99em; /* Para hacerlo un círculo perfecto o píldora */
-    z-index: -1; /* Lo ponemos detrás de los links */
-    
-    /* Sombras para que el indicador también parezca de cristal */
-    box-shadow: 
-        inset 0 0 0 1px rgba(255, 255, 255, 0.4),
-        inset 0 2px 3px -1px rgba(255, 255, 255, 1),
-        inset 0 -2px 3px -1px rgba(0, 0, 0, 0.4),
-        0 3px 6px rgba(0, 0, 0, 0.1);
-    
-    /* Transición suave para el movimiento */
-    transition: left 0.4s cubic-bezier(0.5, 0, 0, 1), 
-                width 0.4s cubic-bezier(0.5, 0, 0, 1);
-}
-
-/* --- ESTILOS PARA EL TEMA CLARO Y OSCURO --- */
-
-/* Tema Claro por defecto */
-:root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --text-color-light: #333;
-    --nav-bg: rgba(220, 220, 225, 0.3); /*OG .4*/ 
-    --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
-    --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.9);
-    --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.5);
-    --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --indicator-bg: rgba(255, 255, 255, 0.5);
-    --modal-info-bg: #ffffff;
-    --footer-bg: #000000;
-    --footer-text: #ffffff;
-}
-
-/* Tema Oscuro */
-body.dark-mode {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --text-color-light: #cccccc;
-    --nav-bg: rgba(20, 20, 20, 0.2); /*transparency OG .5*/
-    --nav-shadow-inset1: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    --nav-shadow-inset2: inset 0 -2px 5px -3px rgba(255, 255, 255, 0.1);
-    --nav-shadow-inset3: inset 0 2px 5px -3px rgba(0, 0, 0, 0.7);
-    --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.3);
-    --indicator-bg: rgba(255, 255, 255, 0.15);
-    --modal-info-bg: #2b2b2b;
-    --footer-bg: #1c1c1c;
-    --footer-text: #cccccc;
-}
-
-body {
-    background-color: var(--bg-color);
-}
-
-nav {
-    background-color: var(--nav-bg);
-    box-shadow: 
-        var(--nav-shadow-inset1),
-        var(--nav-shadow-inset2),
-        var(--nav-shadow-inset3),
-        var(--nav-shadow-outer);
-}
-
-nav ul li a {
-    color: var(--text-color);
-}
-
-#nav-indicator {
-    background-color: var(--indicator-bg);
-}
-
-main h2, .social-links h3 {
-    color: var(--text-color);
-}
-
-.intro-text, .about-text, .modal-info p, .social-links ul li a {
-    color: var(--text-color-light);
-}
-
-.modal-info {
-    background-color: var(--modal-info-bg);
-}
-
-.modal-info h3 {
-     color: var(--text-color);
-}
-
-footer {
-    background-color: var(--footer-bg);
-    color: var(--footer-text);
-}
-
-
-/* --- dark/light mode--- */
-#theme-switcher {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1000;
-    
-    /* stilos */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* liquid ass */
-    background-color: var(--nav-bg);
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(10px);
-    box-shadow: 
-        var(--nav-shadow-inset1),
-        var(--nav-shadow-inset2),
-        var(--nav-shadow-inset3),
-        var(--nav-shadow-outer);
-        
-    transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-#theme-switcher:hover {
+/* Content Warning Styles */
+#modal-img.blurred {
+    filter: blur(20px) saturate(0.8);
     transform: scale(1.1);
 }
 
-/* estilo ícono SVG dentro del botón */
-#theme-switcher svg {
-    width: 24px;
-    height: 24px;
-    color: var(--text-color);
-    transition: color 0.3s ease;
-}
-
-/* --- ADVERTENCIA DE CONTENIDO --- */
-
-/* desenfoque a la imagen */
-#modal-img.blurred {
-  filter: blur(20px) saturate(0.8);
-  transform: scale(1.1);
-}
-
-/* --- ESTILOS PARA ADVERTENCIA DE CONTENIDO (AJUSTADO) --- */
-
-/* El contenedor de la advertencia que se superpone */
 .modal-warning-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1002; /* Debe estar por encima de la imagen */
-    display: none; /* Oculto por defecto */
+    z-index: 1002;
+    display: none;
     justify-content: center;
     align-items: center;
-    /* Fondo semitransparente para que la imagen borrosa se vea un poco más */
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal.show-warning .modal-warning-overlay {
-  display: flex;
+    display: flex;
 }
 
-/* ESTILOS PARA EL CONTENIDO DEL TEXTO (los mismos que antes, pero puedes ajustar colores si quieres) */
 .modal-warning-content {
-    background-color: rgba(20, 20, 20, 0.9); /* Un poco más opaco para el texto */
+    background-color: rgba(20, 20, 20, 0.9);
     color: white;
     padding: 20px 30px;
     border-radius: 8px;
     text-align: center;
     font-family: 'Patrick Hand', sans-serif;
-    max-width: 80%; /* Para que no ocupe todo el ancho */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Sombra para el cuadro de texto */
+    max-width: 80%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .modal-warning-content p {
@@ -894,4 +387,236 @@ footer {
 
 #warning-continue-btn:hover {
     background-color: #ccc;
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 2.5rem 0;
+}
+
+footer p {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo-footer,
+.index-logo-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-logo,
+.index-logo {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Call to Action Styles */
+.cta-container {
+    margin-top: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    padding: 12px 25px;
+    font-family: 'Patrick Hand', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--text-color);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.cta-button:hover {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* About Page Styles */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 0%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInImage 1.2s ease-out 0.3s forwards;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    line-height: 1.7;
+    font-family: 'Patrick Hand', cursive;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    line-height: 1.6;
+    max-width: 700px;
+    font-family: 'Patrick Hand', cursive;
+    text-align: center;
+}
+
+/* Social Links Styles */
+.social-links {
+    margin-top: 40px;
+}
+
+.social-links h3 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.social-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-links ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.social-links ul li a {
+    text-decoration: none;
+    color: var(--text-color-light);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.social-links ul li a:hover {
+    color: #555;
+}
+
+.underline-link {
+    text-decoration: underline;
+}
+
+/* Theme Switcher */
+#theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        var(--nav-shadow-inset1),
+        var(--nav-shadow-inset2),
+        var(--nav-shadow-inset3),
+        var(--nav-shadow-outer);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#theme-switcher:hover {
+    transform: scale(1.1);
+}
+
+#theme-switcher svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo-container h1 {
+        font-size: 1.4rem;
+        white-space: nowrap;
+    }
+
+    nav ul li {
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        font-size: 0.9rem;
+        padding: 5px 3px;
+    }
+
+    main h2 {
+        font-size: 2rem;
+    }
+
+    main {
+        padding: 50px 20px;
+    }
+
+    footer {
+        padding: 2rem 0;
+    }
+
+    .gallery-item {
+        height: 200px;
+    }
+
+    .modal-info {
+        width: 90%;
+    }
 }

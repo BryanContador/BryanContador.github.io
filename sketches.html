@@ -248,7 +248,7 @@
         <img id="modal-img" src="">
         <div class="modal-warning-overlay" id="modal-warning">
             <div class="modal-warning-content">
-                <p>This post may contain images that some viewers <br> find offensive or unsettling.<br>
+                <p>This post may contain images that some viewers find offensive or unsettling.<br>
                     Do you wish to proceed?</p>
                 <button id="warning-continue-btn">View</button>
             </div>
@@ -277,7 +277,7 @@
         const continueBtn = document.getElementById('warning-continue-btn');
 
        // --- Logica del botón de advertencia ---
-       continueBtn.addEventListener('click', () => {
+       continueBtn.addEventListener('click', (event) => {
        event.stopPropagation();
        hasConfirmedSensitiveContent = true; 
        modal.classList.remove('show-warning'); // Oculta el contenedor de la advertencia
