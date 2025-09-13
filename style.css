@@ -620,3 +620,16 @@ footer p {
         width: 90%;
     }
 }
+
+/*  Glassmorphism for warning content */
+.modal-info,
+.modal-warning-content {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modal-warning-content {
+    background-color: rgba(20, 20, 20, 0.3);
+}
