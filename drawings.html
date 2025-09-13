@@ -296,7 +296,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        let hasConfirmedSensitiveContent = false; //content warning
         // --- Referencias a los elementos del DOM ---
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
@@ -312,7 +311,9 @@
        // --- Logica del botón de advertencia ---
        continueBtn.addEventListener('click', () => {
        event.stopPropagation();
-       hasConfirmedSensitiveContent = true; 
+       if (galleryItems[currentImageIndex]) {
+       galleryItems[currentImageIndex].isRevealed = true;
+       } 
        modal.classList.remove('show-warning'); // Oculta el contenedor de la advertencia
        modalImg.classList.remove('blurred');   // Elimina el desenfoque de la imagen
        });
@@ -328,7 +329,8 @@
                 highResSrc: img.dataset.highResSrc,
                 title: img.dataset.title,
                 description: img.dataset.description,
-                isSensitive: img.dataset.sensitive === 'true' //content warning
+                isSensitive: img.dataset.sensitive === 'true', //content warning
+                isRevealed: false
             });
 
             // --- listener a cada imagen para abrir la modal ---
@@ -363,7 +365,7 @@ function openModalAtIndex(index) {
     tempImg.onload = () => {
         modalImg.src = item.highResSrc;
 
-        if (item.isSensitive && !hasConfirmedSensitiveContent) {
+        if (item.isSensitive && !item.isRevealed) {
             modalImg.classList.add('blurred');
             modal.classList.add('show-warning');
         } else {
