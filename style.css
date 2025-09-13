@@ -592,12 +592,13 @@ footer p {
     }
 
     nav ul li {
-        margin: 0 15px;
+        margin: 0 8px;
     }
 
     nav ul li a {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         padding: 5px 3px;
+        white-space: nowrap;
     }
 
     main h2 {
