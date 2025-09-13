@@ -103,7 +103,8 @@
                     data-high-res-src="sketches/Imagen (5)_copia.jpg"
                     data-title="Suicide note"
                     data-description="Original Character
-                    No description">
+                    No description"
+                    data-sensitive="true">
                 </div> 
 
                 <div class="gallery-item">
@@ -118,7 +119,8 @@
                     data-high-res-src="sketches/Imagen (10).jpg"
                     data-title="Blood"
                     data-description="Original Character
-                    No description">
+                    No description"
+                    data-sensitive="true">
                 </div> 
 
                 <div class="gallery-item">
@@ -241,9 +243,18 @@
         <span class="modal-close" id="modal-close">&times;</span>
         <span class="modal-nav prev" id="modal-prev">&#10094;</span>
         <span class="modal-nav next" id="modal-next">&#10095;</span>
-        <div id="modal-image-container">
-            <img id="modal-img" src="">
+           
+    <div id="modal-image-container">
+        <img id="modal-img" src="">
+        <div class="modal-warning-overlay" id="modal-warning">
+            <div class="modal-warning-content">
+                <p>This post may contain images that some viewers find offensive or unsettling.
+                    Do you wish to proceed?</p>
+                <button id="warning-continue-btn">View</button>
+            </div>
         </div>
+    </div>
+
         <div class="modal-info">
             <h3 id="modal-title">No title</h3>
             <p id="modal-description">No description</p>
@@ -252,6 +263,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        let hasConfirmedSensitiveContent = false; //content warning
         // ---elementos del DOM ---
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
@@ -261,6 +273,16 @@
         const closeModalBtn = document.getElementById('modal-close');
         const prevBtn = document.getElementById('modal-prev');
         const nextBtn = document.getElementById('modal-next');
+        const warningOverlay = document.getElementById('modal-warning');
+        const continueBtn = document.getElementById('warning-continue-btn');
+
+       // --- Logica del botón de advertencia ---
+       continueBtn.addEventListener('click', () => {
+       event.stopPropagation();
+       hasConfirmedSensitiveContent = true; 
+       modal.classList.remove('show-warning'); // Oculta el contenedor de la advertencia
+       modalImg.classList.remove('blurred');   // Elimina el desenfoque de la imagen
+       });
 
         // --- Variables Globales para la Galería ---
         const galleryItems = [];
@@ -272,7 +294,9 @@
             galleryItems.push({
                 highResSrc: img.dataset.highResSrc,
                 title: img.dataset.title,
-                description: img.dataset.description
+                description: img.dataset.description,
+                description: img.dataset.description,
+                isSensitive: img.dataset.sensitive === 'true' //content warning
             });
 
             // --- listener a cada imagen para abrir la modal ---
@@ -295,21 +319,34 @@
         }
 
         // --- abrir y actualizar la modal ---
-        function openModalAtIndex(index) {
-            imageContainer.classList.remove('zoomed');
-            modal.classList.remove('is-zoomed');
-            modalImg.style.transformOrigin = 'center center';
-            
-            currentImageIndex = index;
-            const item = galleryItems[currentImageIndex];
-            
-            modalImg.src = item.highResSrc;
-            modalTitle.textContent = item.title;
-            /*modalDescription.textContent = item.description;*/
-            modalDescription.innerHTML = linkify(item.description);
-            
-            modal.style.display = 'flex';
+function openModalAtIndex(index) {
+    imageContainer.classList.remove('zoomed');
+    modal.classList.remove('is-zoomed');
+    modalImg.style.transformOrigin = 'center center';
+
+    currentImageIndex = index;
+    const item = galleryItems[currentImageIndex];
+
+    // Limpiar los estados de la imagen y la advertencia al abrir
+    modalImg.classList.remove('blurred');
+    modal.classList.remove('show-warning');
+
+    const tempImg = new Image();
+    tempImg.src = item.highResSrc;
+    tempImg.onload = () => {
+        modalImg.src = item.highResSrc;
+
+        if (item.isSensitive && !hasConfirmedSensitiveContent) {
+            modalImg.classList.add('blurred');
+            modal.classList.add('show-warning');
         }
+    };
+
+    modalTitle.textContent = item.title;
+    modalDescription.innerHTML = linkify(item.description);
+
+    modal.style.display = 'flex';
+}
 
         // ---para cerrar la modal ---
         function closeModal() {
@@ -352,6 +389,7 @@
         
         // --- ZOOM ---
         imageContainer.addEventListener('click', function(event) {
+            if (modal.classList.contains('show-warning')) return;
             event.stopPropagation();
             this.classList.toggle('zoomed');
             modal.classList.toggle('is-zoomed');

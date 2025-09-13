@@ -321,7 +321,7 @@ footer p {
     }
 
     nav ul li {
-        margin: 0 2px;
+        margin: 0 15px; /*OG 0 02px*/ 
     }
 
     nav ul li a {
@@ -468,6 +468,7 @@ footer p {
 /* --- ESTILOS PARA LA FUNCIÓN DE ZOOM (corrección) --- */
 
 #modal-image-container {
+    position: relative;
     max-width: 90%;
     max-height: 70%;
     display: flex;
@@ -830,4 +831,67 @@ footer {
     height: 24px;
     color: var(--text-color);
     transition: color 0.3s ease;
+}
+
+/* --- ADVERTENCIA DE CONTENIDO --- */
+
+/* desenfoque a la imagen */
+#modal-img.blurred {
+  filter: blur(20px) saturate(0.8);
+  transform: scale(1.1);
+}
+
+/* --- ESTILOS PARA ADVERTENCIA DE CONTENIDO (AJUSTADO) --- */
+
+/* El contenedor de la advertencia que se superpone */
+.modal-warning-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1002; /* Debe estar por encima de la imagen */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    /* Fondo semitransparente para que la imagen borrosa se vea un poco más */
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal.show-warning .modal-warning-overlay {
+  display: flex;
+}
+
+/* ESTILOS PARA EL CONTENIDO DEL TEXTO (los mismos que antes, pero puedes ajustar colores si quieres) */
+.modal-warning-content {
+    background-color: rgba(20, 20, 20, 0.9); /* Un poco más opaco para el texto */
+    color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Patrick Hand', sans-serif;
+    max-width: 80%; /* Para que no ocupe todo el ancho */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Sombra para el cuadro de texto */
+}
+
+.modal-warning-content p {
+    margin: 0 0 15px 0;
+    font-size: 1.2rem;
+}
+
+#warning-continue-btn {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Patrick Hand', sans-serif;
+    text-transform: uppercase;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#warning-continue-btn:hover {
+    background-color: #ccc;
 }
