@@ -622,6 +622,14 @@ footer p {
     .modal-info {
         width: 90%;
     }
+
+    .gallery-separator {
+        margin: 25px 0; 
+    }
+
+    .gallery-separator h3 {
+        font-size: 1.6rem; 
+    }
 }
 
 /*  Glassmorphism for warning content */
