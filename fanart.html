@@ -240,204 +240,27 @@
     </footer>
      
     <div class="modal" id="modal">
-        <span class="modal-close" id="modal-close">&times;</span>
-        <span class="modal-nav prev" id="modal-prev">&#10094;</span>
-        <span class="modal-nav next" id="modal-next">&#10095;</span>
-
-        <div id="modal-image-container">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar">&times;</button>
+    <button class="modal-nav prev" id="modal-prev" aria-label="Imagen anterior">&#10094;</button>
+    <button class="modal-nav next" id="modal-next" aria-label="Siguiente imagen">&#10095;</button>
+       
+    <div id="modal-image-container">
         <img id="modal-img" src="">
         <div class="modal-warning-overlay" id="modal-warning">
             <div class="modal-warning-content">
-                <p>This post may contain images that some viewers find offensive or unsettling. <br>
+                <p>This post may contain images that some viewers find offensive or unsettling.<br>
                     Do you wish to proceed?</p>
                 <button id="warning-continue-btn">View</button>
             </div>
         </div>
     </div>
 
-        <div class="modal-info">
-            <h3 id="modal-title">No title</h3>
-            <p id="modal-description">No description</p>
-        </div>
+    <div class="modal-info">
+        <h3 id="modal-title">No title</h3>
+        <p id="modal-description">No description</p>
     </div>
- 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // ---elementos del DOM ---
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDescription = document.getElementById('modal-description');
-        const imageContainer = document.getElementById('modal-image-container');
-        const closeModalBtn = document.getElementById('modal-close');
-        const prevBtn = document.getElementById('modal-prev');
-        const nextBtn = document.getElementById('modal-next');
-        const warningOverlay = document.getElementById('modal-warning');
-        const continueBtn = document.getElementById('warning-continue-btn');
-
-       // --- Logica del botón de advertencia ---
-       continueBtn.addEventListener('click', () => {
-       event.stopPropagation();
-       if (galleryItems[currentImageIndex]) {
-       galleryItems[currentImageIndex].isRevealed = true;
-       } 
-       modal.classList.remove('show-warning'); // Oculta el contenedor de la advertencia
-       modalImg.classList.remove('blurred');   // Elimina el desenfoque de la imagen
-       });
-
-        // --- Variables Globales para la Galería ---
-        const galleryItems = [];
-        let currentImageIndex = 0;
-
-        // ---colectar todas las imágenes de la galería ---
-        const galleryImageElements = document.querySelectorAll('.gallery-image');
-        galleryImageElements.forEach((img, index) => {
-            galleryItems.push({
-                highResSrc: img.dataset.highResSrc,
-                title: img.dataset.title,
-                description: img.dataset.description,
-                description: img.dataset.description,
-                isSensitive: img.dataset.sensitive === 'true', //content warning
-                isRevealed: false
-            });
-
-            // --- listener a cada imagen para abrir la modal ---
-            img.addEventListener('click', () => {
-                openModalAtIndex(index);
-            });
-        });
-
-        // --- convertir texto de URL en enlaces clicables ---
-        function linkify(text) {
-            const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\b[a-z0-9.-]+\.(com|org|net|io)\b(\/[^ \t\n\r<]*)?)/ig;
-            return text.replace(urlPattern, function(url) {
-                let href = url;
-                if (!href.startsWith('http')) {
-                    href = 'https://' + href;
-                }
-                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-            });
-        
-        }
-
-        // --- convertir texto de URL en enlaces clicables ---
-        function linkify(text) {
-            const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\b[a-z0-9.-]+\.(com|org|net|io)\b(\/[^ \t\n\r<]*)?)/ig;
-            return text.replace(urlPattern, function(url) {
-                let href = url;
-                if (!href.startsWith('http')) {
-                    href = 'https://' + href;
-                }
-                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-            });
-        
-        }
-
-        // --- abrir y actualizar la modal ---
-function openModalAtIndex(index) {
-    imageContainer.classList.remove('zoomed');
-    modal.classList.remove('is-zoomed');
-    modalImg.style.transformOrigin = 'center center';
-
-    currentImageIndex = index;
-    const item = galleryItems[currentImageIndex];
-
-    const tempImg = new Image();
-    tempImg.src = item.highResSrc;
+    </div>
     
-    tempImg.onload = () => {
-        modalImg.src = item.highResSrc;
-
-        if (item.isSensitive && !item.isRevealed) {
-            modalImg.classList.add('blurred');
-            modal.classList.add('show-warning');
-        } else {
-            modalImg.classList.remove('blurred');
-            modal.classList.remove('show-warning');
-        }
-    };
-
-    modalTitle.textContent = item.title;
-    modalDescription.innerHTML = linkify(item.description);
-
-    modal.style.display = 'flex';
-}
-
-        // ---para cerrar la modal ---
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-
-        // ---navegacion ---
-        function showNextImage() {
-            const nextIndex = (currentImageIndex + 1) % galleryItems.length;
-            openModalAtIndex(nextIndex);
-        }
-
-        function showPrevImage() {
-            const prevIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
-            openModalAtIndex(prevIndex);
-        }
-
-        // ---vent Listeners para botones y cierre ---
-        closeModalBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) closeModal();
-        });
-        prevBtn.addEventListener('click', showPrevImage);
-        nextBtn.addEventListener('click', showNextImage);
-
-        // ---para el SWIPE ---
-        let touchStartX = 0;
-        modal.addEventListener('touchstart', (event) => {
-            if (imageContainer.classList.contains('zoomed')) return;
-            touchStartX = event.changedTouches[0].screenX;
-        }, { passive: true });
-
-        modal.addEventListener('touchend', (event) => {
-            if (imageContainer.classList.contains('zoomed')) return;
-            const touchEndX = event.changedTouches[0].screenX;
-            const swipeThreshold = 50;
-            if (touchEndX < touchStartX - swipeThreshold) showNextImage();
-            if (touchEndX > touchStartX + swipeThreshold) showPrevImage();
-        });
-        
-        // --- ZOOM ---
-        imageContainer.addEventListener('click', function(event) {
-            if (modal.classList.contains('show-warning')) return;
-            event.stopPropagation();
-            this.classList.toggle('zoomed');
-            modal.classList.toggle('is-zoomed');
-            if (!this.classList.contains('zoomed')) {
-                modalImg.style.transformOrigin = 'center center';
-            }
-        });
-
-        imageContainer.addEventListener('mousemove', function(event) {
-            if (this.classList.contains('zoomed')) {
-                const rect = this.getBoundingClientRect();
-                const x = ((event.clientX - rect.left) / rect.width) * 100;
-                const y = ((event.clientY - rect.top) / rect.height) * 100;
-                modalImg.style.transformOrigin = `${x}% ${y}%`;
-            }
-        });
-
-        imageContainer.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('zoomed')) {
-                modalImg.style.transformOrigin = 'center center';
-            }
-        });
-        
-        // --- teclado ---
-        document.addEventListener('keydown', (event) => {
-            if (modal.style.display === 'flex' && !imageContainer.classList.contains('zoomed')) {
-                if (event.key === 'ArrowRight') showNextImage();
-                if (event.key === 'ArrowLeft') showPrevImage();
-                if (event.key === 'Escape') closeModal();
-            }
-        });
-    });
-    </script>
     <script src="script.js"></script>
     <button id="theme-switcher" aria-label="Cambiar tema"></button>
 </body>

@@ -634,3 +634,38 @@ footer p {
 .modal-warning-content {
     background-color: rgba(20, 20, 20, 0.3);
 }
+
+/* ==========================================================================
+   ACCESSIBILITY STYLES
+   ========================================================================== */
+
+.modal-close,
+.modal-nav {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.modal-close:focus,
+.modal-nav:focus,
+#warning-continue-btn:focus {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
+}
+
+.modal-close,
+.modal-nav {
+    color: white;
+}
+
+.modal-close {
+    font-size: 3em;
+}
+
+.modal-nav {
+    font-size: 2.5rem; 
+}

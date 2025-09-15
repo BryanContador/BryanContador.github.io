@@ -156,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // SVG icons for theme switcher
         const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-        
         const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
         /**
@@ -203,4 +202,199 @@ document.addEventListener('DOMContentLoaded', () => {
         themeSwitcher.addEventListener('click', toggleTheme);
         initializeTheme();
     }
+    
+    // ==========================================================================
+    // GALLERY MODAL FUNCTIONALITY (CENTRALIZED)
+    // ==========================================================================
+    
+    // all modal logic
+    function initializeGalleryModal() {
+        const modal = document.getElementById('modal');
+        if (!modal) {
+            return;
+        }
+
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const imageContainer = document.getElementById('modal-image-container');
+        const closeModalBtn = document.getElementById('modal-close');
+        const prevBtn = document.getElementById('modal-prev');
+        const nextBtn = document.getElementById('modal-next');
+        const warningOverlay = document.getElementById('modal-warning');
+        const continueBtn = document.getElementById('warning-continue-btn');
+
+        const galleryItems = [];
+        let currentImageIndex = 0;
+        let lastFocusedElement;
+
+        const galleryImageElements = document.querySelectorAll('.gallery-image');
+        galleryImageElements.forEach((img, index) => {
+            galleryItems.push({
+                element: img,
+                highResSrc: img.dataset.highResSrc,
+                title: img.dataset.title,
+                description: img.dataset.description,
+                isSensitive: img.dataset.sensitive === 'true',
+                isRevealed: false
+            });
+
+            img.addEventListener('click', () => {
+                openModalAtIndex(index);
+            });
+        });
+        
+        function linkify(text) {
+            const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\b[a-z0-9.-]+\.(com|org|net|io)\b(\/[^ \t\n\r<]*)?)/ig;
+            return text.replace(urlPattern, function(url) {
+                let href = url;
+                if (!href.startsWith('http')) {
+                    href = 'https://' + href;
+                }
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+            });
+        }
+
+        function openModalAtIndex(index) {
+            lastFocusedElement = document.activeElement;
+            
+            imageContainer.classList.remove('zoomed');
+            modal.classList.remove('is-zoomed');
+            modalImg.style.transformOrigin = 'center center';
+
+            currentImageIndex = index;
+            const item = galleryItems[currentImageIndex];
+
+            const tempImg = new Image();
+            tempImg.src = item.highResSrc;
+            
+            tempImg.onload = () => {
+                modalImg.src = item.highResSrc;
+
+                if (item.isSensitive && !item.isRevealed) {
+                    modalImg.classList.add('blurred');
+                    modal.classList.add('show-warning');
+                } else {
+                    modalImg.classList.remove('blurred');
+                    modal.classList.remove('show-warning');
+                }
+            };
+
+            modalTitle.textContent = item.title;
+            modalDescription.innerHTML = linkify(item.description);
+
+            modal.style.display = 'flex';
+            closeModalBtn.focus();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        }
+
+        function showNextImage() {
+            const nextIndex = (currentImageIndex + 1) % galleryItems.length;
+            openModalAtIndex(nextIndex);
+        }
+
+        function showPrevImage() {
+            const prevIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+            openModalAtIndex(prevIndex);
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+        prevBtn.addEventListener('click', showPrevImage);
+        nextBtn.addEventListener('click', showNextImage);
+        
+        continueBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (galleryItems[currentImageIndex]) {
+                galleryItems[currentImageIndex].isRevealed = true;
+            }
+            modal.classList.remove('show-warning');
+            modalImg.classList.remove('blurred');
+        });
+
+        // --- Keybord and focus (A11y Focus Trap) ---
+        const focusableElementsSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        let focusableElements = [];
+        let firstFocusableElement, lastFocusableElement;
+
+        modal.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+                return;
+            }
+            
+            if (modal.classList.contains('is-zoomed')) return;
+
+            if (event.key === 'ArrowRight') showNextImage();
+            if (event.key === 'ArrowLeft') showPrevImage();
+            
+            // Focus Trap Logic
+            if (event.key === 'Tab') {
+                focusableElements = Array.from(modal.querySelectorAll(focusableElementsSelector)).filter(el => el.offsetParent !== null);
+                firstFocusableElement = focusableElements[0];
+                lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+                if (event.shiftKey) { // Shift + Tab
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        event.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        event.preventDefault();
+                    }
+                }
+            }
+        });
+        
+        // --- Zoom & Swipe logic ---
+        let touchStartX = 0;
+        modal.addEventListener('touchstart', (event) => {
+            if (imageContainer.classList.contains('zoomed')) return;
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+
+        modal.addEventListener('touchend', (event) => {
+            if (imageContainer.classList.contains('zoomed')) return;
+            const touchEndX = event.changedTouches[0].screenX;
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) showNextImage();
+            if (touchEndX > touchStartX + swipeThreshold) showPrevImage();
+        });
+        
+        imageContainer.addEventListener('click', function(event) {
+            if (modal.classList.contains('show-warning')) return;
+            event.stopPropagation();
+            this.classList.toggle('zoomed');
+            modal.classList.toggle('is-zoomed');
+            if (!this.classList.contains('zoomed')) {
+                modalImg.style.transformOrigin = 'center center';
+            }
+        });
+
+        imageContainer.addEventListener('mousemove', function(event) {
+            if (this.classList.contains('zoomed')) {
+                const rect = this.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) / rect.width) * 100;
+                const y = ((event.clientY - rect.top) / rect.height) * 100;
+                modalImg.style.transformOrigin = `${x}% ${y}%`;
+            }
+        });
+
+        imageContainer.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('zoomed')) {
+                modalImg.style.transformOrigin = 'center center';
+            }
+        });
+    }
+    initializeGalleryModal();
 });
