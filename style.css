@@ -616,7 +616,8 @@ footer p {
     }
 
     .gallery-item {
-        height: 200px;
+        flex-basis: calc(50% - 7.5px); 
+        height: 160px; 
     }
 
     .modal-info {
