@@ -228,11 +228,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const galleryItems = [];
         let currentImageIndex = 0;
         let lastFocusedElement;
+        let currentSourceIndex = 0;
 
         const galleryImageElements = document.querySelectorAll('.gallery-image');
         galleryImageElements.forEach((img, index) => {
+            const sources = [img.dataset.highResSrc];
+            const altSources = img.dataset.altSources;
+
+            if (altSources) {
+                sources.push(...altSources.split(','));
+            }
+
             galleryItems.push({
                 element: img,
+                sources: sources,
                 highResSrc: img.dataset.highResSrc,
                 altSrc: img.dataset.altSrc,
                 title: img.dataset.title,
@@ -267,20 +276,25 @@ document.addEventListener('DOMContentLoaded', () => {
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
 
+            currentSourceIndex = 0;//reset counter each time new image is open
+
             const tempImg = new Image();
-            tempImg.src = item.highResSrc;
+            tempImg.src = item.sources[0];
             
             tempImg.onload = () => {
-                modalImg.src = item.highResSrc;
+                modalImg.src = item.sources[0];//shows original
 
-                if (item.isSensitive && !item.isRevealed) {
-                    modalImg.classList.add('blurred');
-                    modal.classList.add('show-warning');
+                if (item.sources.length > 1) { // Si hay más de una imagen en la lista
+                    altBtn.style.display = 'inline-block';
+                    altBtn.textContent = 'View Alternative';
                 } else {
-                    modalImg.classList.remove('blurred');
-                    modal.classList.remove('show-warning');
+                    altBtn.style.display = 'none';
                 }
-            };
+
+                modal.style.display = 'flex';
+                closeModalBtn.focus();
+
+            }
 
             modalTitle.textContent = item.title;
             modalDescription.innerHTML = linkify(item.description);
@@ -405,21 +419,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+        // --- buttom alternative logic ---
         altBtn.addEventListener('click', () => {
             const item = galleryItems[currentImageIndex];
-            
-            if (!item.altSrc) return;
-            const currentFullSrc = modalImg.src;
-            const originalFullSrc = new URL(item.highResSrc, window.location.href).href;
-            const altFullSrc = new URL(item.altSrc, window.location.href).href;
-        
-            if (currentFullSrc === originalFullSrc) {
-                modalImg.src = altFullSrc;
-                altBtn.textContent = 'View Original';
-            } else {
-                modalImg.src = originalFullSrc;
-                altBtn.textContent = 'View Alternative';
-            }
+            if (item.sources.length <= 1) return;
+            // logic to turn to next 
+            // // operator % turns to final
+            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+            modalImg.src = item.sources[currentSourceIndex];
+
+                if (currentSourceIndex === item.sources.length - 1) {
+                    // if its in last, show orginal
+                    altBtn.textContent = 'View Original';
+                } else if (currentSourceIndex === 0) {
+                    altBtn.textContent = 'View Alternative';
+                } else {
+                    altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
+                }
         });
     }
     initializeGalleryModal();
