@@ -1,7 +1,7 @@
 /**
  * Benjamin Counter Website JavaScript
  * Handles randomizers, navigation, theme switching, and interactive features
- */
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextBtn = document.getElementById('modal-next');
         const warningOverlay = document.getElementById('modal-warning');
         const continueBtn = document.getElementById('warning-continue-btn');
+        const altBtn = document.getElementById('modal-alt-btn');
 
         const galleryItems = [];
         let currentImageIndex = 0;
@@ -233,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             galleryItems.push({
                 element: img,
                 highResSrc: img.dataset.highResSrc,
+                altSrc: img.dataset.altSrc,
                 title: img.dataset.title,
                 description: img.dataset.description,
                 isSensitive: img.dataset.sensitive === 'true',
@@ -282,6 +284,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             modalTitle.textContent = item.title;
             modalDescription.innerHTML = linkify(item.description);
+            
+            if (item.altSrc) {
+                altBtn.style.display = 'inline-block';
+                altBtn.textContent = 'View Alternative';
+            } else {
+                    altBtn.style.display = 'none';
+            }
 
             modal.style.display = 'flex';
             closeModalBtn.focus();
@@ -393,6 +402,23 @@ document.addEventListener('DOMContentLoaded', () => {
         imageContainer.addEventListener('mouseleave', function() {
             if (!this.classList.contains('zoomed')) {
                 modalImg.style.transformOrigin = 'center center';
+            }
+        });
+        
+        altBtn.addEventListener('click', () => {
+            const item = galleryItems[currentImageIndex];
+            
+            if (!item.altSrc) return;
+            const currentFullSrc = modalImg.src;
+            const originalFullSrc = new URL(item.highResSrc, window.location.href).href;
+            const altFullSrc = new URL(item.altSrc, window.location.href).href;
+        
+            if (currentFullSrc === originalFullSrc) {
+                modalImg.src = altFullSrc;
+                altBtn.textContent = 'View Original';
+            } else {
+                modalImg.src = originalFullSrc;
+                altBtn.textContent = 'View Alternative';
             }
         });
     }
