@@ -272,19 +272,33 @@ document.addEventListener('DOMContentLoaded', () => {
             imageContainer.classList.remove('zoomed');
             modal.classList.remove('is-zoomed');
             modalImg.style.transformOrigin = 'center center';
+            modal.classList.remove('show-warning'); //warn
+            modalImg.classList.remove('blurred');   //warn
 
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
 
-            currentSourceIndex = 0;//reset counter each time new image is open
+            currentSourceIndex = 0; 
+
+            modalTitle.textContent = item.title;
+            modalDescription.innerHTML = linkify(item.description);
+
+            // sensitive-content
+            if (item.isSensitive && !item.isRevealed) {
+                modal.classList.add('show-warning');
+                modalImg.classList.add('blurred');
+            } else {
+                modal.classList.remove('show-warning');
+                modalImg.classList.remove('blurred');
+            }
 
             const tempImg = new Image();
             tempImg.src = item.sources[0];
             
             tempImg.onload = () => {
-                modalImg.src = item.sources[0];//shows original
+                modalImg.src = item.sources[0]; 
 
-                if (item.sources.length > 1) { // Si hay más de una imagen en la lista
+                if (item.sources.length > 1) { 
                     altBtn.style.display = 'inline-block';
                     altBtn.textContent = 'View Alternative';
                 } else {
@@ -293,21 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 modal.style.display = 'flex';
                 closeModalBtn.focus();
-
             }
-
-            modalTitle.textContent = item.title;
-            modalDescription.innerHTML = linkify(item.description);
-            
-            if (item.altSrc) {
-                altBtn.style.display = 'inline-block';
-                altBtn.textContent = 'View Alternative';
-            } else {
-                    altBtn.style.display = 'none';
-            }
-
-            modal.style.display = 'flex';
-            closeModalBtn.focus();
         }
 
         function closeModal() {
