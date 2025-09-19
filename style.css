@@ -664,6 +664,19 @@ footer p {
     .gallery-separator h3 {
         font-size: 1.6rem; 
     }
+
+    #modal-alt-btn {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        margin-bottom: 15px;
+        order: -1;             
+    }
+
+    #modal-image-container {
+    max-height: 65%;
+    }
 }
 
 /*  Glassmorphism for warning content */
