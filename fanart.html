@@ -239,28 +239,34 @@
         <p id="footer-quote">"Everything in this life is impossible until someone comes and does it."</p>
     </footer>
      
-    <div class="modal" id="modal">
-    <button class="modal-close" id="modal-close" aria-label="Cerrar">&times;</button>
-    <button class="modal-nav prev" id="modal-prev" aria-label="Imagen anterior">&#10094;</button>
-    <button class="modal-nav next" id="modal-next" aria-label="Siguiente imagen">&#10095;</button>
-    <button id="modal-alt-btn">View Alternative</button>
-       
-    <div id="modal-image-container">
-        <img id="modal-img" src="">
-        <div class="modal-warning-overlay" id="modal-warning">
-            <div class="modal-warning-content">
-                <p>This post may contain images that some viewers find offensive or unsettling.<br>
-                    Do you wish to proceed?</p>
-                <button id="warning-continue-btn">View</button>
+    <!--//-->
+   <div class="modal" id="modal">
+        <button class="modal-close" id="modal-close">×</button>
+        <button class="modal-nav prev" id="modal-prev">❮</button>
+        <button class="modal-nav next" id="modal-next">❯</button>
+        <button id="modal-alt-btn">View Alternative</button>
+
+        <div id="modal-image-container">
+            <img id="modal-img" src="">
+            <img id="modal-img-next" src="">
+
+            <div id="modal-warning" class="modal-warning-overlay">
+                <div class="modal-warning-content">
+                    <p>
+                        This post may contain images that some viewers find offensive or unsettling.<br>
+                        Do you wish to proceed?
+                    </p>
+                    <button id="warning-continue-btn">View</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal-info">
-        <h3 id="modal-title">No title</h3>
-        <p id="modal-description">No description</p>
+        <div class="modal-info">
+            <h3 id="modal-title">No title</h3>
+            <p id="modal-description">No description</p>
+        </div>
     </div>
-    </div>
+<!--//-->
     
     <script src="script.js"></script>
     <button id="theme-switcher" aria-label="Cambiar tema"></button>
