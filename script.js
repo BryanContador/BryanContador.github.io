@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     modalImg.src = item.sources[currentSourceIndex];
                     modalImg.classList.remove('is-fading');
-                    modalImgNext.src = '';
+                    //modalImgNext.src = ''; 
                     modalImgNext.classList.remove('is-fading');
 
                     if (currentSourceIndex === item.sources.length - 1) {
