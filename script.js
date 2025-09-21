@@ -278,6 +278,13 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.classList.remove('blurred');
             modalImgNext.classList.remove('blurred');
 
+            modalImg.style.opacity = '';
+            modalImgNext.style.opacity = '';
+            modalImg.style.transition = '';
+            modalImgNext.style.transition = '';
+            modalImg.classList.remove('is-fading');
+            modalImgNext.classList.remove('is-fading');
+
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
 
@@ -432,44 +439,61 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // --- button alternative logic ---
         altBtn.addEventListener('click', () => {
-            const item = galleryItems[currentImageIndex];
-            if (item.sources.length <= 1) return;
+    const item = galleryItems[currentImageIndex];
+    if (item.sources.length <= 1) return;
 
-            let currentImg = document.getElementById('modal-img');
-            let nextImg = document.getElementById('modal-img-next');
+    let currentImg = document.getElementById('modal-img');
+    let nextImg = document.getElementById('modal-img-next');
 
-            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
-            
-            if (currentSourceIndex === item.sources.length - 1) {
-                altBtn.textContent = 'View Original';
-            } else if (currentSourceIndex === 0) {
-                altBtn.textContent = 'View Alternative';
-            } else {
-                altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
-            }
+    currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+    
+    if (currentSourceIndex === item.sources.length - 1) {
+        altBtn.textContent = 'View Original';
+    } else if (currentSourceIndex === 0) {
+        altBtn.textContent = 'View Alternative';
+    } else {
+        altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
+    }
 
-            // element next change
-            const tempImg = new Image();
-            tempImg.src = item.sources[currentSourceIndex];
+    const tempImg = new Image();
+    tempImg.src = item.sources[currentSourceIndex];
 
-            tempImg.onload = () => {
-                nextImg.src = item.sources[currentSourceIndex];
+    tempImg.onload = () => {
+        nextImg.src = item.sources[currentSourceIndex];
 
-                //anim fading
-                currentImg.classList.add('is-fading');
-                nextImg.classList.add('is-fading');
+        // Iniciar fading
+        currentImg.classList.add('is-fading');
+        nextImg.classList.add('is-fading');
 
-                // interchance roles
-                nextImg.addEventListener('transitionend', () => {
-                    // Limpiar las clases de ambos elementos
-                    currentImg.classList.remove('is-fading');
-                    nextImg.classList.remove('is-fading');
-                    currentImg.id = 'modal-img-next';
-                    nextImg.id = 'modal-img';
+        nextImg.addEventListener('transitionend', () => {
+            // Deshabilitar transiciones para cambios instantáneos
+            currentImg.style.transition = 'none';
+            nextImg.style.transition = 'none';
 
-                }, { once: true });
-            };
-        });
+            // Copiar src a current (sin intercambio de IDs)
+            currentImg.src = nextImg.src;
+
+            // Establecer opacidades inline para bloquear estado deseado (current visible, next hidden)
+            currentImg.style.opacity = '1';
+            nextImg.style.opacity = '0';
+
+            // Limpiar clases (no trigger de reversión gracias a transition none)
+            currentImg.classList.remove('is-fading');
+            nextImg.classList.remove('is-fading');
+
+            // Limpiar src de next
+            nextImg.src = '';
+
+            // Restaurar transiciones para usos futuros (en próximo frame para evitar interferencia)
+            setTimeout(() => {
+                currentImg.style.transition = '';
+                nextImg.style.transition = '';
+                currentImg.style.opacity = '';  // Remover inline, dejar que CSS maneje base
+                nextImg.style.opacity = '';
+            }, 0);
+        }, { once: true });
+    };
+});
     }
     initializeGalleryModal();
 });
