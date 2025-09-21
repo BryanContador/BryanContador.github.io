@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const modalImg = document.getElementById('modal-img');
+        const modalImgNext = document.getElementById('modal-img-next');
         const modalTitle = document.getElementById('modal-title');
         const modalDescription = document.getElementById('modal-description');
         const imageContainer = document.getElementById('modal-image-container');
@@ -272,13 +273,15 @@ document.addEventListener('DOMContentLoaded', () => {
             imageContainer.classList.remove('zoomed');
             modal.classList.remove('is-zoomed');
             modalImg.style.transformOrigin = 'center center';
-            modal.classList.remove('show-warning'); //warn
-            modalImg.classList.remove('blurred');   //warn
+            modalImgNext.style.transformOrigin = 'center center';
+            modal.classList.remove('show-warning');
+            modalImg.classList.remove('blurred');
+            modalImgNext.classList.remove('blurred');
 
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
 
-            currentSourceIndex = 0; 
+            currentSourceIndex = 0;
 
             modalTitle.textContent = item.title;
             modalDescription.innerHTML = linkify(item.description);
@@ -287,18 +290,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.isSensitive && !item.isRevealed) {
                 modal.classList.add('show-warning');
                 modalImg.classList.add('blurred');
+                modalImgNext.classList.add('blurred');
             } else {
                 modal.classList.remove('show-warning');
                 modalImg.classList.remove('blurred');
+                modalImgNext.classList.remove('blurred');
             }
 
             const tempImg = new Image();
             tempImg.src = item.sources[0];
             
             tempImg.onload = () => {
-                modalImg.src = item.sources[0]; 
+                modalImg.src = item.sources[0];
+                modalImgNext.src = ''; // Reset next image
+                modalImgNext.classList.remove('is-fading');
 
-                if (item.sources.length > 1) { 
+                if (item.sources.length > 1) {
                     altBtn.style.display = 'inline-block';
                     altBtn.textContent = 'View Alternative';
                 } else {
@@ -341,9 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             modal.classList.remove('show-warning');
             modalImg.classList.remove('blurred');
+            modalImgNext.classList.remove('blurred');
         });
 
-        // --- Keybord and focus (A11y Focus Trap) ---
+        // --- Keyboard and focus (A11y Focus Trap) ---
         const focusableElementsSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
         let focusableElements = [];
         let firstFocusableElement, lastFocusableElement;
@@ -401,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.toggle('is-zoomed');
             if (!this.classList.contains('zoomed')) {
                 modalImg.style.transformOrigin = 'center center';
+                modalImgNext.style.transformOrigin = 'center center';
             }
         });
 
@@ -410,32 +419,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 const x = ((event.clientX - rect.left) / rect.width) * 100;
                 const y = ((event.clientY - rect.top) / rect.height) * 100;
                 modalImg.style.transformOrigin = `${x}% ${y}%`;
+                modalImgNext.style.transformOrigin = `${x}% ${y}%`;
             }
         });
 
         imageContainer.addEventListener('mouseleave', function() {
             if (!this.classList.contains('zoomed')) {
                 modalImg.style.transformOrigin = 'center center';
+                modalImgNext.style.transformOrigin = 'center center';
             }
         });
         
-        // --- buttom alternative logic ---
+        // --- button alternative logic ---
         altBtn.addEventListener('click', () => {
             const item = galleryItems[currentImageIndex];
             if (item.sources.length <= 1) return;
-            // logic to turn to next 
-            // // operator % turns to final
-            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
-            modalImg.src = item.sources[currentSourceIndex];
 
-                if (currentSourceIndex === item.sources.length - 1) {
-                    // if its in last, show orginal
-                    altBtn.textContent = 'View Original';
-                } else if (currentSourceIndex === 0) {
-                    altBtn.textContent = 'View Alternative';
-                } else {
-                    altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
-                }
+            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+
+            // Preload next image
+            const tempImg = new Image();
+            tempImg.src = item.sources[currentSourceIndex];
+
+            tempImg.onload = () => {
+                // Start cross-fade: fade out current, fade in next
+                modalImg.classList.add('is-fading');
+                modalImgNext.src = item.sources[currentSourceIndex];
+                modalImgNext.classList.add('is-fading');
+
+                // After transition, update main image and reset next
+                setTimeout(() => {
+                    modalImg.src = item.sources[currentSourceIndex];
+                    modalImg.classList.remove('is-fading');
+                    modalImgNext.src = '';
+                    modalImgNext.classList.remove('is-fading');
+
+                    if (currentSourceIndex === item.sources.length - 1) {
+                        altBtn.textContent = 'View Original';
+                    } else if (currentSourceIndex === 0) {
+                        altBtn.textContent = 'View Alternative';
+                    } else {
+                        altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
+                    }
+                }, 300);
+            };
         });
     }
     initializeGalleryModal();
