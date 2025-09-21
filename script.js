@@ -435,33 +435,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = galleryItems[currentImageIndex];
             if (item.sources.length <= 1) return;
 
-            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+            let currentImg = document.getElementById('modal-img');
+            let nextImg = document.getElementById('modal-img-next');
 
-            // Preload next image
+            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+            
+            if (currentSourceIndex === item.sources.length - 1) {
+                altBtn.textContent = 'View Original';
+            } else if (currentSourceIndex === 0) {
+                altBtn.textContent = 'View Alternative';
+            } else {
+                altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
+            }
+
+            // element next change
             const tempImg = new Image();
             tempImg.src = item.sources[currentSourceIndex];
 
             tempImg.onload = () => {
-                // Start cross-fade: fade out current, fade in next
-                modalImg.classList.add('is-fading');
-                modalImgNext.src = item.sources[currentSourceIndex];
-                modalImgNext.classList.add('is-fading');
+                nextImg.src = item.sources[currentSourceIndex];
 
-                // After transition, update main image and reset next
-                setTimeout(() => {
-                    modalImg.src = item.sources[currentSourceIndex];
-                    modalImg.classList.remove('is-fading');
-                    //modalImgNext.src = ''; 
-                    modalImgNext.classList.remove('is-fading');
+                //anim fading
+                currentImg.classList.add('is-fading');
+                nextImg.classList.add('is-fading');
 
-                    if (currentSourceIndex === item.sources.length - 1) {
-                        altBtn.textContent = 'View Original';
-                    } else if (currentSourceIndex === 0) {
-                        altBtn.textContent = 'View Alternative';
-                    } else {
-                        altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
-                    }
-                }, 300);
+                // interchance roles
+                nextImg.addEventListener('transitionend', () => {
+                    // Limpiar las clases de ambos elementos
+                    currentImg.classList.remove('is-fading');
+                    nextImg.classList.remove('is-fading');
+                    currentImg.id = 'modal-img-next';
+                    nextImg.id = 'modal-img';
+
+                }, { once: true });
             };
         });
     }
