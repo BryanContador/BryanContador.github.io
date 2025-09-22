@@ -356,31 +356,6 @@ main h2 {
     cursor: not-allowed;
 }
 
-/* Wait message for alternative button */
-#wait-message {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 10%;
-    transform: translateY(0);
-    color: #ffffff;
-    font-family: 'Patrick Hand', sans-serif;
-    font-size: 0.9rem;
-    text-align: center;
-    z-index: 1003;
-    background-color: rgba(20, 20, 20, 0.7);
-    padding: 5px 10px;
-    border-radius: 5px;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    transition: opacity 0.3s ease; 
-    opacity: 1;
-}
-
-#wait-message.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
 /* Modal Navigation */
 .modal-nav {
     cursor: pointer;
@@ -720,15 +695,6 @@ footer p {
         transform: none;
         margin-bottom: 15px;
         order: -1;             
-    }
-
-    #wait-message {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin-top: 8px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     #modal-image-container {

@@ -231,7 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let lastFocusedElement;
         let currentSourceIndex = 0;
         let isSwitching = false; // Estado para controlar el delay
-        let waitMessage = null; // Referencia al mensaje "Please wait"
 
         const galleryImageElements = document.querySelectorAll('.gallery-image');
         galleryImageElements.forEach((img, index) => {
@@ -288,11 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.classList.remove('is-fading');
             modalImgNext.classList.remove('is-fading');
 
-            // Ocultar mensaje "Please wait" si existe
-            if (waitMessage) {
-                waitMessage.classList.add('hidden');
-            }
-
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
 
@@ -336,10 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
             if (lastFocusedElement) {
                 lastFocusedElement.focus();
-            }
-            // Ocultar mensaje al cerrar modal
-            if (waitMessage) {
-                waitMessage.classList.add('hidden');
             }
         }
 
@@ -450,17 +440,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // --- button alternative logic ---
-        waitMessage = document.createElement('span');
-        waitMessage.id = 'wait-message';
-        waitMessage.textContent = 'Please wait';
-        waitMessage.classList.add('hidden');
-        altBtn.insertAdjacentElement('afterend', waitMessage);
-        
         altBtn.addEventListener('click', () => {
             if (isSwitching) {
-                // "Please wait"
-                console.log('Mostrar mensaje: Please wait');
-                waitMessage.classList.remove('hidden');
+                altBtn.textContent = 'PLEASE WAIT';
                 return;
             }
 
@@ -468,21 +450,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.sources.length <= 1) return;
 
             isSwitching = true; // Block new clics
-            altBtn.disabled = true; // Desable clicks
+            altBtn.disabled = true; // Disable clicks
+            altBtn.textContent = 'PLEASE WAIT'; // Show wait message
 
             let currentImg = document.getElementById('modal-img');
             let nextImg = document.getElementById('modal-img-next');
 
             currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
             
-            if (currentSourceIndex === item.sources.length - 1) {
-                altBtn.textContent = 'View Original';
-            } else if (currentSourceIndex === 0) {
-                altBtn.textContent = 'View Alternative';
-            } else {
-                altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
-            }
-
+            const originalBtnText = currentSourceIndex === item.sources.length - 1 ? 'View Original' :
+                                    currentSourceIndex === 0 ? 'View Alternative' :
+                                    `View Alternative ${currentSourceIndex + 1}`;
             const tempImg = new Image();
             tempImg.src = item.sources[currentSourceIndex];
 
@@ -514,11 +492,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                             isSwitching = false;
                             altBtn.disabled = false;
-                            if (waitMessage) {
-                                waitMessage.classList.add('hidden');
-                                console.log('Ocultar mensaje: Please wait');
-                            }
-                        }, 1000); // Delay
+                            altBtn.textContent = originalBtnText; // Restore original button text
+                        }, 500); // Delay
                     }, 0);
                 }, { once: true });
             };
