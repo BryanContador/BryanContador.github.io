@@ -230,6 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentImageIndex = 0;
         let lastFocusedElement;
         let currentSourceIndex = 0;
+        let isSwitching = false; // Estado para controlar el delay
+        let waitMessage = null; // Referencia al mensaje "Please wait"
 
         const galleryImageElements = document.querySelectorAll('.gallery-image');
         galleryImageElements.forEach((img, index) => {
@@ -278,12 +280,18 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.classList.remove('blurred');
             modalImgNext.classList.remove('blurred');
 
+            // Resetear estados para prevenir residuos
             modalImg.style.opacity = '';
             modalImgNext.style.opacity = '';
             modalImg.style.transition = '';
             modalImgNext.style.transition = '';
             modalImg.classList.remove('is-fading');
             modalImgNext.classList.remove('is-fading');
+
+            // Ocultar mensaje "Please wait" si existe
+            if (waitMessage) {
+                waitMessage.classList.add('hidden');
+            }
 
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
@@ -328,6 +336,10 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
             if (lastFocusedElement) {
                 lastFocusedElement.focus();
+            }
+            // Ocultar mensaje al cerrar modal
+            if (waitMessage) {
+                waitMessage.classList.add('hidden');
             }
         }
 
@@ -438,62 +450,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // --- button alternative logic ---
+        waitMessage = document.createElement('span');
+        waitMessage.id = 'wait-message';
+        waitMessage.textContent = 'Please wait';
+        waitMessage.classList.add('hidden');
+        altBtn.insertAdjacentElement('afterend', waitMessage);
+        
         altBtn.addEventListener('click', () => {
-    const item = galleryItems[currentImageIndex];
-    if (item.sources.length <= 1) return;
+            if (isSwitching) {
+                // "Please wait"
+                console.log('Mostrar mensaje: Please wait');
+                waitMessage.classList.remove('hidden');
+                return;
+            }
 
-    let currentImg = document.getElementById('modal-img');
-    let nextImg = document.getElementById('modal-img-next');
+            const item = galleryItems[currentImageIndex];
+            if (item.sources.length <= 1) return;
 
-    currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
-    
-    if (currentSourceIndex === item.sources.length - 1) {
-        altBtn.textContent = 'View Original';
-    } else if (currentSourceIndex === 0) {
-        altBtn.textContent = 'View Alternative';
-    } else {
-        altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
-    }
+            isSwitching = true; // Block new clics
+            altBtn.disabled = true; // Desable clicks
 
-    const tempImg = new Image();
-    tempImg.src = item.sources[currentSourceIndex];
+            let currentImg = document.getElementById('modal-img');
+            let nextImg = document.getElementById('modal-img-next');
 
-    tempImg.onload = () => {
-        nextImg.src = item.sources[currentSourceIndex];
+            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+            
+            if (currentSourceIndex === item.sources.length - 1) {
+                altBtn.textContent = 'View Original';
+            } else if (currentSourceIndex === 0) {
+                altBtn.textContent = 'View Alternative';
+            } else {
+                altBtn.textContent = `View Alternative ${currentSourceIndex + 1}`;
+            }
 
-        // Iniciar fading
-        currentImg.classList.add('is-fading');
-        nextImg.classList.add('is-fading');
+            const tempImg = new Image();
+            tempImg.src = item.sources[currentSourceIndex];
 
-        nextImg.addEventListener('transitionend', () => {
-            // Deshabilitar transiciones para cambios instantáneos
-            currentImg.style.transition = 'none';
-            nextImg.style.transition = 'none';
+            tempImg.onload = () => {
+                nextImg.src = item.sources[currentSourceIndex];
 
-            // Copiar src a current (sin intercambio de IDs)
-            currentImg.src = nextImg.src;
+                // fadding
+                currentImg.classList.add('is-fading');
+                nextImg.classList.add('is-fading');
 
-            // Establecer opacidades inline para bloquear estado deseado (current visible, next hidden)
-            currentImg.style.opacity = '1';
-            nextImg.style.opacity = '0';
+                nextImg.addEventListener('transitionend', () => {
+                    currentImg.style.transition = 'none';
+                    nextImg.style.transition = 'none';
+                    currentImg.src = nextImg.src;
 
-            // Limpiar clases (no trigger de reversión gracias a transition none)
-            currentImg.classList.remove('is-fading');
-            nextImg.classList.remove('is-fading');
+                    currentImg.style.opacity = '1';
+                    nextImg.style.opacity = '0';
+                    currentImg.classList.remove('is-fading');
+                    nextImg.classList.remove('is-fading');
+                    nextImg.src = '';
 
-            // Limpiar src de next
-            nextImg.src = '';
+                    // restore transitions
+                    setTimeout(() => {
+                        currentImg.style.transition = '';
+                        nextImg.style.transition = '';
+                        currentImg.style.opacity = '';
+                        nextImg.style.opacity = '';
 
-            // Restaurar transiciones para usos futuros (en próximo frame para evitar interferencia)
-            setTimeout(() => {
-                currentImg.style.transition = '';
-                nextImg.style.transition = '';
-                currentImg.style.opacity = '';  // Remover inline, dejar que CSS maneje base
-                nextImg.style.opacity = '';
-            }, 0);
-        }, { once: true });
-    };
-});
+                        setTimeout(() => {
+                            isSwitching = false;
+                            altBtn.disabled = false;
+                            if (waitMessage) {
+                                waitMessage.classList.add('hidden');
+                                console.log('Ocultar mensaje: Please wait');
+                            }
+                        }, 1000); // Delay
+                    }, 0);
+                }, { once: true });
+            };
+        });
     }
     initializeGalleryModal();
 });
