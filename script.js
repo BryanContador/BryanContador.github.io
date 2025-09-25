@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentImageIndex = 0;
         let lastFocusedElement;
         let currentSourceIndex = 0;
-        let isSwitching = false; // Estado para controlar el delay
+        let isSwitching = false;
 
         const galleryImageElements = document.querySelectorAll('.gallery-image');
         galleryImageElements.forEach((img, index) => {
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.classList.remove('blurred');
             modalImgNext.classList.remove('blurred');
 
-            // Resetear estados para prevenir residuos
+            // Reset states
             modalImg.style.opacity = '';
             modalImgNext.style.opacity = '';
             modalImg.style.transition = '';
@@ -295,6 +295,11 @@ document.addEventListener('DOMContentLoaded', () => {
             modalTitle.textContent = item.title;
             modalDescription.innerHTML = linkify(item.description);
 
+            // Set alt text for modal images
+            const altText = item.title ? `Drawing: ${item.title}` : item.description ? `Drawing: ${item.description.split('.')[0]}` : 'Gallery drawing';
+            modalImg.alt = altText;
+            modalImgNext.alt = altText;
+
             // sensitive-content
             if (item.isSensitive && !item.isRevealed) {
                 modal.classList.add('show-warning');
@@ -306,6 +311,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalImgNext.classList.remove('blurred');
             }
 
+            // Set loading="lazy" for modal images and preload high-res
+            modalImg.setAttribute('loading', 'lazy');
+            modalImgNext.setAttribute('loading', 'lazy');
             const tempImg = new Image();
             tempImg.src = item.sources[0];
             
@@ -317,13 +325,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item.sources.length > 1) {
                     altBtn.style.display = 'inline-block';
                     altBtn.textContent = 'View Alternative';
+                    // Preload first alternative image if available
+                    if (item.sources[1]) {
+                        const preloadAlt = new Image();
+                        preloadAlt.src = item.sources[1];
+                    }
                 } else {
                     altBtn.style.display = 'none';
                 }
 
                 modal.style.display = 'flex';
                 closeModalBtn.focus();
-            }
+            };
         }
 
         function closeModal() {
@@ -467,7 +480,16 @@ document.addEventListener('DOMContentLoaded', () => {
             tempImg.onload = () => {
                 nextImg.src = item.sources[currentSourceIndex];
 
-                // fadding
+                // fadding 
+                nextImg.alt = currentImg.alt;
+
+                // Preload next alternative image if available
+                const nextAltIndex = (currentSourceIndex + 1) % item.sources.length;
+                if (item.sources[nextAltIndex]) {
+                    const preloadNextAlt = new Image();
+                    preloadNextAlt.src = item.sources[nextAltIndex];
+                }
+
                 currentImg.classList.add('is-fading');
                 nextImg.classList.add('is-fading');
 
@@ -475,6 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentImg.style.transition = 'none';
                     nextImg.style.transition = 'none';
                     currentImg.src = nextImg.src;
+                    currentImg.alt = nextImg.alt;
 
                     currentImg.style.opacity = '1';
                     nextImg.style.opacity = '0';
