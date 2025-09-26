@@ -425,6 +425,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         imageContainer.addEventListener('click', function(event) {
+            // Disable zoom on small screens
+            if (window.innerWidth <= 768) return; 
+
             if (modal.classList.contains('show-warning')) return;
             event.stopPropagation();
             this.classList.toggle('zoomed');
