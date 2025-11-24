@@ -204,6 +204,74 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ==========================================================================
+    // GALLERY GENERATOR (NEW)
+    // ==========================================================================
+
+    function renderGallery() {
+        const container = document.getElementById('dynamic-gallery-container');
+        
+        // If no container found (e.g. index.html or about.html), exit
+        if (!container) return; 
+
+        const category = container.dataset.category;
+        
+        // Check if galleryData exists (from data.js)
+        if (typeof galleryData === 'undefined') {
+            console.error('galleryData is not defined. Make sure data.js is loaded.');
+            return;
+        }
+
+        const items = galleryData[category];
+
+        if (!items) {
+            console.error(`No data found for category: ${category}`);
+            return;
+        }
+
+        items.forEach(item => {
+            if (item.type === 'separator') {
+                // Create separator
+                const separatorDiv = document.createElement('div');
+                separatorDiv.className = 'gallery-separator-line';
+                // Optional: if separator has title in the future
+                if (item.title) {
+                    // separatorDiv.innerHTML = `<h3>${item.title}</h3>`; 
+                }
+                container.appendChild(separatorDiv);
+            } else if (item.type === 'image') {
+                // Create gallery item
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'gallery-item';
+
+                const img = document.createElement('img');
+                img.className = 'gallery-image';
+                img.src = item.thumb;
+                img.alt = item.title || 'Gallery Image';
+                img.loading = 'lazy';
+                
+                // Assign dataset attributes for Modal logic
+                img.dataset.highResSrc = item.highRes;
+                img.dataset.title = item.title;
+                img.dataset.description = item.description;
+
+                if (item.sensitive) {
+                    img.dataset.sensitive = 'true';
+                }
+
+                if (item.altSources && item.altSources.length > 0) {
+                    img.dataset.altSources = item.altSources.join(',');
+                }
+
+                itemDiv.appendChild(img);
+                container.appendChild(itemDiv);
+            }
+        });
+    }
+
+    // Render the gallery BEFORE initializing the modal
+    renderGallery();
+
+    // ==========================================================================
     // GALLERY MODAL FUNCTIONALITY (CENTRALIZED)
     // ==========================================================================
     
@@ -232,7 +300,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentSourceIndex = 0;
         let isSwitching = false;
 
+        // Select the newly generated images
         const galleryImageElements = document.querySelectorAll('.gallery-image');
+        
         galleryImageElements.forEach((img, index) => {
             const sources = [img.dataset.highResSrc];
             const altSources = img.dataset.altSources;
