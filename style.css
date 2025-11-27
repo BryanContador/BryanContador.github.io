@@ -20,10 +20,12 @@
     --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.1);
     --indicator-bg: rgba(255, 255, 255, 0.5);
     --modal-info-bg: #ffffff;
-    --footer-bg: #000000;
-    --footer-text: #ffffff;
+    --footer-bg: #ffffff;
+    --footer-text: #000000;
     --separator-color: #e0e0e0;
     --bg-gradient-end: #cacaca;
+    --header-bg: #ffffff;
+    --header-text: #000000;
 }
 
 /* Dark Theme Variables */
@@ -38,10 +40,12 @@ body.dark-mode {
     --nav-shadow-outer: 0 5px 15px rgba(0, 0, 0, 0.3);
     --indicator-bg: rgba(255, 255, 255, 0.15);
     --modal-info-bg: #2b2b2b;
-    --footer-bg: #1c1c1c;
-    --footer-text: #cccccc;
+    --footer-bg: #000000;
+    --footer-text: #ffffff;
     --separator-color: #333333;
     --bg-gradient-end: #484848;
+    --header-bg: #000000;
+    --header-text: #ffffff;
 }
 
 /* Base Styles */
@@ -58,18 +62,20 @@ body {
 
 /* Header Styles */
 header {
-    background-color: #000000;
+    background-color: var(--header-bg); /* CHANGED: uses variable now */
     text-align: center;
     padding: 20px 0 0;
+    transition: background-color 0.3s ease; /* ADDED: smooth transition */
 }
 
 .logo-container h1 {
-    color: #ffffff;
+    color: var(--header-text);
     font-family: 'ND Logos', 'Arial', sans-serif;
     font-size: 4rem;
     margin: 0;
     letter-spacing: 2px;
     margin-bottom: 15px;
+    transition: color 0.3s ease;
 }
 
 /* Navigation Styles */
@@ -785,4 +791,53 @@ footer p {
     height: 1px;
     background-color: var(--text-color);
     margin: 15px 0;
+}
+
+/* ==========================================================================
+   User String
+   ========================================================================== */
+.secret-code-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px 10px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.secret-text {
+    font-family: 'Patrick Hand', cursive;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    color: var(--text-color);}
+
+.secret-text span {
+    display: inline-block; 
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.secret-text span:nth-child(1) { animation-delay: 0.0s; }
+.secret-text span:nth-child(2) { animation-delay: 0.2s; }
+.secret-text span:nth-child(3) { animation-delay: 0.4s; }
+
+#secret-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--text-color);
+    color: var(--text-color);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2rem;
+    outline: none;
+    
+    width: 80px;
+    min-width: 80px;
+    max-width: 45vw;
+    padding: 0 5px;   
+    transition: width 0.1s ease, border-color 0.3s ease; 
+}
+
+#secret-input:focus {
+    border-color: #7b7b7b;
 }

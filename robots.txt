@@ -4,7 +4,10 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: CCBot
+User-agent: GPTBot
+Allow: /
+
+User-agent: Discordbot
 Allow: /
 
 User-agent: *

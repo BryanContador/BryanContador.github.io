@@ -596,4 +596,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     initializeGalleryModal();
+
+    //--- User String logic ---    
+    const secretInput = document.getElementById('secret-input');
+
+    const SECRET_DESTINATIONS = {
+        //string : dest,
+        //etc...
+    };
+    
+    async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+
+    if (secretInput) {
+        
+        // --- Dynamic Resizing Logic ---
+        const resizeInput = () => {
+            const span = document.createElement('span');
+            span.style.font = getComputedStyle(secretInput).font;
+            span.style.visibility = 'hidden';
+            span.style.position = 'absolute';
+            span.style.whiteSpace = 'pre';
+            span.textContent = secretInput.value || secretInput.placeholder || '';
+            
+            document.body.appendChild(span);
+            const textWidth = span.offsetWidth;
+            document.body.removeChild(span);
+
+            const newWidth = Math.max(120, textWidth + 20); 
+            
+            if (document.activeElement === secretInput || secretInput.value.length > 0) {
+                 secretInput.style.width = `${newWidth}px`;
+            } else {
+                 secretInput.style.width = '80px'; 
+            }
+        };
+
+        secretInput.addEventListener('input', resizeInput);
+        secretInput.addEventListener('focus', resizeInput); 
+        secretInput.addEventListener('blur', resizeInput); 
+
+        // --- Check Logic ---
+        secretInput.addEventListener('input', async (e) => {
+            resizeInput();
+
+            const val = e.target.value.trim(); 
+
+            if (val.length === 0) {
+                e.target.style.borderColor = ''; 
+                return;
+            }
+            
+            const currentHash = await sha256(val);
+
+            if (SECRET_DESTINATIONS[currentHash]) {
+                e.target.style.borderColor = '#00ff00'; 
+                setTimeout(() => {
+                    window.location.href = SECRET_DESTINATIONS[currentHash];
+                }, 300); 
+            } else {
+                e.target.style.borderColor = 'var(--text-color)';
+            }
+        });
+    }
 });
