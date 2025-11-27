@@ -60,6 +60,30 @@ body {
     flex-direction: column;
 }
 
+/* Back Button */
+.top-left-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: 'Patrick Hand', sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.top-left-back-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    cursor: pointer;
+}
+
 /* Header Styles */
 header {
     background-color: var(--header-bg); /* CHANGED: uses variable now */
