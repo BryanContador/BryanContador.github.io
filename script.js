@@ -1,6 +1,6 @@
 /**
  * Benjamin Counter Website JavaScript
- * Handles randomizers, navigation, theme switching, and interactive features
+ * Handles randomizers, navigation, theme switching, gallery rendering, and interactive features
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ==========================================================================
-    // GALLERY GENERATOR (NEW)
+    // GALLERY GENERATOR
     // ==========================================================================
 
     function renderGallery() {
@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return; 
 
         const category = container.dataset.category;
+        const layout = container.dataset.layout; // Detect layout type
         
         // Check if galleryData exists (from data.js)
         if (typeof galleryData === 'undefined') {
@@ -228,44 +229,87 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        items.forEach(item => {
-            if (item.type === 'separator') {
-                // Create separator
-                const separatorDiv = document.createElement('div');
-                separatorDiv.className = 'gallery-separator-line';
-                // Optional: if separator has title in the future
-                if (item.title) {
-                    // separatorDiv.innerHTML = `<h3>${item.title}</h3>`; 
+        // --- LIST LAYOUT (Characters / Categories) ---
+        if (layout === 'list') {
+            container.className = 'category-list-grid';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                
+                if (item.id) {
+                    card.onclick = () => {
+                        window.location.href = `character.html?id=${item.id}`;
+                    };
                 }
-                container.appendChild(separatorDiv);
-            } else if (item.type === 'image') {
-                // Create gallery item
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'gallery-item';
+                
+                //  Thumbnail Container
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'category-thumb-container';
 
                 const img = document.createElement('img');
-                img.className = 'gallery-image';
-                img.src = item.thumb;
-                img.alt = item.title || 'Gallery Image';
-                img.loading = 'lazy';
+                img.className = 'category-thumb';
                 
-                // Assign dataset attributes for Modal logic
-                img.dataset.highResSrc = item.highRes;
-                img.dataset.title = item.title;
-                img.dataset.description = item.description;
-
-                if (item.sensitive) {
-                    img.dataset.sensitive = 'true';
+                if (item.thumb) {
+                    img.src = item.thumb;
+                } else {
+                    img.src = 'resources/logo.png'; 
                 }
+                
+                img.alt = item.name;
+                img.loading = 'lazy';
 
-                if (item.altSources && item.altSources.length > 0) {
-                    img.dataset.altSources = item.altSources.join(',');
+                imgContainer.appendChild(img);
+
+                const nameTag = document.createElement('h3');
+                nameTag.className = 'category-name';
+                nameTag.textContent = item.name;
+
+                card.appendChild(imgContainer);
+                card.appendChild(nameTag);
+
+                container.appendChild(card);
+            });
+
+        } else {
+            // --- STANDARD GALLERY LAYOUT (Images / Fanart / Sketches) ---
+            container.className = 'gallery-grid';
+
+            items.forEach(item => {
+                if (item.type === 'separator') {
+                    // Create separator
+                    const separatorDiv = document.createElement('div');
+                    separatorDiv.className = 'gallery-separator-line';
+                    container.appendChild(separatorDiv);
+                } else if (item.type === 'image') {
+                    // Create gallery item
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'gallery-item';
+
+                    const img = document.createElement('img');
+                    img.className = 'gallery-image';
+                    img.src = item.thumb;
+                    img.alt = item.title || 'Gallery Image';
+                    img.loading = 'lazy';
+                    
+                    // Assign dataset attributes for Modal logic
+                    img.dataset.highResSrc = item.highRes;
+                    img.dataset.title = item.title;
+                    img.dataset.description = item.description;
+
+                    if (item.sensitive) {
+                        img.dataset.sensitive = 'true';
+                    }
+
+                    if (item.altSources && item.altSources.length > 0) {
+                        img.dataset.altSources = item.altSources.join(',');
+                    }
+
+                    itemDiv.appendChild(img);
+                    container.appendChild(itemDiv);
                 }
-
-                itemDiv.appendChild(img);
-                container.appendChild(itemDiv);
-            }
-        });
+            });
+        }
     }
 
     // Render the gallery BEFORE initializing the modal
@@ -275,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // GALLERY MODAL FUNCTIONALITY (CENTRALIZED)
     // ==========================================================================
     
-    // all modal logic
+    // Modal logic is only for standard gallery images, not character lists
     function initializeGalleryModal() {
         const modal = document.getElementById('modal');
         if (!modal) {
@@ -300,9 +344,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentSourceIndex = 0;
         let isSwitching = false;
 
-        // Select the newly generated images
+        // Select ONLY the standard gallery images generated
         const galleryImageElements = document.querySelectorAll('.gallery-image');
         
+        // If no gallery images (e.g., we are in character list view), stop modal init
+        if (galleryImageElements.length === 0) return;
+
         galleryImageElements.forEach((img, index) => {
             const sources = [img.dataset.highResSrc];
             const altSources = img.dataset.altSources;
@@ -328,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         function linkify(text) {
+            if (!text) return '';
             const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\b[a-z0-9.-]+\.(com|org|net|io)\b(\/[^ \t\n\r<]*)?)/ig;
             return text.replace(urlPattern, function(url) {
                 let href = url;
@@ -602,6 +650,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const SECRET_DESTINATIONS = {
         //string : dest,
+        "3cc93b2a02bca5ed6dfd9626007d0c37acc72e87fe3887923ee8de4a52dbb14d": 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08": "sketches.html", // "test"
         //etc...
     };
     
@@ -664,4 +714,57 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ==========================================================================
+    // CHARACTER PROFILE LOADER
+    // ==========================================================================
+
+    function loadCharacterProfile() {
+        const charNameEl = document.getElementById('char-name');
+        if (!charNameEl) return;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const charId = urlParams.get('id');
+
+        if (!charId || !galleryData.categories) {
+            charNameEl.textContent = "CHARACTER NOT FOUND";
+            return;
+        }
+
+        const character = galleryData.categories.find(c => c.id === charId);
+
+        if (character) {
+            document.title = `${character.name} - Benjamin Counter`;
+            charNameEl.textContent = character.name;
+            
+            const bioEl = document.getElementById('char-bio');
+            if (bioEl) bioEl.textContent = character.bio || "No bio available.";
+
+            const loreEl = document.getElementById('char-lore');
+            if (loreEl) loreEl.textContent = character.lore || "No story available yet.";
+
+            const imgEl = document.getElementById('char-profile-img');
+            if (imgEl) {
+                imgEl.src = character.profileImage || character.thumb || 'resources/logo.png';
+                imgEl.alt = character.name;
+            }
+
+            const galleryContainer = document.getElementById('dynamic-gallery-container');
+            if (galleryContainer && character.galleryKey) {
+                galleryContainer.dataset.category = character.galleryKey;
+                
+                renderGallery();
+                
+                initializeGalleryModal();
+            } else {
+                document.querySelector('.gallery').style.display = 'none';
+                document.querySelector('.gallery-separator-line').style.display = 'none';
+                document.querySelectorAll('h3')[1].style.display = 'none';
+            }
+        } else {
+            charNameEl.textContent = "CHARACTER NOT FOUND";
+        }
+    }
+
+    loadCharacterProfile();
 });

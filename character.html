@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benjamin Counter's Drawings</title>
+    <title>Character Profile - Benjamin Counter</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,40 +16,56 @@
             <h1 id="header-title">BENJAMIN COUNTER</h1>
         </div>
     </header>
+    
+    <!--
     <nav>
         <div class="nav-container">
-        <ul id="nav-menu">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="fanart.html">FAN ART</a></li>
-            <li><a href="drawings.html">GALLERY</a></li>
-            <li><a href="sketches.html">SKETCHES</a></li> 
-            <li><a href="about.html">ABOUT</a></li>
-        </ul>
-        <div id="nav-indicator"></div>
+            <ul id="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="fanart.html">FAN ART</a></li>
+                <li><a href="drawings.html">GALLERY</a></li>
+                <li><a href="sketches.html">SKETCHES</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+            </ul>
+            <div id="nav-indicator"></div>
         </div>
     </nav>
-        <!--<button id="hamburger-btn" aria-label="Open menu">
-            &#9776;
-        </button> -->
-    </header>
-    <main class="gallery-page">
-        <h2>CHARACTERS</h2>
-        
-        <!-- Character list container -->
-        <div class="category-container-wrapper">
-            <div id="dynamic-gallery-container" data-category="categories" data-layout="list">
+    -->
+
+    <div class="back-btn-wrapper">
+        <a href="drawings.html" class="glass-back-btn">❮ Back to Characters</a>
+    </div>
+
+    <main class="profile-page">
+        <div class="profile-header">
+            <div class="profile-bio-section">
+                <h2 id="char-name">LOADING...</h2>
+                <div class="bio-text" id="char-bio"></div>
+            </div>
+            
+            <div class="profile-image-section">
+                <img id="char-profile-img" src="" alt="Character Profile">
             </div>
         </div>
+
+        <div class="profile-lore-section">
+            <h3>STORY</h3>
+            <p id="char-lore"></p>
+        </div>
+
+        <div class="gallery-separator-line"></div>
+        <h3>GALLERY</h3>
+        
+        <div class="gallery">
+            <div class="gallery-grid" id="dynamic-gallery-container" data-category=""></div>
+        </div>
     </main>
-    <div class="logo-footer">
-        <img src="resources/logo.png" alt="Benjamin Counter Logo" class="footer-logo" loading="lazy">
-    </div>
+
     <footer>
         <p id="footer-quote">"Everything in this life is impossible until someone comes and does it."</p>
     </footer>
 
-    <!--//-->
-   <div class="modal" id="modal">
+    <div class="modal" id="modal">
         <button class="modal-close" id="modal-close">×</button>
         <button class="modal-nav prev" id="modal-prev">❮</button>
         <button class="modal-nav next" id="modal-next">❯</button>
@@ -58,13 +74,9 @@
         <div id="modal-image-container">
             <img id="modal-img" src="">
             <img id="modal-img-next" src="">
-
             <div id="modal-warning" class="modal-warning-overlay">
                 <div class="modal-warning-content">
-                    <p>
-                        This post may contain images that some viewers find offensive or unsettling.<br>
-                        Do you wish to proceed?
-                    </p>
+                    <p>This post may contain images that some viewers find offensive or unsettling.<br>Do you wish to proceed?</p>
                     <button id="warning-continue-btn">View</button>
                 </div>
             </div>
@@ -75,11 +87,9 @@
             <p id="modal-description">No description</p>
         </div>
     </div>
-<!--//-->
 
     <script src="data.js"></script>
     <script src="script.js"></script>
     <button id="theme-switcher" aria-label="Cambiar tema"></button>
-
 </body>
 </html>

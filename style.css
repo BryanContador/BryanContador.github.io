@@ -865,3 +865,347 @@ footer p {
 #secret-input:focus {
     border-color: #7b7b7b;
 }
+
+/* ==========================================================================
+   CATEGORY LIST STYLES (Gallery/Characters)
+   ========================================================================== */
+
+:root {
+    --card-gradient: linear-gradient(to right, #a9a9a9, #ffffff); 
+}
+
+body.dark-mode {
+    --card-gradient: linear-gradient(to right, #676767, #000000); 
+}
+
+.category-container-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.category-list-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: flex-start;
+    
+    background: var(--card-gradient);
+    border: none;
+    border-radius: 12px;
+    
+    padding: 0;
+    overflow: hidden;
+    
+    height: 120px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.category-thumb-container {
+    width: 120px;
+    height: 100%;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.category-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.category-name {
+    flex-grow: 1;
+    text-align: center;
+    padding: 0 15px;
+    
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;
+    text-transform: uppercase;
+    
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 769px) {
+    .category-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        width: calc(50% - 10px);
+        margin: 0 auto;
+    }
+}
+
+/* Responsive: 1 column on mobile */
+@media (max-width: 768px) {
+    .category-list-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-card {
+        height: 100px; /* Slightly smaller on mobile */
+    }
+    
+    .category-thumb-container {
+        width: 100px;
+    }
+    
+    .category-name {
+        font-size: 1.6rem;
+    }
+}
+
+/* ==========================================================================
+   CHARACTER PROFILE STYLES
+   ========================================================================== */
+
+.profile-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- HEADER SECTION --- */
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+/* Texto Bio */
+.profile-bio-section {
+    flex: 1; 
+    text-align: left;
+}
+
+.profile-bio-section h2 {
+    font-family: 'ND Logos', sans-serif;
+    font-size: 4rem;
+    margin: 0 0 20px 0;
+    color: var(--text-color);
+    line-height: 1;
+}
+
+.bio-text {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+.profile-image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#char-profile-img {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    object-fit: contain;
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* --- LORE SECTION --- */
+.profile-lore-section {
+    text-align: left;
+    margin-bottom: 60px;
+    padding: 30px;
+    background-color: var(--nav-bg);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.profile-lore-section h3 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;
+    margin-top: 0;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+#char-lore {
+
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    white-space: pre-wrap;
+    letter-spacing: 0.3px;
+}
+
+.profile-page > h3 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 3rem;
+    font-weight: normal;
+    text-align: center;
+    margin: 30px 0 20px 0;
+    color: var(--text-color);
+    letter-spacing: 1px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-bio-section {
+        text-align: center;
+    }
+
+    .profile-bio-section h2 {
+        font-size: 3rem;
+    }
+
+    .profile-image-section {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   GLASS BACK BUTTON (Character Page)
+   ========================================================================== */
+
+.back-btn-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 75px;
+    z-index: 990;
+    
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
+    margin-top: 15px; 
+    margin-bottom: 20px;
+    
+    pointer-events: none; 
+}
+
+.glass-back-btn {
+    pointer-events: auto;
+    
+    /* Glassmorphism */
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+        var(--nav-shadow-inset1),
+        var(--nav-shadow-inset2),
+        0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    /* Typography and form */
+    color: var(--text-color);
+    font-family: 'Patrick Hand', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 25px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    transition: all 0.3s ease;
+}
+
+.glass-back-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   CHARACTER PROFILE GALLERY (Flexbox 3 Columns + Fill Space)
+   ========================================================================== */
+
+.profile-page .gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.profile-page .gallery-item {
+    flex-grow: 1;
+    flex-basis: calc(33.333% - 10px);    
+    height: 250px; 
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important; 
+        text-align: left !important;
+        
+        gap: 20px;
+        width: 100%;
+    }
+
+    .profile-bio-section {
+        width: 100%;
+        text-align: left !important;
+        display: block; 
+    }
+
+    .profile-bio-section h2 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-align: left;
+        width: 100%;
+    }
+    
+    .bio-text {
+        text-align: left;
+        width: 100%;
+    }
+
+    .profile-image-section {
+        width: 100%;
+        display: flex;
+        justify-content: center; 
+        margin-top: 10px;
+    }
+
+    #char-profile-img {
+        width: auto;
+        max-width: 100%;
+        max-height: 350px;
+        object-fit: contain;
+    }
+    
+    /* Movile gallery */
+    .profile-page .gallery-item {
+        flex-basis: calc(50% - 8px); 
+        height: 150px; 
+    }
+}
