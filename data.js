@@ -652,6 +652,13 @@ const galleryData = {
         },*/
         {
             type: "image",
+            thumb: "sketches/thumb/Berkut_prayers.jpg",
+            highRes: "sketches/Berkut_prayers.jpg",
+            title: "Prayers",
+            description: "God is the only one with the power to save us. He is the only one who can absolve us of our sins, yet most people turn to him only in times of need.\nIt is the hunger of the soul that ask us to reach out for him, even when we know we don't deserve it.",
+        },
+        {
+            type: "image",
             thumb: "sketches/thumb/bones_thumb.jpg",
             highRes: "sketches/bones.jpg",
             title: "Starvation",
