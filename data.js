@@ -104,7 +104,7 @@ const galleryData = {
             thumb: "fanart/thumb/167 sin título_20240123052223_thumbnail.jpg",
             highRes: "fanart/167 sin título_20240123052223.jpg",
             title: "Woofle",
-            description: "Character property of DarkViperAU.\nDarkViperAU on youtube.\nyoutube.com/@PilferpupCartoons"
+            description: "Character property of DarkViperAU.\nDarkViperAU on youtube\nyoutube.com/@DarkViperAU"
         },
         {
             type: "image",
