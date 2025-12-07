@@ -59,6 +59,13 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "fanart/thumb/baconz_sona_thumb.jpg",
+            highRes: "fanart/baconz_sona.jpg",
+            title: "Rinn",
+            description: "Character property of The48Baconz \nthe48baconz on Discord."
+        },
+        {
+            type: "image",
             thumb: "fanart/thumb/158 sin título_20241001122235_thumb.jpg",
             highRes: "fanart/158 sin título_20241001122235.jpg",
             title: "Bunlith",
