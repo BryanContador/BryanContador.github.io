@@ -395,6 +395,8 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('is-zoomed');
             modalImg.style.transformOrigin = 'center center';
             modalImgNext.style.transformOrigin = 'center center';
+            
+            // Reset states - Clear warning/blur initially so loader is visible
             modal.classList.remove('show-warning');
             modalImg.classList.remove('blurred');
             modalImgNext.classList.remove('blurred');
@@ -422,16 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.alt = altText;
             modalImgNext.alt = altText;
 
-            // sensitive-content
-            if (item.isSensitive && !item.isRevealed) {
-                modal.classList.add('show-warning');
-                modalImg.classList.add('blurred');
-                modalImgNext.classList.add('blurred');
-            } else {
-                modal.classList.remove('show-warning');
-                modalImg.classList.remove('blurred');
-                modalImgNext.classList.remove('blurred');
-            }
+            // sensitive-content warning tag logic moved after load---
 
             // Set loading="lazy" for modal images
             modalImg.setAttribute('loading', 'lazy');
@@ -439,27 +432,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- CHANGED: Open Modal Immediately with Loader ---
             
-            // 1. Show Modal UI
+            // Show Modal UI
             modal.style.display = 'flex';
             closeModalBtn.focus();
 
-            // 2. Setup Loading State
+            //  Setup Loading State
             if (loader) {
                 loader.style.display = 'block';
                 loader.textContent = 'LOADING...';
             }
             modalImg.classList.add('is-loading'); // Hides image
 
-            // 3. Set Image Source
+            // Set Image Source
             modalImg.src = item.sources[0];
             modalImgNext.src = ''; 
             modalImgNext.classList.remove('is-fading');
 
-            // 4. Handle Image Load
+            // Handle Image Load
             modalImg.onload = () => {
                 // Hide loader, show image
                 if (loader) loader.style.display = 'none';
                 modalImg.classList.remove('is-loading');
+
+                // Apply Sensitive Warning ONLY after load is complete
+                if (item.isSensitive && !item.isRevealed) {
+                    modal.classList.add('show-warning');
+                    modalImg.classList.add('blurred');
+                    modalImgNext.classList.add('blurred');
+                } else {
+                    modal.classList.remove('show-warning');
+                    modalImg.classList.remove('blurred');
+                    modalImgNext.classList.remove('blurred');
+                }
 
                 // Logic for Alternative Button
                 if (item.sources.length > 1) {
@@ -475,7 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // 5. Handle Errors
             modalImg.onerror = () => {
                 if (loader) loader.textContent = "Error loading image";
             };
