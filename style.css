@@ -473,9 +473,41 @@ main h2 {
     transition: background-color 0.2s;
 }
 
-#warning-continue-btn:hover {
+n:hover {
     background-color: #ccc;
 }
+
+
+/* ==========================================================================
+    Modal Loader
+   ========================================================================== */
+#modal-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-family: 'Patrick Hand', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    z-index: 1;
+    display: none; 
+    animation: pulse 1.5s infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Hide image while loading */
+#modal-img.is-loading {
+    opacity: 0;
+}
+
+
 
 /* Footer Styles */
 footer {

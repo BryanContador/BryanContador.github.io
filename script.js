@@ -337,6 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const warningOverlay = document.getElementById('modal-warning');
         const continueBtn = document.getElementById('warning-continue-btn');
         const altBtn = document.getElementById('modal-alt-btn');
+        // Retrieve loader element (added in HTML update)
+        const loader = document.getElementById('modal-loader');
 
         const galleryItems = [];
         let currentImageIndex = 0;
@@ -404,6 +406,8 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImgNext.style.transition = '';
             modalImg.classList.remove('is-fading');
             modalImgNext.classList.remove('is-fading');
+            // Remove error class if present
+            modalImg.classList.remove('is-error');
 
             currentImageIndex = index;
             const item = galleryItems[currentImageIndex];
@@ -429,17 +433,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalImgNext.classList.remove('blurred');
             }
 
-            // Set loading="lazy" for modal images and preload high-res
+            // Set loading="lazy" for modal images
             modalImg.setAttribute('loading', 'lazy');
             modalImgNext.setAttribute('loading', 'lazy');
-            const tempImg = new Image();
-            tempImg.src = item.sources[0];
-            
-            tempImg.onload = () => {
-                modalImg.src = item.sources[0];
-                modalImgNext.src = ''; // Reset next image
-                modalImgNext.classList.remove('is-fading');
 
+            // --- CHANGED: Open Modal Immediately with Loader ---
+            
+            // 1. Show Modal UI
+            modal.style.display = 'flex';
+            closeModalBtn.focus();
+
+            // 2. Setup Loading State
+            if (loader) {
+                loader.style.display = 'block';
+                loader.textContent = 'LOADING...';
+            }
+            modalImg.classList.add('is-loading'); // Hides image
+
+            // 3. Set Image Source
+            modalImg.src = item.sources[0];
+            modalImgNext.src = ''; 
+            modalImgNext.classList.remove('is-fading');
+
+            // 4. Handle Image Load
+            modalImg.onload = () => {
+                // Hide loader, show image
+                if (loader) loader.style.display = 'none';
+                modalImg.classList.remove('is-loading');
+
+                // Logic for Alternative Button
                 if (item.sources.length > 1) {
                     altBtn.style.display = 'inline-block';
                     altBtn.textContent = 'View Alternative';
@@ -451,14 +473,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     altBtn.style.display = 'none';
                 }
+            };
 
-                modal.style.display = 'flex';
-                closeModalBtn.focus();
+            // 5. Handle Errors
+            modalImg.onerror = () => {
+                if (loader) loader.textContent = "Error loading image";
             };
         }
 
         function closeModal() {
             modal.style.display = 'none';
+            // Stop loading if user closes modal early
+            modalImg.src = ''; 
             if (lastFocusedElement) {
                 lastFocusedElement.focus();
             }
