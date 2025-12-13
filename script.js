@@ -396,16 +396,19 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.style.transformOrigin = 'center center';
             modalImgNext.style.transformOrigin = 'center center';
             
+            // --- FIX FOR FLASHING: Disable transitions instantly ---
+            modalImg.style.transition = 'none';
+            modalImgNext.style.transition = 'none';
+            
             // Reset states - Clear warning/blur initially so loader is visible
             modal.classList.remove('show-warning');
             modalImg.classList.remove('blurred');
             modalImgNext.classList.remove('blurred');
 
-            // Reset states
-            modalImg.style.opacity = '';
+            modalImg.style.opacity = '0'; // Force invisible instantly
             modalImgNext.style.opacity = '';
-            modalImg.style.transition = '';
-            modalImgNext.style.transition = '';
+            //modalImg.style.transition = '';
+            //modalImgNext.style.transition = '';
             modalImg.classList.remove('is-fading');
             modalImgNext.classList.remove('is-fading');
             // Remove error class if present
@@ -436,23 +439,31 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'flex';
             closeModalBtn.focus();
 
-            //  Setup Loading State
+            // Setup Loading State
             if (loader) {
                 loader.style.display = 'block';
                 loader.textContent = 'LOADING...';
             }
-            modalImg.classList.add('is-loading'); // Hides image
+            modalImg.classList.add('is-loading'); // Ensures CSS keeps it hidden
 
             // Set Image Source
             modalImg.src = item.sources[0];
             modalImgNext.src = ''; 
             modalImgNext.classList.remove('is-fading');
 
-            // Handle Image Load
+            // Restore transitions after a tiny delay so the "Hide" was instant
+            setTimeout(() => {
+                modalImg.style.transition = '';
+                modalImgNext.style.transition = '';
+            }, 50);
+
+            //Handle Image Load
             modalImg.onload = () => {
                 // Hide loader, show image
                 if (loader) loader.style.display = 'none';
                 modalImg.classList.remove('is-loading');
+                
+                modalImg.style.opacity = ''; 
 
                 // Apply Sensitive Warning ONLY after load is complete
                 if (item.isSensitive && !item.isRevealed) {
