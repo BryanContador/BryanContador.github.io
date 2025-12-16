@@ -626,6 +626,14 @@ const galleryData = {
     berkut_art: [
         {
             type: "image",
+            thumb: "drawings/thumb/window_thumb.jpg",
+            highRes: "drawings/window.jpg",
+            altSources:["drawings/window_sky.jpg"],
+            title: "Window",
+            description: "Vent art.\nThe feeling of being trapped behind a prison cell. Only a grasp away from having what you want, but unable to reach it no matter how hard you try."
+        },
+        {
+            type: "image",
             thumb: "drawings/thumb/berkut_thumb.jpg",
             highRes: "drawings/berkut.jpg",
             //altSources:["drawings/berkut_text.jpg"],
