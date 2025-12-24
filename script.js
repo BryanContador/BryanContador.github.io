@@ -692,6 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //string : dest,
         "3cc93b2a02bca5ed6dfd9626007d0c37acc72e87fe3887923ee8de4a52dbb14d": 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08": "sketches.html", // "test"
+        "0832c0adf05418144b7b5f01e14600782ba7a302a606b49e3bf26214b765c176": "surprise.html", // name
         //etc...
     };
     
