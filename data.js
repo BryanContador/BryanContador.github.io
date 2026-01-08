@@ -626,6 +626,13 @@ const galleryData = {
     berkut_art: [
         {
             type: "image",
+            thumb: "drawings/thumb/berkut_beach_thumb.jpg",
+            highRes: "drawings/berkut/berkut_beach.jpg",
+            title: "Beach day",
+            description: "smash"
+        },
+        {
+            type: "image",
             thumb: "drawings/thumb/window_thumb.jpg",
             highRes: "drawings/berkut/window.jpg",
             altSources:["drawings/berkut/window_sky.jpg"],
