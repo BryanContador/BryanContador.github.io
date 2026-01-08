@@ -764,11 +764,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const charNameEl = document.getElementById('char-name');
         if (!charNameEl) return;
 
+        // Get Lore elements
+        const loreWrapper = document.getElementById('lore-wrapper');
+        const loreBtn = document.getElementById('lore-expand-btn');
+        const loreFade = document.querySelector('.lore-fade-overlay');
+
         const urlParams = new URLSearchParams(window.location.search);
         const charId = urlParams.get('id');
 
         if (!charId || !galleryData.categories) {
             charNameEl.textContent = "CHARACTER NOT FOUND";
+            if(loreBtn) loreBtn.style.display = 'none';
             return;
         }
 
@@ -781,8 +787,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const bioEl = document.getElementById('char-bio');
             if (bioEl) bioEl.textContent = character.bio || "No bio available.";
 
+            // --- Updated Lore Logic ---
             const loreEl = document.getElementById('char-lore');
-            if (loreEl) loreEl.textContent = character.lore || "No story available yet.";
+            if (loreEl) {
+                loreEl.textContent = character.lore || "No story available yet.";
+
+                if (loreWrapper && loreBtn) {
+                     // Reset to default state first (collapsed)
+                     loreWrapper.classList.add('collapsed');
+                     loreWrapper.classList.remove('expanded');
+                     loreBtn.style.display = 'none'; // Hide initially to prevent jump
+                     if(loreFade) loreFade.style.display = 'block';
+
+                     // Wait for render to calculate height
+                     setTimeout(() => {
+                        const fullHeight = loreEl.scrollHeight;
+                        const collapsedHeight = 250;
+
+                        if (fullHeight <= collapsedHeight + 50) {
+                            // Text is short
+                            loreWrapper.classList.remove('collapsed');
+                            loreWrapper.classList.add('expanded');
+                            loreBtn.style.display = 'none';
+                            if(loreFade) loreFade.style.display = 'none';
+                        } else {
+                            // Text is long
+                            loreBtn.style.display = 'block';
+                            if(loreFade) loreFade.style.display = 'block';
+                        }
+                     }, 50);
+                }
+            }
 
             const imgEl = document.getElementById('char-profile-img');
             if (imgEl) {
@@ -804,6 +839,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             charNameEl.textContent = "CHARACTER NOT FOUND";
+        }
+
+        // Add Event Listener to button (prevent duplicate listeners)
+        if (loreBtn && !loreBtn.dataset.hasListener) {
+            loreBtn.addEventListener('click', () => {
+                if (loreWrapper) {
+                    loreWrapper.classList.toggle('collapsed');
+                    loreWrapper.classList.toggle('expanded');
+                }
+            });
+            loreBtn.dataset.hasListener = "true";
         }
     }
 

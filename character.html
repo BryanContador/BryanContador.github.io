@@ -50,7 +50,16 @@
 
         <div class="profile-lore-section">
             <h3>STORY</h3>
-            <p id="char-lore"></p>
+            
+            <!-- Wrapper for the text and fade effect -->
+            <div id="lore-wrapper" class="lore-wrapper collapsed">
+                <p id="char-lore"></p>
+                <div class="lore-fade-overlay"></div>
+            </div>
+
+            <button id="lore-expand-btn" class="lore-expand-btn" aria-label="Expand Story">
+                <span class="arrow-icon">▼</span>
+            </button>
         </div>
 
         <div class="gallery-separator-line"></div>

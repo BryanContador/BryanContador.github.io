@@ -1241,3 +1241,64 @@ body.dark-mode {
         height: 150px; 
     }
 }
+/* ==========================================================================
+   LORE EXPANDER STYLES
+   ========================================================================== */
+
+.lore-wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.6s ease-in-out;
+}
+
+/* COLLAPSED STATE */
+.lore-wrapper.collapsed {
+    max-height: 250px; 
+    
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+/* EXPANDED STATE */
+.lore-wrapper.expanded {
+    max-height: 5000px;
+    
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+.lore-fade-overlay {
+    display: none !important;
+}
+
+/* BUTTON STYLES */
+.lore-expand-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px 0;
+    margin-top: -15px;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7;
+}
+
+.lore-expand-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.lore-expand-btn .arrow-icon {
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Rotate arrow when expanded */
+.lore-wrapper.expanded + .lore-expand-btn .arrow-icon {
+    transform: rotate(180deg);
+}
