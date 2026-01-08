@@ -407,8 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             modalImg.style.opacity = '0'; // Force invisible instantly
             modalImgNext.style.opacity = '';
-            //modalImg.style.transition = '';
-            //modalImgNext.style.transition = '';
+            
             modalImg.classList.remove('is-fading');
             modalImgNext.classList.remove('is-fading');
             // Remove error class if present
@@ -568,6 +567,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // --- Zoom & Swipe logic ---
+        // REMOVED: Gave a lot of trouble on mobile while trying to swipe. Just deteled them for simplicity lol
+        /*  
         let touchStartX = 0;
         modal.addEventListener('touchstart', (event) => {
             if (imageContainer.classList.contains('zoomed')) return;
@@ -581,7 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (touchEndX < touchStartX - swipeThreshold) showNextImage();
             if (touchEndX > touchStartX + swipeThreshold) showPrevImage();
         });
-        
+        */
+
         imageContainer.addEventListener('click', function(event) {
             // Disable zoom on small screens
             if (window.innerWidth <= 768) return; 
@@ -764,7 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const charNameEl = document.getElementById('char-name');
         if (!charNameEl) return;
 
-        // Get Lore elements
+        // NEW: Get Lore elements
         const loreWrapper = document.getElementById('lore-wrapper');
         const loreBtn = document.getElementById('lore-expand-btn');
         const loreFade = document.querySelector('.lore-fade-overlay');
