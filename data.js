@@ -701,7 +701,7 @@ const galleryData = {
         {
             type: "image",
             thumb: "drawings/thumb/demon_girl_final_2_thumb.jpg",
-            highRes: "drawings/demon_girl_final_2.jpg",
+            highRes: "drawings/demon/demon_girl_final_2.jpg",
             altSources:["sketches/demon/demon_girl_final_2_ver2.jpg"],
             title: "Pray for me",
             description: "Drawing originally intended as a gift. Reused as vent art. \nThe girl, sitting in the middle of nowhere, looks up, praying to God for forgiveness."
