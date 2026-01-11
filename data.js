@@ -692,19 +692,19 @@ const galleryData = {
     demon_girl_art: [
         {
             type: "image",
-            thumb: "drawings/thumb/1685216510247_thumb.jpg",
-            highRes: "drawings/demon/1685216510247.jpg",
-            altSources:["sketches/demon/127 sin título_20230512041503.jpg"],
-            title: "Demon Girl",
-            description: "No description."
-        },
-        {
-            type: "image",
             thumb: "drawings/thumb/demon_girl_final_2_thumb.jpg",
             highRes: "drawings/demon/demon_girl_final_2.jpg",
             altSources:["sketches/demon/demon_girl_final_2_ver2.jpg"],
             title: "Pray for me",
             description: "Drawing originally intended as a gift. Reused as vent art. \nThe girl, sitting in the middle of nowhere, looks up, praying to God for forgiveness."
+        },
+        {
+            type: "image",
+            thumb: "drawings/thumb/1685216510247_thumb.jpg",
+            highRes: "drawings/demon/1685216510247.jpg",
+            altSources:["sketches/demon/127 sin título_20230512041503.jpg"],
+            title: "Demon Girl",
+            description: "No description."
         },
         {
             type: "image",
