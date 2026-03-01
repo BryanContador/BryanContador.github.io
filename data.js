@@ -272,7 +272,7 @@ const galleryData = {
         {
             type: "category",
             id: "misc",
-            name: "Miscellaneous",
+            name: "Others",
             thumb: "drawings/thumb/152 sin título_20241231203824_thumb.jpg",
             
             profileImage: "drawings/152 sin título_20241231203824.jpg",
@@ -624,6 +624,13 @@ const galleryData = {
     ],
 
     berkut_art: [
+        {
+            type: "image",
+            thumb: "drawings/thumb/UK_Berkut_thumb.jpg",
+            highRes: "drawings/berkut/UK_Berkut.jpg",
+            title: "United Kingdom",
+            description: "Wish i was there"
+        },
         {
             type: "image",
             thumb: "drawings/thumb/berkut_beach_thumb.jpg",
