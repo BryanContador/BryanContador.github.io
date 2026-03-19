@@ -31,6 +31,14 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "fanart/thumb/fanta_thumb.jpg",
+            highRes: "fanart/fanta.jpg",
+            title: "Fanta!",
+            description: "Character property of Ghoulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+
+        },
+        {
+            type: "image",
             thumb: "fanart/thumb/homies_thumb.jpg",
             highRes: "fanart/homies.jpg",
             title: "Fanart for homies",
@@ -41,7 +49,7 @@ const galleryData = {
             thumb: "fanart/thumb/Badger_zombie_slayer_thumb.jpg",
             highRes: "fanart/Badger_zombie_slayer.jpg",
             title: "Fanart for the Alix (ZOMBIE SLAYER)",
-            description: "Art for with Goulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+            description: "Art for with Ghoulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
         },
         {
             type: "image",
@@ -55,7 +63,7 @@ const galleryData = {
             thumb: "fanart/thumb/Liam_feet_love_thumb.jpg",
             highRes: "fanart/Liam_feet_love.jpg",
             title: "Art Trade (FEET)",
-            description: "Art Trade with Goulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+            description: "Art Trade with Ghoulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
         },
         {
             type: "image",
