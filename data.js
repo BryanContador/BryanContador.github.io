@@ -633,6 +633,14 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "sketches/thumb/scene_1_berkut_thumb.jpg",
+            highRes: "sketches/berkut/scene_1_berkut.jpg",
+            altSources:["sketches/berkut/scene_boceto.jpg"],
+            title: "San Valentin",
+            description: "Got tired of it all and never finished it. Maybe it was for the best."
+        },
+        {
+            type: "image",
             thumb: "drawings/thumb/berkut_beach_thumb.jpg",
             highRes: "drawings/berkut/berkut_beach.jpg",
             title: "Beach day",
