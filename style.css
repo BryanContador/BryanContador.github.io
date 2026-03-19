@@ -600,6 +600,7 @@ footer p {
 }
 
 /* Social Links Styles */
+/* Social Links Styles */
 .social-links {
     margin-top: 40px;
 }
@@ -615,6 +616,7 @@ footer p {
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-bottom: 40px;
 }
 
 .social-links ul li {
@@ -623,6 +625,8 @@ footer p {
 }
 
 .social-links ul li a {
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     color: var(--text-color-light);
     font-family: 'Patrick Hand', cursive;
@@ -631,12 +635,43 @@ footer p {
     transition: color 0.3s ease;
 }
 
+.social-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor; 
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
 .social-links ul li a:hover {
-    color: #555;
+    color: var(--text-color);
+}
+
+.social-links ul li a:hover .social-icon {
+    transform: scale(1.1);
 }
 
 .underline-link {
     text-decoration: underline;
+}
+
+.repo-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--separator-color);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.repo-link {
+    color: var(--text-color);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.repo-link:hover {
+    color: #7b7b7b;
 }
 
 /* Theme Switcher */
