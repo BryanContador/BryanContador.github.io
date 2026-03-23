@@ -174,8 +174,11 @@ const galleryData = {
             type: "image",
             thumb: "fanart/thumb/47_sin_titulo_20230710011059_thumb.png",
             highRes: "fanart/47_sin_titulo_20230710011059.jpg",
+            altSources: ["fanart/sketches/47 sin título_20230706231130.jpg"],
             title: "Lillybee",
-            description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons"
+            description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons",
+            date: "2023-07-10",
+            status: "sketch"
         },
         {
             type: "image",
@@ -300,36 +303,48 @@ const galleryData = {
             thumb: "drawings/thumb/124_sin_titulo_Restaurado_20230902020738_thumb.png",
             highRes: "drawings/sunshine/124_sin_titulo_Restaurado_20230902020738.jpg",
             title: "Pose",
-            description: "The Sunshine in my life.\nInspired on a piece of an artist i can't remember. The style of them was a big inspiration for this drawing."
+            description: "The Sunshine in my life.\nInspired on a piece of an artist i can't remember. The style of them was a big inspiration for this drawing.",
+            status: "finished",
+            date: "2023-09-02"
         },
         {
             type: "image",
             thumb: "drawings/thumb/74 sin título_20221015231324_thumb.jpg",
             highRes: "drawings/sunshine/74 sin título_20221015231324.jpg",
-            altSources: ["sketches/sunshine/74 sin título_20221009114353.jpg","sketches/sunshine/74 sin título.jpg"],
+            altSources: ["drawings/sunshine/74 sin título_20221015231324_back.jpg","sketches/sunshine/74 sin título_20221009114353.jpg","sketches/sunshine/74 sin título.jpg"],
             title: "Halloween",
-            description: "Original Character \nSunshine celebrating Halloween 2022. Originally created for a contest, but disqualified for not following the theme."
+            description: "Original Character \nSunshine celebrating Halloween 2022. Originally created for a contest, but disqualified for not following the theme.",
+            status: "finished",
+            date: "2022-10-15"
         },
         {   
             type: "image",
             thumb: "drawings/thumb/45 sin título_20220813183603_thumb.jpg",
             highRes: "drawings/sunshine/45 sin título_20220813183603.jpg",
+            altSources: ["drawings/sunshine/45 sin título_20220817123912.jpg"],
             title: "No Title",
-            description: "Original Character\nNo description."
+            description: "Original Character\nNo description.",
+            status: "finished",
+            date: "2022-08-13"
         },
         {
             type: "image",
             thumb: "drawings/thumb/171 sin título_20240403052546_thumb.jpg",
             highRes: "drawings/sunshine/171 sin título_20240403052546.jpg",
             title: "Monja",
-            description: "Original Character \nMy part of a collaborative drawing."
+            description: "Original Character \nMy part of a collaborative drawing.",
+            date: "2024-04-03",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/sun_sense_thumb.jpg",
             highRes: "drawings/sunshine/sun_sense.jpg",
+            altSources: ["drawings/sunshine/13 sin título_20220506000300.jpg"],
             title: "No title",
             description:"Playing with light and shadow.",
+            status: "finished",
+            date:"2022-05-06"
         },
         {
             type: "image",
@@ -337,56 +352,85 @@ const galleryData = {
             highRes: "drawings/sunshine/sunsun_pain_2_scaled_5x_pngcrushed.png",
             altSources: ["drawings/sunshine/sunsun_pain_2_3_scaled_5x_pngcrushed.png"],
             title: "No title",
-            description: "MICROSOFT PAINT 🗣️🗣️🔥"
+            description: "MICROSOFT PAINT 🗣️🗣️🔥",
+            status: "finished",
+            date: "2025-05-25"
         },
         {
             type: "image",
             thumb: "drawings/thumb/paint_sunshine_sad_color_1_scaled_thumb.png",
             highRes: "drawings/sunshine/paint_sunshine_sad_color_1_scaled.png",
             title: "Sad day",
-            description: "Made in MS Paint.\nDraw this in a day of distress; i think it came out pretty okay."
+            description: "Made in MS Paint.\nDraw this in a day of distress; i think it came out pretty okay.",
+            status: "finished",
+            date: "2025-05-25"
         },
         {
             type: "image",
             thumb: "sketches/thumb/demon_sunshine_thumb.jpg",
             highRes: "sketches/sunshine/demon_sunshine.jpg",
             title: "Portada",
-            description: "Yes, i know. It's kinda cringe..."
+            description: "Yes, i know. It's kinda cringe...",
+            status: "sketch",
+            date: "2022-05-14"
+
+        },
+        {
+            type: "image",
+            thumb: "sketches/sunshine/18 sin título_20220514105411.jpg",
+            highRes: "sketches/sunshine/18 sin título_20220514105411.jpg",
+            altSources: ["sketches/sunshine/18 sin título_20220513235014.jpg"],
+            title: "Nice feet",
+            description: "Can i lick them?",
+            status: "sketch",
+            date: "2022-05-14"
         },
         {
             type: "image",
             thumb: "drawings/thumb/736 sin título_20210619131447_thumb.jpg",
             highRes: "drawings/sunshine/736 sin título_20210619131447.jpg",
             title: "Trabajo social",
-            description: "Original Character \nNo description."
+            description: "Original Character \nNo description.",
+            status: "finished",
+            date: "2021-06-19"
         },
         {
             type: "image",
             thumb: "drawings/thumb/744 sin título_20210725035000_thumb.jpg",
             highRes: "drawings/sunshine/744 sin título_20210725035000.jpg",
+            altSources: ["drawings/sunshine/744 sin título_20210725130558.jpg","drawings/sunshine/744 sin título_20210725130737.jpg"],
             title: "No Title",
-            description: "Original Character\nBack in 2021... crazy."
+            description: "Original Character\nBack in 2021... crazy.",
+            status: "finished",
+            date: "2021-07-25"
         },
         {
             type: "image",
             thumb: "sketches/thumb/24 sin título2_thumb.jpg",
             highRes: "sketches/sunshine/24 sin título2.jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch",
+            date: "2021-07-25"
+
         },
         {
             type: "image",
             thumb: "drawings/thumb/740 sin título_20210708040753_thumb.jpg",
             highRes: "drawings/sunshine/740 sin título_20210708040753.jpg",
             title: "Alternative Universe Sunshine",
-            description: "Original Character \nNo description."
+            description: "Original Character \nNo description.",
+            status: "finished",
+            date: "2021-07-08"
         },
         {
             type: "image",
             thumb: "sketches/thumb/768 sin título_thumb.jpg",
             highRes: "sketches/sunshine/768 sin título.jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch",
+            date: "2021-07-25"
         },
         {
             type: "image",
@@ -394,28 +438,36 @@ const galleryData = {
             highRes: "drawings/sunshine/comic1.jpg",
             altSources:["drawings/sunshine/comic2.jpg", "drawings/sunshine/comic3.jpg", "drawings/sunshine/comic4.jpg", "drawings/sunshine/comic5.jpg", "drawings/sunshine/comic6.jpg", "drawings/sunshine/comic7.jpg", "drawings/sunshine/comic8.jpg"],
             title: "Comic",
-            description: "Non-canon comic made for my english class. More than rushed."
+            description: "Non-canon comic made for my english class. More than rushed.",
+            status: "finished",
+            date: "2022-05-01"
         },
         {
             type: "image",
             thumb: "drawings/thumb/328 sin título_thumb.jpg",
             highRes: "drawings/sunshine/328 sin título.jpg",
             title: "early 2020",
-            description: "Original Character \nAll these years, and she hasn't changed a bit."
+            description: "Original Character \nAll these years, and she hasn't changed a bit.",
+            status: "finished",
+            date: "2003-01-01"
         },
         {
             type: "image",
             thumb: "drawings/thumb/288 sin título(2019)_thumb.jpg",
             highRes: "drawings/sunshine/288 sin título(2019).jpg",
             title: "XMAS 2019",
-            description: "Original Character\nWoah... where did the years go?"
+            description: "Original Character\nWoah... where did the years go?",
+            status: "finished",
+            date: "2002-01-01"
         },
         {
             type: "image",
             thumb: "drawings/thumb/259 sin título_thumb.jpg",
             highRes: "drawings/sunshine/259 sin título.jpg",
             title: "Sunshine #1",
-            description: "Original Character \nFirst formal drawing of Sunshine...\nyeah, she's still the same."
+            description: "Original Character \nFirst formal drawing of Sunshine...\nyeah, she's still the same.",
+            status: "finished",
+            date: "2001-01-01"
         },
     ],
 
@@ -424,23 +476,32 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/1739986621233_thumb.png",
             highRes: "drawings/jamol/1739986621233.png",
-            altSources: ["drawings/jamol/1739986621233_alternative.jpg"],
+            altSources: ["drawings/jamol/1739986621233_alternative.jpg", "sketches/jamol/121 sin título_Restaurado_20230330203722.jpg"],
             title: "Buyer's remorse",
-            description: "No description"
+            description: "No description",
+            date: "2023-04-23",
+            //yyyy - mm - dd
+            status: "finished"
+            // finished OR sketch
         },
         {
             type: "image",
             thumb: "drawings/thumb/1739986554241_thumb.png",
             highRes: "drawings/jamol/1739986554241.png",
+            altSources:["drawings/jamol/156 sin título_20231108100300.jpg"],
             title: "Appreciation",
-            description: "No description"
+            description: "No description",
+            date: "2023-11-15",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/1739986719411_thumb.jpg",
             highRes: "drawings/jamol/1739986719411.jpg",
             title: "Guerrero",
-            description: "My part of a collaborative drawing"
+            description: "My part of a collaborative drawing",
+            date: "2024-06-28",
+            status: "finished"
         },
         {
             type: "image",
@@ -449,22 +510,29 @@ const galleryData = {
             altSources: ["drawings/jamol/30 sin título3_20230104112037_alternative_1.jpg", "drawings/jamol/30 sin título3_20230104112037_alternative_2.jpg","sketches/jamol/30 sin título2_20230102134339.jpg"],
             title: "Still standing",
             description: "Piece inspired by the iconography of martyrs and saints. \nA literal hole where her heart once was.",
-            sensitive: true
+            sensitive: true,
+            date: "2023-01-30",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/24 sin título_thumb.jpg",
             highRes: "drawings/jamol/24 sin título.jpg",
+            altSources:["sketches/jamol/24 sin título_20220527002425.jpg"],
             title: "Above the water",
             description: "Blood after a fight.",
-            sensitive: true
+            sensitive: true,
+            date: "2022-09-20",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/1739986680341_thumb.jpg",
             highRes: "drawings/jamol/1739986680341.png",
             title: "No Title",
-            description: "No description."
+            description: "No description.",
+            date: "2023-02-07",
+            status: "finished"
         },
         {
             type: "image",
@@ -472,49 +540,63 @@ const galleryData = {
             highRes: "drawings/jamol/fractured.jpg",
             title: "Fractured",
             description: "A bit of more vent art.",
-            sensitive: true
+            sensitive: true,
+            date: "2025-10-1",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/mommy_thumb.png",
             highRes: "drawings/jamol/mommy.png",
             title: "Mommy",
-            description: "Drawn for Halloween 2025. Microsoft Paint."
+            description: "Drawn for Halloween 2025. Microsoft Paint.",
+            date: "2025-10-31",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/sadness_thumb.png",
             highRes: "drawings/jamol/sadness.png",
             title: "Melancholy",
-            description: "Done in a moment of raw sadness. \nMade in Microsoft Paint."
+            description: "Done in a moment of raw sadness. \nMade in Microsoft Paint.",
+            date: "2025-06-25",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/2bad_scaled_5x_pngcrushed_thumb.png",
             highRes: "drawings/jamol/2bad_scaled_5x_pngcrushed.png",
             title: "No title",
-            description: "No description."
+            description: "No description.",
+            date: "2025-05-29",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/smoke_it_away_thumb.jpg",
             highRes: "drawings/jamol/smoke_it_away.jpg",
             title: "Smoke it away",
-            description: "Quick drawing with no real deep thought behind it."
+            description: "Quick drawing with no real deep thought behind it.",
+            date:"2025-11-28",
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/137 sin título_thumb.jpg",
             highRes: "sketches/jamol/137 sin título.jpg",
             title: "No title",
-            description: "Maybe one day i'll finish this one...\nmaybe."
+            description: "Maybe one day i'll finish this one...\nmaybe.",
+            date: "2024-05-30",
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Feelings_from_the_heart_thumb.jpg",
             highRes: "sketches/jamol/Feelings_from_the_heart.jpg",
-            title: "No title",
-            description: "Magma drawing made on Pilferpup Draws' stream (YouTube)"
+            title: "Feelings from the heart",
+            description: "Magma drawing made on Pilferpup Draws' stream (YouTube)",
+            date: "2025-01-02",
+            status: "sketch"
         },
         {
             type: "image",
@@ -523,20 +605,26 @@ const galleryData = {
             title: "No title",
             description: "No description",
             sensitive: true
+
         },
         {
             type: "image",
             thumb: "sketches/thumb/PUNCH_thumb.jpg",
             highRes: "sketches/jamol/PUNCH.jpg",
             title: "FALCOM! PUNCH!!!",
-            description: "Magma drawing made on Pilferpup Draws' stream (YouTube)."
+            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).",
+            date: "2025-09-08",
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/smile_thumb.jpg",
             highRes: "sketches/jamol/smile.jpg",
             title: "Smile.",
-            description: "No description"
+            description: "No description",
+            date: "2025-02-13",
+            status: "sketch"
+
         },
         {
             type: "image",
@@ -544,7 +632,8 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen_(17).jpg",
             title: "THE END.",
             description: "No description",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
@@ -552,7 +641,8 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen_(19).jpg",
             title: "Alone",
             description: "No description",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
@@ -560,7 +650,8 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen_(18).jpg",
             title: "No title",
             description: "No description",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
@@ -568,14 +659,16 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen (5)_copia.jpg",
             title: "Suicide note",
             description: "Original Character\nNo description",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Imagen (11)_thumb.jpg",
             highRes: "sketches/jamol/Imagen (11).jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch"
         },
         {
             type: "image",
@@ -583,21 +676,24 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen (10).jpg",
             title: "Blood",
             description: "No description",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Imagen_(16)_thumb.jpg",
             highRes: "sketches/jamol/Imagen_(16).jpg",
             title: "THE END.",
-            description: "No description"
+            description: "No description",
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Imagen3_thumb.jpg",
             highRes: "sketches/jamol/Imagen3.jpg",
             title: "TALIBAN",
-            description: "No description"
+            description: "No description",
+            status: "sketch"
         },
         {
             type: "image",
@@ -605,7 +701,8 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen_(4).jpg",
             title: "Torn apart",
             description: "No description",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
@@ -613,21 +710,24 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen_(8).jpg",
             title: "Suicide",
             description: "I remember making this piece when I was at my lowest point.\nI don't plan on going back to that place.",
-            sensitive: true
+            sensitive: true,
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Imagen_(20)_thumb.jpg",
             highRes: "sketches/jamol/Imagen_(20).jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Imagen_(7)_thumb.jpg",
             highRes: "sketches/jamol/Imagen_(7).jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch"
         },
     ],
 
@@ -637,7 +737,9 @@ const galleryData = {
             thumb: "drawings/thumb/UK_Berkut_thumb.jpg",
             highRes: "drawings/berkut/UK_Berkut.jpg",
             title: "United Kingdom",
-            description: "Wish i was there"
+            description: "Wish i was there",
+            date: "2026-01-26",
+            status: "finished"
         },
         {
             type: "image",
@@ -645,14 +747,18 @@ const galleryData = {
             highRes: "sketches/berkut/scene_1_berkut.jpg",
             altSources:["sketches/berkut/scene_boceto.jpg"],
             title: "San Valentin",
-            description: "Got tired of it all and never finished it. Maybe it was for the best."
+            description: "Got tired of it all and never finished it. Maybe it was for the best.",
+            date:"2026-02-26",
+            status: "sketch"
         },
         {
             type: "image",
             thumb: "drawings/thumb/berkut_beach_thumb.jpg",
             highRes: "drawings/berkut/berkut_beach.jpg",
             title: "Beach day",
-            description: "smash"
+            description: "smash",
+            status: "finished",
+            date: "2026-01-06"
         },
         {
             type: "image",
@@ -660,7 +766,9 @@ const galleryData = {
             highRes: "drawings/berkut/window.jpg",
             altSources:["drawings/berkut/window_sky.jpg"],
             title: "Window",
-            description: "Vent art.\nThe feeling of being trapped behind a prison cell. Only a grasp away from having what you want, but unable to reach it no matter how hard you try."
+            description: "Vent art.\nThe feeling of being trapped behind a prison cell. Only a grasp away from having what you want, but unable to reach it no matter how hard you try.",
+            date: "2025-12-26",
+            status: "finished"
         },
         {
             type: "image",
@@ -668,7 +776,9 @@ const galleryData = {
             highRes: "drawings/berkut/berkut.jpg",
             //altSources:["drawings/berkut_text.jpg"],
             title: "Berkut Kalashnikov",
-            description: "For this piece, I wanted to give Berkut a more formal representation. Before this drawing, all of Berkut's depictions are more casual or simple sketches."//\nI aimed to capture his essence as a character while giving him a polished look. I wanted to depic his hope for his future, focusing on his eyes and expression."
+            description: "For this piece, I wanted to give Berkut a more formal representation. Before this drawing, all of Berkut's depictions are more casual or simple sketches.",//\nI aimed to capture his essence as a character while giving him a polished look. I wanted to depic his hope for his future, focusing on his eyes and expression."
+            date: "2025-10-06",
+            status: "finished"
         },
         {
             type: "image",
@@ -676,7 +786,9 @@ const galleryData = {
             highRes: "sketches/berkut/Berkut_Kalashnikov.jpg",
             altSources:["sketches/berkut/Berkut_Kalashnikov_glasses.jpg"],
             title: "Berkut Kalashnikov",
-            description: "First 'formal' depiction of Berkut."
+            description: "First 'formal' depiction of Berkut.",
+            status: "sketch",
+            date: "2025-06-05"
         },
         {
             type: "image",
@@ -686,7 +798,9 @@ const galleryData = {
             title: "Berkut fullbody",
             description:"Anatomy study of Berkut.\nWanted to give him a more feminine appearance while still keeping his masculine traits. A small waist but defined muscles. ",
             //description: "Original Character\nLook at him man, look at those grippers dude just look at his chest and tell me you wont rub yourself all over him come on i dare you.",
-            sensitive: true
+            sensitive: true,
+            status: "sketch",
+            date: "2025-05-25"
         },
         /*{
             type: "image",
@@ -701,6 +815,8 @@ const galleryData = {
             highRes: "sketches/berkut/Berkut_prayers.jpg",
             title: "Prayers",
             description: "God is the only one with the power to save us. He is the only one who can absolve us of our sins, yet most people turn to him only in times of need.\nIt is the hunger of the soul that ask us to reach out for him, even when we know we don't deserve it.",
+            status: "sketch",
+            date:"2025-11-30"
         },
         {
             type: "image",
@@ -708,6 +824,8 @@ const galleryData = {
             highRes: "sketches/berkut/bones.jpg",
             title: "Starvation",
             description: "I plan to finish this at some point in the future. Vent art.\nAlthough overly literal, it depicts the “hunger” experienced in those moments of loneliness, when there is nothing you can do. Trapped behind a glass wall, with no choice but to watch others feed themselves from afar.",
+            status: "sketch",
+            date: "2025-07-21",
             sensitive: true
         },
     ],
@@ -719,7 +837,10 @@ const galleryData = {
             highRes: "drawings/demon/demon_girl_final_2.jpg",
             altSources:["sketches/demon/demon_girl_final_2_ver2.jpg"],
             title: "Pray for me",
-            description: "Drawing originally intended as a gift. Reused as vent art. \nThe girl, sitting in the middle of nowhere, looks up, praying to God for forgiveness."
+            description: "Drawing originally intended as a gift. Reused as vent art. \nThe girl, sitting in the middle of nowhere, looks up, praying to God for forgiveness.",
+            status: "finished",
+            date: "2025-11-25"
+            
         },
         {
             type: "image",
@@ -727,35 +848,43 @@ const galleryData = {
             highRes: "drawings/demon/1685216510247.jpg",
             altSources:["sketches/demon/127 sin título_20230512041503.jpg"],
             title: "Demon Girl",
-            description: "No description."
+            description: "No description.",
+            date: "2023-05-20",
+            status: "finished"
         },
         {
             type: "image",
             thumb: "drawings/thumb/187_sin título_20250218003753_thumb.jpg",
             highRes: "drawings/demon/187_sin título_20250218003753.jpg",
             title: "Demon Girl on da pool",
-            description: "My part of a collaborative drawing"
+            description: "My part of a collaborative drawing",
+            date: "2025-02-18",
+            status: "finished"
+            
         },
         {
             type: "image",
             thumb: "sketches/thumb/image(1)_thumb.jpg",
             highRes: "sketches/demon/image(1).jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch",
         },
         {
             type: "image",
             thumb: "sketches/thumb/126 sin título_20250210134808_thumb.jpg",
             highRes: "sketches/demon/126 sin título_20250210134808.jpg",
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch",
         },
         {
             type: "image",
             thumb: "sketches/thumb/670 sin título (1)_thumb.jpg",
             highRes: "sketches/demon/670 sin título (1).jpg",
             title: "No title",
-            description: "Not planning on finishing this one.\nFrom 2019-2020. First formal drawing of the demon girl."
+            description: "Not planning on finishing this one.\nFrom 2019-2020. First formal drawing of the demon girl.",
+            status: "sketch"
         }
     ],
 
@@ -766,7 +895,9 @@ const galleryData = {
             highRes: "drawings/152 sin título_20241231203824.jpg",
             altSources:["sketches/152 sin título_20231210225254.jpg"],
             title: "Hana Fork",
-            description: "English cocker spaniel."
+            description: "English cocker spaniel.",
+            status: "finished",
+            date: "2024-12-31"
         },
         /*{
             type: "image",
@@ -780,7 +911,9 @@ const galleryData = {
             thumb: "drawings/thumb/Paint_punk_end_thumb.png",
             highRes: "drawings/Paint_punk_end.png",
             title: "PUNK BUN",
-            description: "Microsoft Paint."
+            description: "Microsoft Paint.",
+            status: "finished",
+            date: "2025-05-21"
         },
         {
             type: "image",
@@ -788,7 +921,9 @@ const galleryData = {
             highRes: "drawings/Imagen-2.jpg",
             altSources:["drawings/Imagen-2_alt.jpg"],
             title: "Windows XP",
-            description: "Originally made for Art Class."
+            description: "Originally made for Art Class.",
+            status: "finished",
+            date: "2025-02-20"
         },
         {
             type: "image",
@@ -796,7 +931,9 @@ const galleryData = {
             highRes: "sketches/Imagen_(14).jpg",
             altSources:["sketches/Imagen_(13).jpg"],
             title: "No title",
-            description: "No description"
+            description: "No description",
+            status: "sketch",
+            date: "2022-05-14"
         },
         {
             type: "image",
@@ -804,6 +941,8 @@ const galleryData = {
             highRes: "sketches/Imagen_(3).jpg",
             title: "I'm sad, you know?",
             description: "Original Character\nNo description",
+            status: "sketch",
+            date: "2022-10-14",
             sensitive: true
         },
         /*{
@@ -818,49 +957,63 @@ const galleryData = {
             thumb: "sketches/thumb/Imagen_(15)_thumb.jpg",
             highRes: "sketches/Imagen_(15).jpg",
             title: "Janet",
-            description: "Original Character\nNo description"
+            description: "Original Character\nNo description",
+            status: "sketch",
+            date: "2022-05-15"
         },
         {
             type: "image",
             thumb: "drawings/thumb/302_sin_título_thumb.jpg",
             highRes: "drawings/302_sin_título.jpg",
             title: "Janet",
-            description: "Original Character \nSunshine's girlfriend."
+            description: "Original Character \nSunshine's girlfriend.",
+            status: "finished",
+            date: "2019-08-15"
         },
         {
             type: "image",
             thumb: "drawings/thumb/766 sin título_20210929084302_thumb.jpg",
             highRes: "drawings/766 sin título_20210929084302.jpg",
             title: "No title",
-            description: "Original Character\nAnother bunny, why not."
+            description: "Original Character\nAnother bunny, why not.",
+            status: "finished",
+            date: "2021-09-29"
         },
         {
             type: "image",
             thumb: "drawings/thumb/Sprite-00060_thumb.png",
             highRes: "drawings/Sprite-00060.png",
             title: "Pixel art",
-            description: "Original Character \nMade in Aseprite. Really proud of the color choices"
+            description: "Original Character \nMade in Aseprite. Really proud of the color choices",
+            status: "finished",
+            date: "2019-09-29"
         },
         {
             type: "image",
             thumb: "sketches/thumb/New Drawing4_copia_thumb.jpg",
             highRes: "sketches/New Drawing4_copia.png",
             title: "Peace",
-            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).\nOriginal character."
+            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).\nOriginal character.",
+            status: "sketch",
+            date:"2025-07-28"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Main Room_1_thumb.jpg",
             highRes: "sketches/Main Room_1.jpg",
             title: "Thiccccck",
-            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).\nOriginal character."
+            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).\nOriginal character.",
+            status: "sketch",
+            date:"2025-08-04"
         },
         {
             type: "image",
             thumb: "sketches/thumb/Main Room_2_thumb.jpg",
             highRes: "sketches/Main Room_2.jpg",
             title: "Axel Ocelot",
-            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).\nOriginal character."
+            description: "Magma drawing made on Pilferpup Draws' stream (YouTube).\nOriginal character.",
+            status: "sketch",
+            date:"2025-08-03"
         },
         /*Roblox character */
         {
@@ -868,14 +1021,19 @@ const galleryData = {
             thumb: "drawings/thumb/634 sin título_thumb.jpg",
             highRes: "drawings/634 sin título.jpg",
             title: "Clown bunny",
-            description: "No description."
+            description: "No description.",
+            status: "sketch",
+            date: "2021-05-14"
+
         },
         {
             type: "image",
             thumb: "drawings/thumb/248 sin título_thumb.jpg",
             highRes: "drawings/248 sin título.jpg",
             title: "Bear girl",
-            description: "One of my first (digital) drawings."
+            description: "One of my first (digital) drawings.",
+            status: "finished",
+            date: "2019-05-14"
         }
     ],
 

@@ -35,6 +35,19 @@
     
     <main>
         <h2>SKETCHES & WIPs</h2>
+        
+        <!-- filetr.</p> -->
+        <div class="sort-container" id="gallery-sort-container" style="display: none;">
+            <label for="gallery-sort">Sort by:</label>
+            <select id="gallery-sort">
+                <option value="unsorted">Unsorted (Default)</option>
+                <option value="date-new">Date (Newest First)</option>
+                <option value="date-old">Date (Oldest First)</option>
+                <option value="status-finished">Finished to Sketch</option>
+                <option value="status-sketch">Sketch to Finished</option>
+            </select>
+        </div>
+        
         <div class="gallery">
             <!-- Dynamic Gallery Container -->
             <div class="gallery-grid" id="dynamic-gallery-container" data-category="sketches">

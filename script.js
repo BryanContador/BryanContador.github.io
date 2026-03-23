@@ -204,11 +204,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ==========================================================================
-    // GALLERY GENERATOR
+    // GALLERY GENERATOR & SORTING
     // ==========================================================================
 
-    function renderGallery() {
+    // Variables for Modal Logic (Centralized)
+    let isModalInitialized = false;
+    let galleryItems = [];
+    let currentImageIndex = 0;
+    let lastFocusedElement;
+    let currentSourceIndex = 0;
+    let isSwitching = false;
+
+    function renderGallery(sortType = 'unsorted') {
         const container = document.getElementById('dynamic-gallery-container');
+        const sortFabContainer = document.getElementById('sort-fab-container');
         
         // If no container found (e.g. index.html or about.html), exit
         if (!container) return; 
@@ -229,8 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        container.innerHTML = ''; // Clear existing content before rendering new items
+
         // --- LIST LAYOUT (Characters / Categories) ---
         if (layout === 'list') {
+            if (sortFabContainer) sortFabContainer.style.display = 'none'; 
             container.className = 'category-list-grid';
 
             items.forEach(item => {
@@ -273,9 +285,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
             // --- STANDARD GALLERY LAYOUT (Images / Fanart / Sketches) ---
+            if (sortFabContainer) sortFabContainer.style.display = 'block'; // <-- AÑADIDO: Muestra la burbuja en la galería
             container.className = 'gallery-grid';
 
-            items.forEach(item => {
+            // <-- AÑADIDO: Lógica de Ordenamiento -->
+            let itemsToRender = [...items];
+
+            if (sortType !== 'unsorted') {
+                // Eliminar separadores al ordenar para no romper el layout
+                itemsToRender = itemsToRender.filter(item => item.type === 'image');
+
+                itemsToRender.sort((a, b) => {
+                    if (sortType === 'date-new') {
+                        return new Date(b.date || '1970-01-01') - new Date(a.date || '1970-01-01');
+                    } else if (sortType === 'date-old') {
+                        return new Date(a.date || '1970-01-01') - new Date(b.date || '1970-01-01');
+                    } else if (sortType === 'status-finished') {
+                        let sA = a.status || 'finished';
+                        let sB = b.status || 'finished';
+                        if (sA === sB) return 0;
+                        return sA === 'finished' ? -1 : 1;
+                    } else if (sortType === 'status-sketch') {
+                        let sA = a.status || 'finished';
+                        let sB = b.status || 'finished';
+                        if (sA === sB) return 0;
+                        return sA === 'sketch' ? -1 : 1;
+                    }
+                    return 0;
+                });
+            }
+
+            itemsToRender.forEach(item => { //itemsToRender
                 if (item.type === 'separator') {
                     // Create separator
                     const separatorDiv = document.createElement('div');
@@ -315,6 +355,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render the gallery BEFORE initializing the modal
     renderGallery();
 
+    const sortFabBtn = document.getElementById('sort-fab-btn');
+    const sortPopup = document.getElementById('sort-popup');
+    const sortOptions = document.querySelectorAll('.sort-option');
+
+    if (sortFabBtn && sortPopup) {
+        // animation and toggle
+        sortFabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortPopup.classList.toggle('show');
+        });
+
+        //close the menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (sortPopup.classList.contains('show') && !sortPopup.contains(e.target)) {
+                sortPopup.classList.remove('show');
+            }
+        });
+
+        // Apply filter
+        sortOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                //update active state
+                sortOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                //close
+                sortPopup.classList.remove('show');
+                
+                // render with selected filter
+                const selectedSort = option.dataset.sort;
+                renderGallery(selectedSort);
+                initializeGalleryModal();
+            });
+        });
+    }
+
     // ==========================================================================
     // GALLERY MODAL FUNCTIONALITY (CENTRALIZED)
     // ==========================================================================
@@ -340,11 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Retrieve loader element (added in HTML update)
         const loader = document.getElementById('modal-loader');
 
-        const galleryItems = [];
-        let currentImageIndex = 0;
-        let lastFocusedElement;
-        let currentSourceIndex = 0;
-        let isSwitching = false;
+        galleryItems.length = 0; // Reset gallery items to avoid duplicates when re-initializing after sorting
 
         // Select ONLY the standard gallery images generated
         const galleryImageElements = document.querySelectorAll('.gallery-image');
@@ -513,181 +585,188 @@ document.addEventListener('DOMContentLoaded', () => {
             openModalAtIndex(prevIndex);
         }
 
-        closeModalBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) closeModal();
-        });
-        prevBtn.addEventListener('click', showPrevImage);
-        nextBtn.addEventListener('click', showNextImage);
-        
-        continueBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            if (galleryItems[currentImageIndex]) {
-                galleryItems[currentImageIndex].isRevealed = true;
-            }
-            modal.classList.remove('show-warning');
-            modalImg.classList.remove('blurred');
-            modalImgNext.classList.remove('blurred');
-        });
-
-        // --- Keyboard and focus (A11y Focus Trap) ---
-        const focusableElementsSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-        let focusableElements = [];
-        let firstFocusableElement, lastFocusableElement;
-
-        modal.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                closeModal();
-                return;
-            }
+        // Envolver todos los eventos de interacción en una validación para evitar duplicados al recargar el modal
+        if (!isModalInitialized) {
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) closeModal();
+            });
+            prevBtn.addEventListener('click', showPrevImage);
+            nextBtn.addEventListener('click', showNextImage);
             
-            if (modal.classList.contains('is-zoomed')) return;
+            continueBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                if (galleryItems[currentImageIndex]) {
+                    galleryItems[currentImageIndex].isRevealed = true;
+                }
+                modal.classList.remove('show-warning');
+                modalImg.classList.remove('blurred');
+                modalImgNext.classList.remove('blurred');
+            });
 
-            if (event.key === 'ArrowRight') showNextImage();
-            if (event.key === 'ArrowLeft') showPrevImage();
-            
-            // Focus Trap Logic
-            if (event.key === 'Tab') {
-                focusableElements = Array.from(modal.querySelectorAll(focusableElementsSelector)).filter(el => el.offsetParent !== null);
-                firstFocusableElement = focusableElements[0];
-                lastFocusableElement = focusableElements[focusableElements.length - 1];
+            // --- Keyboard and focus (A11y Focus Trap) ---
+            const focusableElementsSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+            let focusableElements = [];
+            let firstFocusableElement, lastFocusableElement;
 
-                if (event.shiftKey) { // Shift + Tab
-                    if (document.activeElement === firstFocusableElement) {
-                        lastFocusableElement.focus();
-                        event.preventDefault();
-                    }
-                } else { // Tab
-                    if (document.activeElement === lastFocusableElement) {
-                        firstFocusableElement.focus();
-                        event.preventDefault();
+            modal.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    closeModal();
+                    return;
+                }
+                
+                if (modal.classList.contains('is-zoomed')) return;
+
+                if (event.key === 'ArrowRight') showNextImage();
+                if (event.key === 'ArrowLeft') showPrevImage();
+                
+                // Focus Trap Logic
+                if (event.key === 'Tab') {
+                    focusableElements = Array.from(modal.querySelectorAll(focusableElementsSelector)).filter(el => el.offsetParent !== null);
+                    firstFocusableElement = focusableElements[0];
+                    lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+                    if (event.shiftKey) { // Shift + Tab
+                        if (document.activeElement === firstFocusableElement) {
+                            lastFocusableElement.focus();
+                            event.preventDefault();
+                        }
+                    } else { // Tab
+                        if (document.activeElement === lastFocusableElement) {
+                            firstFocusableElement.focus();
+                            event.preventDefault();
+                        }
                     }
                 }
-            }
-        });
-        
-        // --- Zoom & Swipe logic ---
-        // REMOVED: Gave a lot of trouble on mobile while trying to swipe. Just deteled them for simplicity lol
-        /*  
-        let touchStartX = 0;
-        modal.addEventListener('touchstart', (event) => {
-            if (imageContainer.classList.contains('zoomed')) return;
-            touchStartX = event.changedTouches[0].screenX;
-        }, { passive: true });
-
-        modal.addEventListener('touchend', (event) => {
-            if (imageContainer.classList.contains('zoomed')) return;
-            const touchEndX = event.changedTouches[0].screenX;
-            const swipeThreshold = 50;
-            if (touchEndX < touchStartX - swipeThreshold) showNextImage();
-            if (touchEndX > touchStartX + swipeThreshold) showPrevImage();
-        });
-        */
-
-        imageContainer.addEventListener('click', function(event) {
-            // Disable zoom on small screens
-            if (window.innerWidth <= 768) return; 
-
-            if (modal.classList.contains('show-warning')) return;
-            event.stopPropagation();
-            this.classList.toggle('zoomed');
-            modal.classList.toggle('is-zoomed');
-            if (!this.classList.contains('zoomed')) {
-                modalImg.style.transformOrigin = 'center center';
-                modalImgNext.style.transformOrigin = 'center center';
-            }
-        });
-
-        imageContainer.addEventListener('mousemove', function(event) {
-            if (this.classList.contains('zoomed')) {
-                const rect = this.getBoundingClientRect();
-                const x = ((event.clientX - rect.left) / rect.width) * 100;
-                const y = ((event.clientY - rect.top) / rect.height) * 100;
-                modalImg.style.transformOrigin = `${x}% ${y}%`;
-                modalImgNext.style.transformOrigin = `${x}% ${y}%`;
-            }
-        });
-
-        imageContainer.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('zoomed')) {
-                modalImg.style.transformOrigin = 'center center';
-                modalImgNext.style.transformOrigin = 'center center';
-            }
-        });
-        
-        // --- button alternative logic ---
-        altBtn.addEventListener('click', () => {
-            if (isSwitching) {
-                altBtn.textContent = 'PLEASE WAIT';
-                return;
-            }
-
-            const item = galleryItems[currentImageIndex];
-            if (item.sources.length <= 1) return;
-
-            isSwitching = true; // Block new clics
-            altBtn.disabled = true; // Disable clicks
-            altBtn.textContent = 'PLEASE WAIT'; // Show wait message
-
-            let currentImg = document.getElementById('modal-img');
-            let nextImg = document.getElementById('modal-img-next');
-
-            currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+            });
             
-            const originalBtnText = currentSourceIndex === item.sources.length - 1 ? 'View Original' :
-                                    currentSourceIndex === 0 ? 'View Alternative' :
-                                    `View Alternative ${currentSourceIndex + 1}`;
-            const tempImg = new Image();
-            tempImg.src = item.sources[currentSourceIndex];
+            // --- Zoom & Swipe logic ---
+            // REMOVED: Gave a lot of trouble on mobile while trying to swipe. Just deteled them for simplicity lol
+            /*  
+            let touchStartX = 0;
+            modal.addEventListener('touchstart', (event) => {
+                if (imageContainer.classList.contains('zoomed')) return;
+                touchStartX = event.changedTouches[0].screenX;
+            }, { passive: true });
 
-            tempImg.onload = () => {
-                nextImg.src = item.sources[currentSourceIndex];
+            modal.addEventListener('touchend', (event) => {
+                if (imageContainer.classList.contains('zoomed')) return;
+                const touchEndX = event.changedTouches[0].screenX;
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold) showNextImage();
+                if (touchEndX > touchStartX + swipeThreshold) showPrevImage();
+            });
+            */
 
-                // fadding 
-                nextImg.alt = currentImg.alt;
+            imageContainer.addEventListener('click', function(event) {
+                // Disable zoom on small screens
+                if (window.innerWidth <= 768) return; 
 
-                // Preload next alternative image if available
-                const nextAltIndex = (currentSourceIndex + 1) % item.sources.length;
-                if (item.sources[nextAltIndex]) {
-                    const preloadNextAlt = new Image();
-                    preloadNextAlt.src = item.sources[nextAltIndex];
+                if (modal.classList.contains('show-warning')) return;
+                event.stopPropagation();
+                this.classList.toggle('zoomed');
+                modal.classList.toggle('is-zoomed');
+                if (!this.classList.contains('zoomed')) {
+                    modalImg.style.transformOrigin = 'center center';
+                    modalImgNext.style.transformOrigin = 'center center';
+                }
+            });
+
+            imageContainer.addEventListener('mousemove', function(event) {
+                if (this.classList.contains('zoomed')) {
+                    const rect = this.getBoundingClientRect();
+                    const x = ((event.clientX - rect.left) / rect.width) * 100;
+                    const y = ((event.clientY - rect.top) / rect.height) * 100;
+                    modalImg.style.transformOrigin = `${x}% ${y}%`;
+                    modalImgNext.style.transformOrigin = `${x}% ${y}%`;
+                }
+            });
+
+            imageContainer.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('zoomed')) {
+                    modalImg.style.transformOrigin = 'center center';
+                    modalImgNext.style.transformOrigin = 'center center';
+                }
+            });
+            
+            // --- button alternative logic ---
+            altBtn.addEventListener('click', () => {
+                if (isSwitching) {
+                    altBtn.textContent = 'PLEASE WAIT';
+                    return;
                 }
 
-                currentImg.classList.add('is-fading');
-                nextImg.classList.add('is-fading');
+                const item = galleryItems[currentImageIndex];
+                if (item.sources.length <= 1) return;
 
-                nextImg.addEventListener('transitionend', () => {
-                    currentImg.style.transition = 'none';
-                    nextImg.style.transition = 'none';
-                    currentImg.src = nextImg.src;
-                    currentImg.alt = nextImg.alt;
+                isSwitching = true; // Block new clics
+                altBtn.disabled = true; // Disable clicks
+                altBtn.textContent = 'PLEASE WAIT'; // Show wait message
 
-                    currentImg.style.opacity = '1';
-                    nextImg.style.opacity = '0';
-                    currentImg.classList.remove('is-fading');
-                    nextImg.classList.remove('is-fading');
-                    nextImg.src = '';
+                let currentImg = document.getElementById('modal-img');
+                let nextImg = document.getElementById('modal-img-next');
 
-                    // restore transitions
-                    setTimeout(() => {
-                        currentImg.style.transition = '';
-                        nextImg.style.transition = '';
-                        currentImg.style.opacity = '';
-                        nextImg.style.opacity = '';
+                currentSourceIndex = (currentSourceIndex + 1) % item.sources.length;
+                
+                const originalBtnText = currentSourceIndex === item.sources.length - 1 ? 'View Original' :
+                                        currentSourceIndex === 0 ? 'View Alternative' :
+                                        `View Alternative ${currentSourceIndex + 1}`;
+                const tempImg = new Image();
+                tempImg.src = item.sources[currentSourceIndex];
 
+                tempImg.onload = () => {
+                    nextImg.src = item.sources[currentSourceIndex];
+
+                    // fadding 
+                    nextImg.alt = currentImg.alt;
+
+                    // Preload next alternative image if available
+                    const nextAltIndex = (currentSourceIndex + 1) % item.sources.length;
+                    if (item.sources[nextAltIndex]) {
+                        const preloadNextAlt = new Image();
+                        preloadNextAlt.src = item.sources[nextAltIndex];
+                    }
+
+                    currentImg.classList.add('is-fading');
+                    nextImg.classList.add('is-fading');
+
+                    nextImg.addEventListener('transitionend', () => {
+                        currentImg.style.transition = 'none';
+                        nextImg.style.transition = 'none';
+                        currentImg.src = nextImg.src;
+                        currentImg.alt = nextImg.alt;
+
+                        currentImg.style.opacity = '1';
+                        nextImg.style.opacity = '0';
+                        currentImg.classList.remove('is-fading');
+                        nextImg.classList.remove('is-fading');
+                        nextImg.src = '';
+
+                        // restore transitions
                         setTimeout(() => {
-                            isSwitching = false;
-                            altBtn.disabled = false;
-                            altBtn.textContent = originalBtnText; // Restore original button text
-                        }, 500); // Delay
-                    }, 0);
-                }, { once: true });
-            };
-        });
+                            currentImg.style.transition = '';
+                            nextImg.style.transition = '';
+                            currentImg.style.opacity = '';
+                            nextImg.style.opacity = '';
+
+                            setTimeout(() => {
+                                isSwitching = false;
+                                altBtn.disabled = false;
+                                altBtn.textContent = originalBtnText; // Restore original button text
+                            }, 500); // Delay
+                        }, 0);
+                    }, { once: true });
+                };
+            });
+
+            isModalInitialized = true; // <--Declarar modal como inicializado para no duplicar eventos
+        }
     }
     initializeGalleryModal();
 
-    //--- User String logic ---    
+    // ==========================================================================
+    // User String logic
+    // ==========================================================================
     const secretInput = document.getElementById('secret-input');
 
     const SECRET_DESTINATIONS = {
