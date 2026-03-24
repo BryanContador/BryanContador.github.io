@@ -83,6 +83,7 @@ const galleryData = {
             type: "image",
             thumb: "fanart/thumb/HIM_thumb.jpg",
             highRes: "fanart/HIM.jpg",
+            altSources: ["sketches/Sin título_5_scaled.png", "sketches/idk._2png_scaled_4x_pngcrushed.png"],
             title: "El Rudy",
             description: "Inspired by the early 2000's aesthetic and reinforced by Lucy Bedroque's song Hot Boy.\nFeaturing Rudy3rASMR on YouTube.\nyoutube.com/@Rud3yASMR"
         },
@@ -571,6 +572,16 @@ const galleryData = {
             date: "2025-05-29",
             status: "finished"
         },
+        {/////CAMBIAR TODO ALV CUANDO ESTÉ TERMINADO
+            type:"image",
+            thumb: "sketches/jamol/wip_refsheet.jpg",
+            highRes: "sketches/jamol/wip_refsheet.jpg",
+            title: "Ref Sheet WIP for Jamol",
+            description: "Been wanting to get her done for a while.",
+            date: "2026-03-24", ////CAMBIAR
+            status: "sketch"  /////CAMBIAR CUANDO ESTE TERMINADO
+
+        },
         {
             type: "image",
             thumb: "drawings/thumb/smoke_it_away_thumb.jpg",
@@ -869,6 +880,7 @@ const galleryData = {
             title: "No title",
             description: "No description",
             status: "sketch",
+            date: "2023-06-16"
         },
         {
             type: "image",
@@ -877,6 +889,7 @@ const galleryData = {
             title: "No title",
             description: "No description",
             status: "sketch",
+            date: "2022-01-01"
         },
         {
             type: "image",
@@ -884,7 +897,8 @@ const galleryData = {
             highRes: "sketches/demon/670 sin título (1).jpg",
             title: "No title",
             description: "Not planning on finishing this one.\nFrom 2019-2020. First formal drawing of the demon girl.",
-            status: "sketch"
+            status: "sketch",
+            date: "2019-01-01"
         }
     ],
 
