@@ -526,6 +526,13 @@ footer p {
     padding: 0 20px;
 }
 
+.copyright-text {
+    font-style: normal !important;
+    font-family: 'Patrick Hand', sans-serif;
+    font-size: 0.95rem !important;
+    opacity: 0.7;
+}
+
 .logo-footer,
 .index-logo-container {
     text-align: center;
