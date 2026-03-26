@@ -161,6 +161,7 @@ const galleryData = {
             type: "image",
             thumb: "fanart/thumb/176 sin título_20240704015305_thumb.jpg",
             highRes: "fanart/176 sin título_20240704015305.jpg",
+            altSources:["fanart/sketches/176 sin título_20240702142444.jpg"],
             title: "Lullaby",
             description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons"
         },
@@ -251,9 +252,9 @@ const galleryData = {
             type: "category",
             id: "jamol",
             name: "Jamol",
-            thumb: "drawings/thumb/1739986621233_thumb.png",
+            thumb: "drawings/thumb/1739986621233_thumb.jpg",
             
-            profileImage: "drawings/jamol/1739986621233.png",
+            profileImage: "drawings/jamol/1739986621233.jpg",
             galleryKey: "jamol_art",
             bio: "Species: Tehuantepec jackrabbit\nAge: Early twenties (unspecified)\n\n\"Maybe this suffering is what I deserve. Otherwise, why would God let me live through this pain?\"",
             lore:"Born in Mexico, she crossed north to live on the fringes of the US border at age 19, following her mother's death. She was left to care for the plantation her father and brother left behind.A legacy she never wanted. She has no real interest in the rancher life, but this is no ordinary plantation. While legitimate crops grow on the outside, in the heart of the land, illegal plants are grown and sold. Not by her hand, but by the people running the borders.\nDreaming of a better life, she tries to stay in the city for as long as she can, returning only when the cartel calls to make new deals. She has her hands tied. Nowhere to run. Nowhere to scream for help.\nWhen treating with the cartels, she uses her brother's name, Iván, donning a turban to keep her identity a secret. But words spread fast. In a game of telephone, locals referred to her as 'el tal Iván' (that Ivan guy). Misinterpretations twisted this into a more infamous name: 'The Taliban.'\nHer existence is suffering. Every day she wakes up to face the harsh reality of the border. Her only hope is to surrender herself to the feds and live the rest of her life behind bars. But for her, this is not an option. Not for now.\n\nI created this character as a vessel for my depression during a time when life felt relentless. She became my primary outlet. A way to externalize the pain when things were beating me down without stop. Many of my drawings reflect that suffering. Because she helped me carry that weight, she holds a special place in my heart, just like many of my other characters.",
@@ -303,6 +304,7 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/124_sin_titulo_Restaurado_20230902020738_thumb.png",
             highRes: "drawings/sunshine/124_sin_titulo_Restaurado_20230902020738.jpg",
+            altSources:["drawings/sunshine/124 sin título_Restaurado_20230902020733.jpg","sketches/sunshine/124 sin título_Restaurado.jpg","sketches/sunshine/124 sin título_Restaurado_20230505011546.jpg"],
             title: "Pose",
             description: "The Sunshine in my life.\nInspired on a piece of an artist i can't remember. The style of them was a big inspiration for this drawing.",
             status: "finished",
@@ -332,6 +334,7 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/171 sin título_20240403052546_thumb.jpg",
             highRes: "drawings/sunshine/171 sin título_20240403052546.jpg",
+            altSources:["sketches/sunshine/171 sin título_20240217195420.jpg"],
             title: "Monja",
             description: "Original Character \nMy part of a collaborative drawing.",
             date: "2024-04-03",
@@ -346,6 +349,33 @@ const galleryData = {
             description:"Playing with light and shadow.",
             status: "finished",
             date:"2022-05-06"
+        },
+        {
+            type: "image",
+            thumb: "drawings/thumb/400 sin título_thumb.jpg",
+            highRes: "drawings/sunshine/400 sin título.jpg",
+            title: "bust",
+            description: "Oooold drawing, she seems to be taller and slimer than what she looks like today.",
+            date: "2003-01-04",
+            status: "finished"
+        },
+        {
+            type: "image",
+            thumb: "drawings/thumb/503 sin título_thumb.jpg",
+            highRes: "drawings/sunshine/503 sin título.jpg",
+            title: "200 followers",
+            description: "I do not remember who's character Shunshine is posing with, but it was a person i used to interact on my long unsued Instagram account.",
+            date: "2003-01-03",
+            status: "finished"
+        },
+        {
+            type: "image",
+            thumb: "drawings/sunshine/576 sin título.png",
+            highRes: "drawings/sunshine/576 sin título.png",
+            title: "Da Baby less gooo",
+            description: "Don't remember when i this this drawing, but its was then Da Baby was an internet meme xD",
+            date: "2003-01-02",
+            status: "finished"
         },
         {
             type: "image",
@@ -475,8 +505,8 @@ const galleryData = {
     jamol_art: [
         {
             type: "image",
-            thumb: "drawings/thumb/1739986621233_thumb.png",
-            highRes: "drawings/jamol/1739986621233.png",
+            thumb: "drawings/thumb/1739986621233_thumb.jpg",
+            highRes: "drawings/jamol/1739986621233.jpg",
             altSources: ["drawings/jamol/1739986621233_alternative.jpg", "sketches/jamol/121 sin título_Restaurado_20230330203722.jpg"],
             title: "Buyer's remorse",
             description: "No description",
@@ -487,9 +517,9 @@ const galleryData = {
         },
         {
             type: "image",
-            thumb: "drawings/thumb/1739986554241_thumb.png",
-            highRes: "drawings/jamol/1739986554241.png",
-            altSources:["drawings/jamol/156 sin título_20231108100300.jpg"],
+            thumb: "drawings/thumb/1739986554241_thumb.jpg",
+            highRes: "drawings/jamol/1739986554241.jpg",
+            altSources:["drawings/jamol/156 sin título_20231108100300.jpg","sketches/jamol/156 sin título_20231101173751.jpg"],
             title: "Appreciation",
             description: "No description",
             date: "2023-11-15",
@@ -499,6 +529,7 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/1739986719411_thumb.jpg",
             highRes: "drawings/jamol/1739986719411.jpg",
+            altSources:["sketches/jamol/170 sin título_20240613110055.jpg","sketches/jamol/170 sin título_20240621114532.jpg","sketches/jamol/170 sin título.jpg"],
             title: "Guerrero",
             description: "My part of a collaborative drawing",
             date: "2024-06-28",
@@ -507,7 +538,7 @@ const galleryData = {
         {
             type: "image",
             thumb: "drawings/thumb/30 sin título3_20230104112037_thumb.jpg",
-            highRes: "drawings/jamol/30 sin título3_20230104112037.png",
+            highRes: "drawings/jamol/30 sin título3_20230104112037.jpg",
             altSources: ["drawings/jamol/30 sin título3_20230104112037_alternative_1.jpg", "drawings/jamol/30 sin título3_20230104112037_alternative_2.jpg","sketches/jamol/30 sin título2_20230102134339.jpg"],
             title: "Still standing",
             description: "Piece inspired by the iconography of martyrs and saints. \nA literal hole where her heart once was.",
@@ -529,7 +560,7 @@ const galleryData = {
         {
             type: "image",
             thumb: "drawings/thumb/1739986680341_thumb.jpg",
-            highRes: "drawings/jamol/1739986680341.png",
+            highRes: "drawings/jamol/1739986680341.jpg",
             title: "No Title",
             description: "No description.",
             date: "2023-02-07",
@@ -581,6 +612,15 @@ const galleryData = {
             date: "2026-03-24", ////CAMBIAR
             status: "sketch"  /////CAMBIAR CUANDO ESTE TERMINADO
 
+        },
+        {
+            type: "image",
+            thumb: "sketches/jamol/37 sin título_20220831210237.jpg",
+            highRes: "sketches/jamol/37 sin título_20220831210237.jpg",
+            title: "A lil smoke",
+            description: "2022-08-31",
+            date:"2022-08-31",
+            status: "sketch"
         },
         {
             type: "image",
@@ -857,7 +897,7 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/1685216510247_thumb.jpg",
             highRes: "drawings/demon/1685216510247.jpg",
-            altSources:["sketches/demon/127 sin título_20230512041503.jpg"],
+            altSources:["sketches/demon/127 sin título_20230512041503.jpg", "sketches/demon/127 sin título_20230513111651.jpg"],
             title: "Demon Girl",
             description: "No description.",
             date: "2023-05-20",
@@ -966,6 +1006,15 @@ const galleryData = {
             title: "No title",
             description: "No description"
         },*/
+        {
+            type: "image",
+            thumb: "sketches/thumb/84 sin título_thumb.jpg",
+            highRes: "sketches/84 sin título.jpg",
+            title: "Janet",
+            description: "Damn i really need to draw Janet more often fr\n2022-11-09",
+            status: "sketch",
+            date: "2022-11-09"
+        },
         {
             type: "image",
             thumb: "sketches/thumb/Imagen_(15)_thumb.jpg",
