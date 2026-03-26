@@ -599,6 +599,32 @@ footer p {
     text-align: center;
 }
 
+.last-commit-box {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 20px auto 0 auto;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1rem;
+    width: fit-content;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.4;
+}
+
+.last-commit-box a {
+    color: var(--bg-color);
+    text-decoration: underline;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+.last-commit-box a:hover {
+    opacity: 0.7;
+}
+
 /* Social Links Styles */
 .social-links {
     margin-top: 40px;

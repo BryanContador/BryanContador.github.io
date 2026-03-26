@@ -67,6 +67,10 @@
                 
                 <div class="repo-info">
                     <p class="about-text">Want to see what's under the hood? See the repo <a href="https://github.com/BryanContador/BryanContador.github.io" target="_blank" class="underline-link repo-link">HERE</a></p>
+                    <!-- Last commit container -->
+                    <div class="last-commit-box" id="last-commit">
+                        Fetching last commit...
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,6 +82,37 @@
         <p>"Everything in this life is impossible until someone comes and does it."</p>
     </footer>
     -->
+    
+    <script>
+        // Fetch the last commit from public GitHub API
+        document.addEventListener("DOMContentLoaded", function() {
+            const username = 'BryanContador';
+            const repo = 'BryanContador.github.io';
+            
+            const branch = 'main'; 
+
+            fetch(`https://api.github.com/repos/${username}/${repo}/commits/${branch}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Branch not found or API limit reached");
+                    return response.json();
+                })
+                .then(data => {
+                    const commitDate = new Date(data.commit.author.date).toLocaleDateString();
+                    const commitMessage = data.commit.message;
+                    const commitUrl = data.html_url;
+                    const commitHash = data.sha.substring(0, 7);
+
+                    document.getElementById('last-commit').innerHTML = `
+                        Last commit (<a href="${commitUrl}" target="_blank" class="underline-link">${commitHash}</a>): 
+                        "${commitMessage}" on ${commitDate}
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching last commit:', error);
+                    document.getElementById('last-commit').innerHTML = 'Latest update data currently unavailable.';
+                });
+        });
+    </script>
     
     <script src="data.js"></script>
     <script src="script.js"></script>
