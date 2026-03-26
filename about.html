@@ -103,8 +103,9 @@
                     const commitHash = data.sha.substring(0, 7);
 
                     document.getElementById('last-commit').innerHTML = `
-                        Last commit (<a href="${commitUrl}" target="_blank" class="underline-link">${commitHash}</a>): 
-                        "${commitMessage}" on ${commitDate}
+                        Last commit (<a href="${commitUrl}" target="_blank">${commitHash}</a>):
+                        <br>"${commitMessage}"<br>
+                        <span style="font-size: 0.85em; opacity: 0.8;">on ${commitDate}</span>
                     `;
                 })
                 .catch(error => {
