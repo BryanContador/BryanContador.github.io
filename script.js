@@ -204,8 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ==========================================================================
-    // GALLERY GENERATOR & SORTING
+    // GALLERY GENERATOR & SORTING / FILTERING
     // ==========================================================================
+
+    // State trackers for Sort and Filter
+    let currentSortType = 'unsorted';
+    let currentFilterType = 'all';
 
     // Variables for Modal Logic (Centralized)
     let isModalInitialized = false;
@@ -215,9 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSourceIndex = 0;
     let isSwitching = false;
 
-    function renderGallery(sortType = 'unsorted') {
+    function renderGallery() {
         const container = document.getElementById('dynamic-gallery-container');
-        const sortFabContainer = document.getElementById('sort-fab-container');
+        const actionFabsWrapper = document.getElementById('action-fabs-wrapper');
         
         // If no container found (e.g. index.html or about.html), exit
         if (!container) return; 
@@ -242,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- LIST LAYOUT (Characters / Categories) ---
         if (layout === 'list') {
-            if (sortFabContainer) sortFabContainer.style.display = 'none'; 
+            if (actionFabsWrapper) actionFabsWrapper.style.display = 'none'; 
             container.className = 'category-list-grid';
 
             items.forEach(item => {
@@ -285,27 +289,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
             // --- STANDARD GALLERY LAYOUT (Images / Fanart / Sketches) ---
-            if (sortFabContainer) sortFabContainer.style.display = 'block'; // <-- AÑADIDO: Muestra la burbuja en la galería
+            if (actionFabsWrapper) actionFabsWrapper.style.display = 'flex'; // Stack the FABs
             container.className = 'gallery-grid';
 
-            // <-- AÑADIDO: Lógica de Ordenamiento -->
             let itemsToRender = [...items];
 
-            if (sortType !== 'unsorted') {
-                // Eliminar separadores al ordenar para no romper el layout
+            // --- 1. APPLY FILTERING (Eye Icon) ---
+            if (currentFilterType !== 'all') {
+                // If filtering, remove separators first so they don't break layout
+                itemsToRender = itemsToRender.filter(item => item.type === 'image');
+                
+                itemsToRender = itemsToRender.filter(item => {
+                    let status = item.status || 'finished'; // Default to finished
+                    return status === currentFilterType;
+                });
+            }
+
+            // --- 2. APPLY SORTING ---
+            if (currentSortType !== 'unsorted') {
+                // Remove separators to prevent layout breakage
                 itemsToRender = itemsToRender.filter(item => item.type === 'image');
 
                 itemsToRender.sort((a, b) => {
-                    if (sortType === 'date-new') {
+                    if (currentSortType === 'date-new') {
                         return new Date(b.date || '1970-01-01') - new Date(a.date || '1970-01-01');
-                    } else if (sortType === 'date-old') {
+                    } else if (currentSortType === 'date-old') {
                         return new Date(a.date || '1970-01-01') - new Date(b.date || '1970-01-01');
-                    } else if (sortType === 'status-finished') {
+                    } else if (currentSortType === 'status-finished') {
                         let sA = a.status || 'finished';
                         let sB = b.status || 'finished';
                         if (sA === sB) return 0;
                         return sA === 'finished' ? -1 : 1;
-                    } else if (sortType === 'status-sketch') {
+                    } else if (currentSortType === 'status-sketch') {
                         let sA = a.status || 'finished';
                         let sB = b.status || 'finished';
                         if (sA === sB) return 0;
@@ -315,7 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            itemsToRender.forEach(item => { //itemsToRender
+            // Render the items
+            itemsToRender.forEach(item => {
                 if (item.type === 'separator') {
                     // Create separator
                     const separatorDiv = document.createElement('div');
@@ -355,41 +371,78 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render the gallery BEFORE initializing the modal
     renderGallery();
 
+    // -----------------------------------------------------------
+    // FAB Popup Toggle Logic (Sort and Filter)
+    // -----------------------------------------------------------
+    const filterFabBtn = document.getElementById('filter-fab-btn');
+    const filterPopup = document.getElementById('filter-popup');
     const sortFabBtn = document.getElementById('sort-fab-btn');
     const sortPopup = document.getElementById('sort-popup');
-    const sortOptions = document.querySelectorAll('.sort-option');
 
-    if (sortFabBtn && sortPopup) {
-        // animation and toggle
-        sortFabBtn.addEventListener('click', (e) => {
+    // Helper to toggle a specific popup and close others
+    function togglePopup(targetPopup) {
+        if (targetPopup.classList.contains('show')) {
+            targetPopup.classList.remove('show');
+        } else {
+            // Close all popups first
+            if (filterPopup) filterPopup.classList.remove('show');
+            if (sortPopup) sortPopup.classList.remove('show');
+            // Open the target one
+            targetPopup.classList.add('show');
+        }
+    }
+
+    if (filterFabBtn && filterPopup) {
+        filterFabBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            sortPopup.classList.toggle('show');
-        });
-
-        //close the menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (sortPopup.classList.contains('show') && !sortPopup.contains(e.target)) {
-                sortPopup.classList.remove('show');
-            }
-        });
-
-        // Apply filter
-        sortOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                //update active state
-                sortOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-                
-                //close
-                sortPopup.classList.remove('show');
-                
-                // render with selected filter
-                const selectedSort = option.dataset.sort;
-                renderGallery(selectedSort);
-                initializeGalleryModal();
-            });
+            togglePopup(filterPopup);
         });
     }
+
+    if (sortFabBtn && sortPopup) {
+        sortFabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePopup(sortPopup);
+        });
+    }
+
+    // Close any open popups when clicking outside
+    document.addEventListener('click', (e) => {
+        if (filterPopup && filterPopup.classList.contains('show') && !filterPopup.contains(e.target)) {
+            filterPopup.classList.remove('show');
+        }
+        if (sortPopup && sortPopup.classList.contains('show') && !sortPopup.contains(e.target)) {
+            sortPopup.classList.remove('show');
+        }
+    });
+
+    // Handle Filter Options Click
+    const filterOptions = document.querySelectorAll('#filter-popup .fab-option');
+    filterOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            filterOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            filterPopup.classList.remove('show');
+            
+            currentFilterType = option.dataset.filter;
+            renderGallery();
+            initializeGalleryModal();
+        });
+    });
+
+    // Handle Sort Options Click
+    const sortOptions = document.querySelectorAll('#sort-popup .fab-option');
+    sortOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            sortOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            sortPopup.classList.remove('show');
+            
+            currentSortType = option.dataset.sort;
+            renderGallery();
+            initializeGalleryModal();
+        });
+    });
 
     // ==========================================================================
     // GALLERY MODAL FUNCTIONALITY (CENTRALIZED)

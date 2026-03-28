@@ -38,23 +38,43 @@
 
     <main class="profile-page">
 
-        <!-- filetr.</p> -->
-        <div id="sort-fab-container" style="display: none;">
-            <div class="sort-popup" id="sort-popup">
-                <button class="sort-option active" data-sort="unsorted">Unsorted (Default)</button>
-                <button class="sort-option" data-sort="date-new">New to Old</button>
-                <button class="sort-option" data-sort="date-old">Old to New</button>
-                <button class="sort-option" data-sort="status-finished">Finished First</button>
-                <button class="sort-option" data-sort="status-sketch">Sketch First</button>
+        <!-- Actions FABs Container -->
+        <div id="action-fabs-wrapper" style="display: none;">
+            
+            <!-- Filter FAB -->
+            <div class="fab-container" id="filter-fab-container">
+                <div class="fab-popup" id="filter-popup">
+                    <button class="fab-option active" data-filter="all">All</button>
+                    <button class="fab-option" data-filter="finished">Finished Only</button>
+                    <button class="fab-option" data-filter="sketch">Sketches Only</button>
+                </div>
+                <button id="filter-fab-btn" class="fab-btn" aria-label="Filter images">
+                    <!-- Eye Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
             </div>
-            <button id="sort-fab-btn" class="sort-fab" aria-label="Sort images">
-                <!-- Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="4" y1="6" x2="20" y2="6"></line>
-                    <line x1="4" y1="12" x2="14" y2="12"></line>
-                    <line x1="4" y1="18" x2="8" y2="18"></line>
-                </svg>
-            </button>
+
+            <!-- Sort FAB -->
+            <div class="fab-container" id="sort-fab-container">
+                <div class="fab-popup" id="sort-popup">
+                    <button class="fab-option active" data-sort="unsorted">Unsorted (Default)</button>
+                    <button class="fab-option" data-sort="date-new">New to Old</button>
+                    <button class="fab-option" data-sort="date-old">Old to New</button>
+                    <button class="fab-option" data-sort="status-finished">Finished First</button>
+                    <button class="fab-option" data-sort="status-sketch">Sketch First</button>
+                </div>
+                <button id="sort-fab-btn" class="fab-btn" aria-label="Sort images">
+                    <!-- Sort Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="12" x2="14" y2="12"></line>
+                        <line x1="4" y1="18" x2="8" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <div class="profile-header">

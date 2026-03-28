@@ -655,7 +655,8 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen_(9).jpg",
             title: "No title",
             description: "No description",
-            sensitive: true
+            sensitive: true,
+            status:"sketch"
 
         },
         {
