@@ -176,7 +176,7 @@ const galleryData = {
             type: "image",
             thumb: "fanart/thumb/47_sin_titulo_20230710011059_thumb.png",
             highRes: "fanart/47_sin_titulo_20230710011059.jpg",
-            altSources: ["fanart/sketches/47 sin título_20230706231130.jpg"],
+            altSources: ["fanart/sketches/47 sin título_20230706231130.jpg","fanart/sketches/47 sin título_20220710005425.jpg"],
             title: "Lillybee",
             description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons",
             date: "2023-07-10",
@@ -324,8 +324,8 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/45 sin título_20220813183603_thumb.jpg",
             highRes: "drawings/sunshine/45 sin título_20220813183603.jpg",
-            altSources: ["drawings/sunshine/45 sin título_20220817123912.jpg"],
-            title: "No Title",
+            altSources: ["sketches/sunshine/45 sin título_20220813135919.jpg","drawings/sunshine/45 sin título_20220817123912.jpg"],
+            title: "Ranchera",
             description: "Original Character\nNo description.",
             status: "finished",
             date: "2022-08-13"
@@ -342,6 +342,16 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "drawings/thumb/43 sin título_20220710191245_thumb.jpg",
+            highRes: "drawings/sunshine/46 sin título_20220710173007.jpg",
+            altSources: ["drawings/sunshine/46 sin título_20220710153833.jpg","drawings/sunshine/60 sin título_20220903125918.jpg"],
+            title: "Sunshine ref sheet",
+            description:"Very early ref sheet of shunshine\nbig ahh ears",
+            status: "finished",
+            date:"2022-07-10"
+        },
+        {
+            type: "image",
             thumb: "drawings/thumb/sun_sense_thumb.jpg",
             highRes: "drawings/sunshine/sun_sense.jpg",
             altSources: ["drawings/sunshine/13 sin título_20220506000300.jpg"],
@@ -349,6 +359,15 @@ const galleryData = {
             description:"Playing with light and shadow.",
             status: "finished",
             date:"2022-05-06"
+        },
+        {
+            type: "image",
+            thumb: "drawings/thumb/415 sin título_thumb.jpg",
+            highRes: "drawings/sunshine/415 sin título.jpg",
+            title: "sleep demons",
+            description: "Can't recall why or the porpose of this drawing being totally honest.",
+            date: "2003-01-04",
+            status: "finished"
         },
         {
             type: "image",
@@ -1038,6 +1057,7 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/766 sin título_20210929084302_thumb.jpg",
             highRes: "drawings/766 sin título_20210929084302.jpg",
+            altSources:["drawings/766 sin título_20210921092525.jpg"],
             title: "No title",
             description: "Original Character\nAnother bunny, why not.",
             status: "finished",
