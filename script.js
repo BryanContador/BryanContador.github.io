@@ -445,6 +445,113 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================================
+    // GRID CYCLE FUNCTIONALITY & TOAST NOTIFICATION
+    // ==========================================================================
+    const gridFabBtn = document.getElementById('grid-fab-btn');
+    const toastNotification = document.getElementById('toast-notification');
+    const toastMessage = document.getElementById('toast-message');
+    const toastClose = document.getElementById('toast-close');
+    const dynamicGalleryContainer = document.getElementById('dynamic-gallery-container');
+    
+    // States: 0 = Default (auto/~3), 1 = Large (2 per row), 2 = Small (6 per row)
+    const gridStates = ['default', '2', '6'];
+    const gridMessages = [
+        'Grid View: OG', //Grid View: Default (Medium)',
+        'Grid View: Large', //'Grid View: Large (2 per row)',
+        'Grid View: Small'//'Grid View: Small (6 per row)'
+    ];
+    
+    let currentGridStateIndex = 0;
+    let toastTimer = null;
+
+    // Apply saved layout on load
+    if (dynamicGalleryContainer && gridFabBtn) {
+        const savedGridState = localStorage.getItem('galleryGridState');
+        if (savedGridState !== null) {
+            currentGridStateIndex = parseInt(savedGridState, 10);
+            applyGridClasses(currentGridStateIndex);
+        }
+
+        gridFabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Cycle to next state
+            currentGridStateIndex = (currentGridStateIndex + 1) % gridStates.length;
+            
+            // Save to localStorage
+            localStorage.setItem('galleryGridState', currentGridStateIndex);
+            
+            // Apply CSS
+            applyGridClasses(currentGridStateIndex);
+            
+            // Show Notification
+            showToast(gridMessages[currentGridStateIndex]);
+        });
+    }
+
+    function applyGridClasses(index) {
+        if (!dynamicGalleryContainer) return;
+        
+        // Remove existing grid classes
+        dynamicGalleryContainer.classList.remove('grid-view-2', 'grid-view-6');
+        
+        // Add new class if not default
+        const state = gridStates[index];
+        if (state !== 'default') {
+            dynamicGalleryContainer.classList.add(`grid-view-${state}`);
+        }
+    }
+
+    // Add this to your variable declarations at the top of the Grid Cycle section
+    const toastProgress = document.getElementById('toast-progress');
+
+    // Update your showToast function
+    function showToast(message) {
+        if (!toastNotification) return;
+
+        toastMessage.textContent = message;
+        toastNotification.classList.add('show');
+        
+        // Add a tiny pop animation for consecutive clicks
+        toastNotification.classList.remove('pop');
+        void toastNotification.offsetWidth; // Trigger reflow
+        toastNotification.classList.add('pop');
+
+        // Reset and start the progress bar animation
+        if (toastProgress) {
+            toastProgress.classList.remove('toast-progress-animate');
+            void toastProgress.offsetWidth; // Trigger reflow to restart animation
+            toastProgress.classList.add('toast-progress-animate');
+        }
+
+        // Reset timer
+        if (toastTimer) clearTimeout(toastTimer);
+        
+        // Auto-hide after 6 seconds
+        toastTimer = setTimeout(() => {
+            hideToast();
+        }, 6000);
+    }
+
+    //hideToast function
+    function hideToast() {
+        if (!toastNotification) return;
+        toastNotification.classList.remove('show', 'pop');
+        
+        // Stop the animation when hidden early
+        if (toastProgress) {
+            toastProgress.classList.remove('toast-progress-animate');
+        }
+    }
+
+    if (toastClose) {
+        toastClose.addEventListener('click', () => {
+            hideToast();
+            if (toastTimer) clearTimeout(toastTimer);
+        });
+    }
+
+    // ==========================================================================
     // GALLERY MODAL FUNCTIONALITY (CENTRALIZED)
     // ==========================================================================
     

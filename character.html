@@ -40,7 +40,20 @@
 
         <!-- Actions FABs Container -->
         <div id="action-fabs-wrapper" style="display: none;">
-            
+
+            <!-- Grid Cycle FAB -->
+            <div class="fab-container">
+                <button id="grid-fab-btn" class="fab-btn" aria-label="Toggle Grid Size">
+                    <!-- Classic 2x2 Grid Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </button>
+            </div>
+
             <!-- Filter FAB -->
             <div class="fab-container" id="filter-fab-container">
                 <div class="fab-popup" id="filter-popup">
@@ -144,5 +157,12 @@
     <script src="data.js"></script>
     <script src="script.js"></script>
     <button id="theme-switcher" aria-label="Cambiar tema"></button>
+
+    <!-- Toast Notification for Grid View -->
+    <div id="toast-notification" class="toast-notification">
+        <span id="toast-message">Grid View: Default</span>
+        <button id="toast-close" aria-label="Close notification">×</button>
+        <div id="toast-progress"></div>
+    </div>
 </body>
 </html>

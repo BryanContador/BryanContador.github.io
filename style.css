@@ -1477,3 +1477,129 @@ body.dark-mode {
     color: #7b7b7b;
     background-color: rgba(128, 128, 128, 0.1);
 }
+
+
+/* ==========================================================================
+   GRID VIEW MODIFIERS (Dynamic Gallery Sizes)
+   ========================================================================== */
+
+/* 2 Columns View (Large) */
+.gallery-grid.grid-view-2 .gallery-item {
+    flex-basis: calc(50% - 7.5px) !important;
+    max-width: calc(50% - 7.5px) !important;
+    height: 350px; 
+}
+
+/* 6 Columns View (Small) */
+.gallery-grid.grid-view-6 .gallery-item {
+    flex-basis: calc(16.666% - 12.5px) !important;
+    max-width: calc(16.666% - 12.5px) !important;
+    height: 150px; 
+}
+
+/* Mobile Adjustments for Grid */
+@media (max-width: 768px) {
+    /* 2 Columns becomes 1 Column on Mobile */
+    .gallery-grid.grid-view-2 .gallery-item {
+        flex-basis: 100% !important;
+        max-width: 100% !important;
+        height: 300px;
+    }
+    
+    /* 6 Columns becomes 3 Columns on Mobile */
+    .gallery-grid.grid-view-6 .gallery-item {
+        flex-basis: calc(33.333% - 10px) !important;
+        max-width: calc(33.333% - 10px) !important;
+        height: 100px;
+    }
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+
+
+.toast-notification.show {
+    bottom: 30px;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    pointer-events: auto;
+}
+
+/* Little pop animation when clicking repeatedly */
+.toast-notification.pop {
+    transform: translateX(-50%) scale(1.05);
+}
+
+#toast-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#toast-close:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.toast-notification {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    
+    color: var(--text-color);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2rem;
+    padding: 10px 25px;
+    border-radius: 50px;
+    
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    
+    /* keeps the progress bar inside the rounded corners */
+    overflow: hidden; 
+    
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/*progress Bar Styles */
+#toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-color); 
+    transform-origin: left;
+    opacity: 0.7;
+}
+
+/* animation class added by JS */
+.toast-progress-animate {
+    animation: shrinkProgress 6s linear forwards;
+}
+
+@keyframes shrinkProgress {
+    0% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+}
