@@ -728,8 +728,18 @@ const galleryData = {
             type: "image",
             thumb: "resources/warning.png",
             highRes: "sketches/jamol/Imagen (5)_copia.jpg",
+            altSources:["sketches/jamol/35 sin título.jpg"],
             title: "Suicide note",
             description: "Original Character\nNo description",
+            sensitive: true,
+            status: "sketch"
+        },/*c:\Users\Latitude\Documents\Scanned Documents\Imagen (13).jpg */
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (13)_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (13).jpg",
+            title: "No title",
+            description: "No description",
             sensitive: true,
             status: "sketch"
         },
@@ -768,11 +778,27 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "sketches/thumb/Imagen (4)_jamol_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (4).jpg",
+            title: "No title",
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
             thumb: "sketches/thumb/Imagen_(4)_thumb.jpg",
             highRes: "sketches/jamol/Imagen_(4).jpg",
             title: "Torn apart",
             description: "No description",
             sensitive: true,
+            status: "sketch"
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (2)_jamol_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (2).jpg",
+            title: "No title",
+            description: "No description",
             status: "sketch"
         },
         {
@@ -788,6 +814,31 @@ const galleryData = {
             type: "image",
             thumb: "sketches/thumb/Imagen_(20)_thumb.jpg",
             highRes: "sketches/jamol/Imagen_(20).jpg",
+            title: "No title",
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (5)_cigarro_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (5)_cigarro.jpg",
+            title: "Gas",
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (11)_gun_jamol_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (11)_gun.jpg",
+            title: "No title",
+            sensitive: true,
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (10)jamol_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (10)jamol.jpg",
             title: "No title",
             description: "No description",
             status: "sketch"
