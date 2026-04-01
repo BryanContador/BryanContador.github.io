@@ -798,7 +798,7 @@ const galleryData = {
             thumb: "sketches/thumb/Imagen (2)_jamol_thumb.jpg",
             highRes: "sketches/jamol/Imagen (2).jpg",
             title: "No title",
-            description: "No description",
+            description: "Very first drawing of Jamol",
             status: "sketch"
         },
         {
