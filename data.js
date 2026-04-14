@@ -304,7 +304,7 @@ const galleryData = {
             type: "image",
             thumb: "drawings/thumb/124_sin_titulo_Restaurado_20230902020738_thumb.png",
             highRes: "drawings/sunshine/124_sin_titulo_Restaurado_20230902020738.jpg",
-            altSources:["drawings/sunshine/124 sin título_Restaurado_20230902020733.jpg","sketches/sunshine/124 sin título_Restaurado.jpg","sketches/sunshine/124 sin título_Restaurado_20230505011546.jpg"],
+            altSources:["drawings/sunshine/124 sin título_Restaurado_20230902020733.jpg","sketches/sunshine/124 sin título_Restaurado.jpg",{src: "sketches/sunshine/124 sin título_Restaurado_20230505011546.jpg", sensitive: true}],
             title: "Pose",
             description: "The Sunshine in my life.\nInspired on a piece of an artist i can't remember. The style of them was a big inspiration for this drawing.",
             status: "finished",

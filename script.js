@@ -361,13 +361,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     img.dataset.title = item.title;
                     img.dataset.description = item.description;
 
-                    if (item.sensitive) {
-                        img.dataset.sensitive = 'true';
-                    }
+                    // Create a map to track sensitivity for main image + alternatives
+                    let sourceSensitivities = [item.sensitive === true];
+                    let altSrcs = [];
 
                     if (item.altSources && item.altSources.length > 0) {
-                        img.dataset.altSources = item.altSources.join(',');
+                        item.altSources.forEach(alt => {
+                            if (typeof alt === 'string') {
+                                altSrcs.push(alt);
+                                // Inherit main image sensitivity by default for older strings
+                                sourceSensitivities.push(item.sensitive === true); 
+                            } else if (typeof alt === 'object') {
+                                altSrcs.push(alt.src);
+                                // Use specific alt sensitivity, or fallback to main
+                                sourceSensitivities.push(alt.sensitive !== undefined ? alt.sensitive : item.sensitive === true);
+                            }
+                        });
+                        img.dataset.altSources = altSrcs.join(',');
                     }
+                    
+                    // Save the sensitivity map to the DOM
+                    img.dataset.sensitiveMap = sourceSensitivities.join(',');
+
+                    //if (item.altSources && item.altSources.length > 0) {
+                    //    img.dataset.altSources = item.altSources.join(',');
+                    //}
 
                     itemDiv.appendChild(img);
                     container.appendChild(itemDiv);
@@ -600,15 +618,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 sources.push(...altSources.split(','));
             }
 
+            // Extract the sensitivity map we created earlier
+            const sensitivityMap = img.dataset.sensitiveMap ? img.dataset.sensitiveMap.split(',').map(s => s === 'true') : [false];
+
             galleryItems.push({
                 element: img,
                 sources: sources,
                 highResSrc: img.dataset.highResSrc,
-                altSrc: img.dataset.altSrc,
                 title: img.dataset.title,
                 description: img.dataset.description,
-                isSensitive: img.dataset.sensitive === 'true',
-                isRevealed: false
+                sensitivityMap: sensitivityMap,
+                // Create an array to track if the user clicked "continue" for each specific image
+                revealedMap: new Array(sensitivityMap.length).fill(false) 
             });
 
             img.addEventListener('click', () => {
@@ -704,8 +725,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 modalImg.style.opacity = ''; 
 
-                // Apply Sensitive Warning ONLY after load is complete
-                if (item.isSensitive && !item.isRevealed) {
+                // Check sensitivity specifically for the CURRENT image index (0 = main)
+                const isCurrentSensitive = item.sensitivityMap[currentSourceIndex];
+                const isCurrentRevealed = item.revealedMap[currentSourceIndex];
+
+                if (isCurrentSensitive && !isCurrentRevealed) {
                     modal.classList.add('show-warning');
                     modalImg.classList.add('blurred');
                     modalImgNext.classList.add('blurred');
@@ -764,8 +788,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             continueBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                if (galleryItems[currentImageIndex]) {
-                    galleryItems[currentImageIndex].isRevealed = true;
+                const currentItem = galleryItems[currentImageIndex];
+                if (currentItem) {
+                    // Reveal ONLY the specific alternative the user is looking at
+                    currentItem.revealedMap[currentSourceIndex] = true;
                 }
                 modal.classList.remove('show-warning');
                 modalImg.classList.remove('blurred');
@@ -887,6 +913,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // fadding 
                     nextImg.alt = currentImg.alt;
+                    // Check sensitivity for the newly selected alternative
+                    const isNextSensitive = item.sensitivityMap[currentSourceIndex];
+                    const isNextRevealed = item.revealedMap[currentSourceIndex];
+
+                    if (isNextSensitive && !isNextRevealed) {
+                        modal.classList.add('show-warning');
+                        nextImg.classList.add('blurred');
+                        //currentImg.classList.add('blurred');
+                    } else {
+                        modal.classList.remove('show-warning');
+                        nextImg.classList.remove('blurred');
+                        //currentImg.classList.remove('blurred');
+                    }
 
                     // Preload next alternative image if available
                     const nextAltIndex = (currentSourceIndex + 1) % item.sources.length;
@@ -903,6 +942,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         nextImg.style.transition = 'none';
                         currentImg.src = nextImg.src;
                         currentImg.alt = nextImg.alt;
+                        // Copy the blur state from the next image to the current image ONLY after the fade is done
+                        if (nextImg.classList.contains('blurred')) {
+                            currentImg.classList.add('blurred');
+                        } else {
+                            currentImg.classList.remove('blurred');
+                        }
 
                         currentImg.style.opacity = '1';
                         nextImg.style.opacity = '0';
