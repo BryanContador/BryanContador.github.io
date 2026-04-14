@@ -97,36 +97,49 @@
 
     <script>
         // Fetch the last commit from public GitHub API
-        document.addEventListener("DOMContentLoaded", async function() {
+        document.addEventListener("DOMContentLoaded", function() {
             const username = 'BryanContador';
             const repo = 'BryanContador.github.io';
             const branch = 'main'; 
-            const commitContainer = document.getElementById('last-commit');
 
-            try {
-                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/commits/${branch}`);
-                
-                if (!response.ok) {
-                    throw new Error("Branch not found or API limit reached");
-                }
+            fetch(`https://api.github.com/repos/${username}/${repo}/commits/${branch}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Branch not found or API limit reached");
+                    return response.json();
+                })
+                .then(data => {
+                    // 1. Get the raw date from GitHub
+                    const dateObj = new Date(data.commit.author.date);
+                    
+                    // 2. Set the formatting options for Date AND Time
+                    const options = { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        second: '2-digit'
+                    };
+                    
+                    // 3. Convert it to a readable string based on the user's timezone
+                    const commitDate = dateObj.toLocaleString(undefined, options);
 
-                const data = await response.json();
-                const commitDate = new Date(data.commit.author.date).toLocaleDateString();
-                const commitMessage = data.commit.message;
-                const commitUrl = data.html_url;
-                const commitHash = data.sha.substring(0, 7);
+                    const commitMessage = data.commit.message;
+                    const commitUrl = data.html_url;
+                    const commitHash = data.sha.substring(0, 7);
 
-                commitContainer.innerHTML = `
-                    Last commit (<a href="${commitUrl}" target="_blank">${commitHash}</a>):
-                    <br>"${commitMessage}"<br>
-                    <span style="font-size: 0.85em; opacity: 0.8;">on ${commitDate}</span>
-                `;
-            } catch (error) {
-                console.error('Error fetching last commit:', error);
-                commitContainer.innerHTML = 'Latest update data currently unavailable.';
-            }
+                    document.getElementById('last-commit').innerHTML = `
+                        Last commit (<a href="${commitUrl}" target="_blank">${commitHash}</a>):
+                        <br>"${commitMessage}"<br>
+                        <span style="font-size: 0.85em; opacity: 0.8;">on ${commitDate}</span>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching last commit:', error);
+                    document.getElementById('last-commit').innerHTML = 'Latest update data currently unavailable.';
+                });
         });
-</script>
+    </script>
     
     <script src="data.js"></script>
     <script src="script.js"></script>
