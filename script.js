@@ -4,6 +4,14 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ==========================================================================
+    // AUTO-UPDATE COPYRIGHT YEAR
+    // ==========================================================================
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
     
     // ==========================================================================
     // RANDOMIZER FUNCTIONS
