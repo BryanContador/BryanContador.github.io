@@ -42,14 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const footerQuotes = [
             "Everything in this life is impossible until someone comes and does it.",
             "Do a barrel roll!",
-            "Start diggin in yo butt, twin",
+            //"Start diggin in yo butt, twin",
             "Would you remember me tomorrow if i was gone?",
             "I'll always be dreaming of you.",
             "Minnesota, exist.",
             "Wish you were here...",
-            "FUCK YOU",
-            "I HATE YOU.",
-            "FUCK YOU IN PARTICULAR"
+            //"FUCK YOU",
+            //"I HATE YOU.",
+            //"FUCK YOU IN PARTICULAR"
+            "Bring me to you, morena"
         ];
         
         if (Math.random() < 0.25) {
