@@ -301,6 +301,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (actionFabsWrapper) actionFabsWrapper.style.display = 'flex'; // Stack the FABs
             container.className = 'gallery-grid';
 
+            // Re-apply saved grid state so it persists across loads, sorts, and character profiles 
+            const savedGridState = localStorage.getItem('galleryGridState');
+            if (savedGridState !== null) {
+                const stateIndex = parseInt(savedGridState, 10);
+                if (stateIndex === 1) container.classList.add('grid-view-2');
+                else if (stateIndex === 2) container.classList.add('grid-view-6');
+            }
+
             let itemsToRender = [...items];
 
             // --- 1. APPLY FILTERING (Eye Icon) ---
