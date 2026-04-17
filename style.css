@@ -135,21 +135,15 @@ nav ul {
 
 nav ul li {
     margin: 0 20px; /*original 5px*/
-    /*animation: floatAnimation 3s ease-in-out infinite; /* <--ANIMATION ANIMACIÓN  */ /*make it stop moving, may go back and put it back*/
 }
-
-/*nav ul li:nth-child(1) { animation-delay: 0s; }
-nav ul li:nth-child(2) { animation-delay: 0.2s; }
-nav ul li:nth-child(3) { animation-delay: 0.4s; }
-nav ul li:nth-child(4) { animation-delay: 0.6s; }
-nav ul li:nth-child(5) { animation-delay: 0.8s; }*/
 
 nav ul li a {
     color: var(--text-color);
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem; /* modified from 1.2rem */
     padding: 5px 3px;
-    font-family: 'Patrick Hand', sans-serif;
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', sans-serif; */
+    font-weight: 500; /* Added medium weight so it stands out nicely */
     text-transform: uppercase;
 }
 
@@ -173,7 +167,7 @@ nav ul li a:hover {
     transition: left 0.4s cubic-bezier(0.5, 0, 0, 1), 
                 width 0.4s cubic-bezier(0.5, 0, 0, 1);
 
-    /* ADDED:  new horizontal breathing animation */
+    /* ADDED: new horizontal breathing animation */
     animation: breatheHorizontal 5s ease-in-out infinite;
     transform-origin: center; /* Ensures it breathes out from the middle */
 }
@@ -194,9 +188,9 @@ main.gallery-page {
 
 main h2 {
     color: var(--text-color);
-    font-family: 'Patrick Hand', cursive; 
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive; */
     font-size: 3rem;
-    font-weight: normal; 
+    font-weight: 700; /* Added bold because Roboto looks better bold for titles */
     margin: 0;
     opacity: 0;
     animation: fadeIn 2s ease-in 0.5s forwards;
@@ -532,8 +526,8 @@ footer p {
 
 .copyright-text {
     font-style: normal !important;
-    font-family: 'Patrick Hand', sans-serif; 
-    font-size: 0.95rem !important; 
+    font-family: "Roboto Flex", sans-serif; /*before 'Patrick Hand', sans-serif*/
+    font-size: 0.8rem !important; /*0.95rem*/
     opacity: 0.7;
 }
 
@@ -559,7 +553,7 @@ footer p {
     background-color: var(--text-color);
     color: var(--bg-color);
     padding: 12px 25px;
-    font-family: 'Patrick Hand', sans-serif;
+    font-family: "Roboto Flex", sans-serif; /*before 'Patrick Hand', sans-serif*/
     text-transform: uppercase;
     text-decoration: none;
     border: 2px solid var(--text-color);
@@ -596,7 +590,8 @@ footer p {
     font-size: 1.1rem;
     color: var(--text-color-light);
     line-height: 1.7;
-    font-family: 'Patrick Hand', cursive;
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
+    font-weight: 400; /* Added normal weight */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -606,7 +601,8 @@ footer p {
     color: var(--text-color-light);
     line-height: 1.6;
     max-width: 700px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
+    font-weight: 400; /* Added normal weight */
     text-align: center;
 }
 
@@ -616,8 +612,8 @@ footer p {
     padding: 12px 20px;
     border-radius: 8px;
     margin: 20px auto 0 auto;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.1rem;
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
+    font-size: 0.95rem; /* before 1.1rem */
     width: fit-content;
     max-width: 90%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -642,7 +638,7 @@ footer p {
 }
 
 .social-links h3 {
-    font-family: 'Patrick Hand', cursive; 
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: var(--text-color);
@@ -689,6 +685,7 @@ footer p {
 
 .underline-link {
     text-decoration: underline;
+    /**/font-family: "Roboto Flex", sans-serif;
 }
 
 .repo-info {
@@ -746,7 +743,7 @@ footer p {
     transition: color 0.3s ease;
 }
 /* ==============================================================================
-    Animations and Responsive Design
+    Animations and Responsive DesigN
    ========================================================================== */
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -832,6 +829,7 @@ footer p {
 
     .gallery-separator h3 {
         font-size: 1.6rem; 
+        /**/font-family: "Roboto Flex", sans-serif;
     }
 
     #modal-alt-btn {
@@ -1157,13 +1155,13 @@ body.dark-mode {
 }
 
 .profile-lore-section h3 {
-    font-family: 'Patrick Hand', cursive; 
-    font-size: 2rem; 
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive; */
+    font-size: 1.5rem; /*before 2rem*/
     margin-top: 0;
     color: var(--text-color);
     border-bottom: 1px solid var(--text-color);
     display: inline-block;
-    padding-bottom: 5px; 
+    padding-bottom: 1px; /*before 5px*/
 }
 
 #char-lore {
@@ -1178,9 +1176,9 @@ body.dark-mode {
 }
 
 .profile-page > h3 {
-    font-family: 'Patrick Hand', cursive; 
+    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive; */
     font-size: 3rem;
-    font-weight: normal;
+    font-weight: bold; /*before normal*/
     text-align: center;
     margin: 0px 0 20px 0;
     color: var(--text-color);
