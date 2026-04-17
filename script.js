@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "Welcome, stranger. What are you buying?",
             "I used to be an adventurer like you. Then I took an arrow in the knee...",
             "War... War never changes.",
-            "FUCK MINNESOTA.",
-            "FUCK YOU IN PARTICULAR",
+            //"FUCK MINNESOTA.",
+            //"FUCK YOU IN PARTICULAR",
             "As I break apart."
         ];
         
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Randomize header title (very rare)
     const headerTitleElement = document.getElementById('header-title');
     if (headerTitleElement) {
-        const alternativeTitles = ["FUCK YOU IN PARTICULAR"];
+        const alternativeTitles = ["ME", "Just Bryan", "enjoy","i'm always watching","thank you for being there for me"];
         if (Math.random() < 0.01) {
             headerTitleElement.textContent = alternativeTitles[Math.floor(Math.random() * alternativeTitles.length)];
         }
