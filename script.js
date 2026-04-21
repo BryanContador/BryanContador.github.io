@@ -799,8 +799,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.stopPropagation();
                 const currentItem = galleryItems[currentImageIndex];
                 if (currentItem) {
-                    // Reveal ONLY the specific alternative the user is looking at
-                    currentItem.revealedMap[currentSourceIndex] = true;
+                    // Reveal the main image AND all alternative sources at once
+                    currentItem.revealedMap.fill(true);
+                    //currentItem.revealedMap[currentSourceIndex] = true; this is hot garbage bruh what i was thinking
                 }
                 modal.classList.remove('show-warning');
                 modalImg.classList.remove('blurred');
