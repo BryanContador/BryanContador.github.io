@@ -1141,6 +1141,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.gallery-separator-line').style.display = 'none';
                 document.querySelectorAll('h3')[1].style.display = 'none';
             }
+            
+            const extraLinkContainer = document.getElementById('char-extra-link-container');
+            const extraLinkAnchor = document.getElementById('char-extra-link');
+            if (extraLinkContainer && extraLinkAnchor) {
+                if (character.extraLink) {
+                    extraLinkAnchor.href = character.extraLink.url;
+                    extraLinkAnchor.textContent = character.extraLink.text;
+                    extraLinkContainer.style.display = 'block';
+                } else {
+                    extraLinkContainer.style.display = 'none';
+                }
+            }
+            
         } else {
             charNameEl.textContent = "CHARACTER NOT FOUND";
         }
