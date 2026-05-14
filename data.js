@@ -34,7 +34,7 @@ const galleryData = {
             thumb: "fanart/thumb/fanta_thumb.jpg",
             highRes: "fanart/fanta.jpg",
             title: "Fanta!",
-            description: "Character property of Ghoulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+            description: "Character property of Ghoulish Badger.\n@missbadgers on TikTok\nhttps://ko-fi.com/missbadgers"
 
         },
         {
@@ -42,28 +42,28 @@ const galleryData = {
             thumb: "fanart/thumb/homies_thumb.jpg",
             highRes: "fanart/homies.jpg",
             title: "Fanart for homies",
-            description: "Art for the homeboys.\n@missbadgers on TikTok\nko-fi.com/missbadgers\n(Don't look at the guy on the center he's up to no good...)"
+            description: "Art for the homeboys.\n@missbadgers on TikTok\nhttps://ko-fi.com/missbadgers \n(Don't look at the guy on the center he's up to no good...)"
         },
         {
             type: "image",
             thumb: "fanart/thumb/Badger_zombie_slayer_thumb.jpg",
             highRes: "fanart/Badger_zombie_slayer.jpg",
             title: "Fanart for the Alix (ZOMBIE SLAYER)",
-            description: "Art for with Ghoulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+            description: "Art for with Ghoulish Badger.\n@missbadgers on TikTok\n https://ko-fi.com/missbadgers "
         },
         {
             type: "image",
             thumb: "fanart/thumb/Liam_chuky_thumb.jpg",
             highRes: "fanart/Liam_chuky.jpg",
             title: "Fanart for the Liam (CHUKY)",
-            description: "Art for William Londington.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+            description: "Art for William Londington.\n@missbadgers on TikTok\nhttps://ko-fi.com/missbadgers"
         },
         {
             type: "image",
             thumb: "fanart/thumb/Liam_feet_love_thumb.jpg",
             highRes: "fanart/Liam_feet_love.jpg",
             title: "Art Trade (FEET)",
-            description: "Art Trade with Ghoulish Badger.\n@missbadgers on TikTok\nko-fi.com/missbadgers"
+            description: "Art Trade with Ghoulish Badger.\n@missbadgers on TikTok\nhttps://ko-fi.com/missbadgers"
         },
         {
             type: "image",
@@ -275,6 +275,19 @@ const galleryData = {
             //    text: "Personal notes here",
             //    url: "https://bryancontador.github.io/resources/docs/Notes.pdf"
             //}
+        },
+        {
+            type: "category",
+            id: "bertie",
+            name: "Bertie",
+            thumb: "drawings/thumb/bertie_thumb.jpg",
+
+            //profileImage: "drawings/bertie/bertie.jpg",
+            profileImage: "drawings/bertie/lil_bertie.jpg",
+            galleryKey: "bertie_art",
+            bio: "Pushie boy with a big heart and a bigger hat.\nTADC Original Character\nDesigned by artist Ghoulish Badger.",
+            lore: "Placeholder for lore, sorry. WILL change this line later, pinkie promise."
+
         },
         {
             type: "category",
@@ -955,6 +968,18 @@ const galleryData = {
             date: "2025-07-21",
             sensitive: true
         },
+    ],
+
+    bertie_art: [
+        {
+            type: "image",
+            thumb: "drawings/thumb/bertie_thumb.jpg",
+            highRes: "drawings/bertie/bertie.jpg",
+            title: "Bertie",
+        description: "Character sheet for Bertie.\nMade by Ghoulish Badger.\n@missbadgers on TikTok. \nhttps://ko-fi.com/missbadgers",
+            status: "finished",
+            date: "2026-01-01"
+        }
     ],
 
     demon_girl_art: [
