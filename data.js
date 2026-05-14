@@ -978,6 +978,15 @@ const galleryData = {
             title: "Bertie",
         description: "Character sheet for Bertie.\nMade by Ghoulish Badger.\n@missbadgers on TikTok. \nhttps://ko-fi.com/missbadgers",
             status: "finished",
+            date: "2026-05-05"
+        },
+        {
+            type:"image",
+            thumb:"drawings/thumb/bertie_pose_thumb.jpg",
+            highRes: "sketches/bertie/bertie_pose.jpg",
+            title: "Bertie Pose",
+            description: "Little Bertie boy pose. Finished version in progress. \nSketch by Goulish Badger.\n@missbadgers on TikTok. \nhttps://ko-fi.com/missbadgers",
+            status: "sketch",
             date: "2026-01-01"
         }
     ],
