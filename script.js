@@ -298,20 +298,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
             // --- STANDARD GALLERY LAYOUT (Images / Fanart / Sketches) ---
-            if (actionFabsWrapper) actionFabsWrapper.style.display = 'flex'; // Stack the FABs
             container.className = 'gallery-grid';
 
-            // Re-apply saved grid state so it persists across loads, sorts, and character profiles 
-            const savedGridState = localStorage.getItem('galleryGridState');
-            if (savedGridState !== null) {
-                const stateIndex = parseInt(savedGridState, 10);
-                if (stateIndex === 1) container.classList.add('grid-view-2');
-                else if (stateIndex === 2) container.classList.add('grid-view-6');
+            // Count the actual images (ignoring separators)
+            const imageCount = items.filter(item => item.type === 'image').length;
+
+            if (imageCount <= 3) {
+                // Hide the entire FAB wrapper (Hides Grid, Filter, and Sort)
+                if (actionFabsWrapper) actionFabsWrapper.style.display = 'none';
+
+                // Force OG grid by removing any saved layout classes
+                container.classList.remove('grid-view-2', 'grid-view-6');
+            } else {
+                // Show FABs normally if there are more than 3 images
+                if (actionFabsWrapper) actionFabsWrapper.style.display = 'flex'; 
+
+                // Re-apply saved grid state so it persists across loads, sorts, and character profiles 
+                const savedGridState = localStorage.getItem('galleryGridState');
+                if (savedGridState !== null) {
+                    const stateIndex = parseInt(savedGridState, 10);
+                    if (stateIndex === 1) container.classList.add('grid-view-2');
+                    else if (stateIndex === 2) container.classList.add('grid-view-6');
+                }
             }
 
             let itemsToRender = [...items];
 
-            // --- 1. APPLY FILTERING (Eye Icon) ---
+            // ---  APPLY FILTERING (Eye Icon) ---
             if (currentFilterType !== 'all') {
                 // If filtering, remove separators first so they don't break layout
                 itemsToRender = itemsToRender.filter(item => item.type === 'image');
@@ -322,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // --- 2. APPLY SORTING ---
+            // ---  APPLY SORTING ---
             if (currentSortType !== 'unsorted') {
                 // Remove separators to prevent layout breakage
                 itemsToRender = itemsToRender.filter(item => item.type === 'image');
