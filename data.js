@@ -640,10 +640,11 @@ const galleryData = {
             date: "2025-05-29",
             status: "finished"
         },
-        {/////CAMBIAR TODO ALV CUANDO ESTÉ TERMINADO
+        {/////AVANZE UN POCO
             type:"image",
-            thumb: "sketches/jamol/wip_refsheet.jpg",
-            highRes: "sketches/jamol/wip_refsheet.jpg",
+            thumb: "sketches/jamol/wip_refsheet.jpg", //tambien cambiar cuando esté listo, ponerlo un pocco arriba, abajo de Saint.
+            highRes: "sketches/jamol/wip_refsheet.jpg", //poner esta dentro de alt sources y poner la nueva imagen aqui
+            altSources: ["sketches/jamol/wip_refsheet_3.jpg","sketches/jamol/wip_refsheet_2.jpg","sketches/jamol/wip_refsheet_4.jpg","sketches/jamol/wip_refsheet_5.jpg"],
             title: "Ref Sheet WIP for Jamol",
             description: "Been wanting to get her done for a while.",
             date: "2026-03-24", ////CAMBIAR
