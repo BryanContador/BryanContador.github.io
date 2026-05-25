@@ -541,6 +541,17 @@ const galleryData = {
 
     jamol_art: [
         {
+            type:"image",
+            thumb: "drawings/thumb/refsheet_final_thumb.jpg", //tambien cambiar cuando esté listo, ponerlo un pocco arriba, abajo de Saint.
+            highRes: "drawings/jamol/refsheet_final.jpg",
+            altSources: ["sketches/jamol/wip_refsheet_3.jpg","sketches/jamol/wip_refsheet_2.jpg","sketches/jamol/wip_refsheet_4.jpg","sketches/jamol/wip_refsheet_5.jpg","sketches/jamol/wip_refsheet.jpg"],
+            title: "Ref Sheet WIP for Jamol",
+            description: "Been wanting to get her done for a while.",
+            date: "2026-05-24",
+            status: "finished" 
+
+        },
+        {
             type: "image",
             thumb: "drawings/thumb/1739986621233_thumb.jpg",
             highRes: "drawings/jamol/1739986621233.jpg",
@@ -572,12 +583,13 @@ const galleryData = {
             date: "2024-06-28",
             status: "finished"
         },
+        
         {
             type: "image",
             thumb: "drawings/thumb/30 sin título3_20230104112037_thumb.jpg",
             highRes: "drawings/jamol/30 sin título3_20230104112037.jpg",
             altSources: ["drawings/jamol/30 sin título3_20230104112037_alternative_1.jpg", "drawings/jamol/30 sin título3_20230104112037_alternative_2.jpg","sketches/jamol/30 sin título2_20230102134339.jpg"],
-            title: "Still standing",
+            title: "Still standing / Saint",
             description: "Piece inspired by the iconography of martyrs and saints. \nA literal hole where her heart once was.",
             sensitive: true,
             date: "2023-01-30",
@@ -639,17 +651,6 @@ const galleryData = {
             description: "No description.",
             date: "2025-05-29",
             status: "finished"
-        },
-        {/////AVANZE UN POCO
-            type:"image",
-            thumb: "sketches/jamol/wip_refsheet.jpg", //tambien cambiar cuando esté listo, ponerlo un pocco arriba, abajo de Saint.
-            highRes: "sketches/jamol/wip_refsheet.jpg", //poner esta dentro de alt sources y poner la nueva imagen aqui
-            altSources: ["sketches/jamol/wip_refsheet_3.jpg","sketches/jamol/wip_refsheet_2.jpg","sketches/jamol/wip_refsheet_4.jpg","sketches/jamol/wip_refsheet_5.jpg"],
-            title: "Ref Sheet WIP for Jamol",
-            description: "Been wanting to get her done for a while.",
-            date: "2026-03-24", ////CAMBIAR
-            status: "sketch"  /////CAMBIAR CUANDO ESTE TERMINADO
-
         },
         {
             type: "image",
