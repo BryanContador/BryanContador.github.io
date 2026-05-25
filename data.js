@@ -476,6 +476,7 @@ const galleryData = {
             type: "image",
             thumb: "sketches/thumb/24 sin título2_thumb.jpg",
             highRes: "sketches/sunshine/24 sin título2.jpg",
+            altSources: ["sketches/sunshine/24 sin título2_background.jpg"],
             title: "No title",
             description: "No description",
             status: "sketch",
@@ -542,7 +543,7 @@ const galleryData = {
     jamol_art: [
         {
             type:"image",
-            thumb: "drawings/thumb/refsheet_final_thumb.jpg", //tambien cambiar cuando esté listo, ponerlo un pocco arriba, abajo de Saint.
+            thumb: "drawings/thumb/refsheet_final_thumb.jpg",
             highRes: "drawings/jamol/refsheet_final.jpg",
             altSources: ["sketches/jamol/wip_refsheet_3.jpg","sketches/jamol/wip_refsheet_2.jpg","sketches/jamol/wip_refsheet_4.jpg","sketches/jamol/wip_refsheet_5.jpg","sketches/jamol/wip_refsheet.jpg"],
             title: "Ref Sheet WIP for Jamol",
