@@ -545,8 +545,8 @@ const galleryData = {
             type:"image",
             thumb: "drawings/thumb/refsheet_final_thumb.jpg",
             highRes: "drawings/jamol/refsheet_final.jpg",
-            altSources: ["sketches/jamol/wip_refsheet_3.jpg","sketches/jamol/wip_refsheet_2.jpg","sketches/jamol/wip_refsheet_4.jpg","sketches/jamol/wip_refsheet_5.jpg","sketches/jamol/wip_refsheet.jpg"],
-            title: "Ref Sheet WIP for Jamol",
+            altSources: ["sketches/jamol/wip_refsheet.jpg","sketches/jamol/wip_refsheet_3.jpg","sketches/jamol/wip_refsheet_2.jpg","sketches/jamol/wip_refsheet_4.jpg","sketches/jamol/wip_refsheet_5.jpg",],
+            title: "Ref Sheet for Jamol",
             description: "Been wanting to get her done for a while.",
             date: "2026-05-24",
             status: "finished" 
