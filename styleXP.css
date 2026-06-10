@@ -563,3 +563,232 @@ body {
     border-color: #316ac5;
     background-color: #c1d2ee;
 }
+
+/* ==========================================================================
+   START MENU STYLES
+   ========================================================================== */
+#start-menu {
+    position: absolute;
+    bottom: 30px; 
+    left: 0;
+    width: 380px;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    display: none; 
+    flex-direction: column;
+    z-index: 100000;
+    border: 1px solid #0055ea;
+    border-bottom: none;
+    overflow: hidden;
+}
+#start-menu.show { display: flex; }
+
+.start-menu-header {
+    background: linear-gradient(to bottom, #108bed 0%, #0d79d1 100%);
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border-bottom: 2px solid #f38a00;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.start-menu-header img {
+    width: 42px; height: 42px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    margin-right: 10px;
+    background: #fff;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.start-menu-body { display: flex; height: 320px; }
+.start-menu-left { flex: 1; background-color: #fff; border-right: 1px solid #95bcee; padding-top: 5px; }
+.start-menu-right { width: 160px; background-color: #d3e5fa; padding: 10px 0; border-left: 1px solid #fff; }
+.sm-right-item { padding: 8px 15px; color: #00136b; font-weight: bold; cursor: pointer; }
+.sm-right-item:hover { background-color: #2f71cd; color: white; }
+.sm-divider { height: 1px; background: linear-gradient(to right, transparent, #8cb5eb, transparent); margin: 5px 10px; }
+
+.start-menu-footer {
+    background: linear-gradient(to bottom, #3988fb 0%, #175fe3 100%);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+.start-menu-btn {
+    display: flex; align-items: center; color: white; cursor: pointer; gap: 5px; font-size: 12px;
+}
+.start-menu-btn img {
+    width: 28px; height: 28px; border-radius: 3px; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); transition: filter 0.2s;
+}
+.start-menu-btn:hover span { text-decoration: underline; }
+.start-menu-btn:hover img { filter: brightness(1.2); }
+#start-button.active {
+    background: linear-gradient(to bottom, #1e5e0d 0%, #368525 25%, #419631 100%);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+/* ==========================================================================
+   FINAL SHUTDOWN OVERLAY & DIALOG
+   ========================================================================== */
+#shutdown-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0); /* Starts transparent */
+    backdrop-filter: grayscale(0%); /* Starts full color */
+    -webkit-backdrop-filter: grayscale(0%);
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Animation properties */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, background-color 8s ease, backdrop-filter 8s ease, -webkit-backdrop-filter 1s ease;
+}
+
+#shutdown-overlay.show { 
+    opacity: 1;
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: grayscale(100%);
+    -webkit-backdrop-filter: grayscale(100%);
+}
+
+#turn-off-dialog {
+    width: 320px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    font-family: Tahoma, 'Segoe UI', sans-serif;
+    border: 1px solid #fff;
+    outline: 1px solid #000;
+}
+
+.tod-header {
+    background: #00339c;
+    color: white;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+.tod-body {
+    background: linear-gradient(to right, #4a6fdc 0%, #7da2fb 50%, #4a6fdc 100%);
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.tod-btn-group { display: flex; gap: 40px; }
+
+.tod-btn {
+    display: flex; flex-direction: column; align-items: center; color: white; cursor: pointer; font-size: 11px; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+.tod-btn img {
+    width: 38px; height: 38px; border-radius: 4px; margin-bottom: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.4); border: 2px solid transparent; transition: all 0.2s;
+}
+.tod-btn:hover img { border-color: rgba(255,255,255,0.7); filter: brightness(1.15); transform: translateY(-2px); }
+.tod-footer {
+    background: #00339c;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+#tod-cancel {
+    background: #e3e3e3; border: 1px solid #000; border-radius: 3px; padding: 3px 15px; font-family: Tahoma, sans-serif; font-size: 11px; cursor: pointer; box-shadow: inset 1px 1px 1px white;
+}
+#tod-cancel:hover { background: #f0f0f0; }
+
+/* ==========================================================================
+   BLUE SHUTDOWN SCREEN
+   ========================================================================== */
+#logoff-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #5a7edc;
+    z-index: 1000000;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: wait; /* loading cursor */
+}
+#logoff-screen.show { display: flex; }
+.logoff-bar { height: 12%; width: 100%; }
+.logoff-bar.top {
+    background: linear-gradient(to right, #00136b 0%, #00339c 100%);
+    border-bottom: 2px solid #f38a00;
+}
+.logoff-bar.bottom {
+    background: linear-gradient(to right, #00136b 0%, #00339c 100%);
+    border-top: 2px solid #f38a00;
+}
+.logoff-center {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; color: white; font-family: Tahoma, sans-serif; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.logoff-center img {
+    width: 64px; margin-bottom: 20px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+}
+
+
+/* ==========================================================================
+   UPDATED START MENU LAYOUT
+   ========================================================================== */
+.start-menu-body { display: flex; height: 380px; }
+.start-menu-left { flex: 1; background-color: #fff; border-right: 1px solid #95bcee; display: flex; flex-direction: column; justify-content: space-between; }
+#start-menu-apps { padding: 5px; flex-grow: 1; overflow-y: auto; }
+
+.sm-left-item {
+    display: flex; align-items: center; padding: 5px; cursor: pointer; border: 1px solid transparent;
+}
+.sm-left-item img { width: 32px; height: 32px; margin-right: 10px; }
+.sm-item-text { display: flex; flex-direction: column; }
+.sm-item-text strong { color: #000; font-size: 11px; }
+.sm-item-text span { color: #888; font-size: 10px; }
+.sm-left-item:hover { background-color: #2f71cd; border-color: #000; }
+.sm-left-item:hover strong, .sm-left-item:hover span { color: #fff; }
+
+.all-programs-btn {
+    display: flex; justify-content: center; align-items: center; padding: 8px; border-top: 1px solid #d3e5fa; cursor: pointer; gap: 5px; background: #fff;
+}
+.all-programs-btn strong { font-size: 11px; color: #000; }
+.all-programs-btn .triangle-right { color: #368525; font-size: 10px; }
+.all-programs-btn:hover { background-color: #2f71cd; }
+.all-programs-btn:hover strong { color: #fff; }
+.all-programs-btn:hover .triangle-right { color: #fff; }
+
+.start-menu-right { width: 170px; background-color: #d3e5fa; padding: 5px; border-left: 1px solid #fff; }
+.sm-right-item { display: flex; align-items: center; padding: 6px 10px; color: #00136b; font-weight: bold; cursor: pointer; border: 1px solid transparent; border-radius: 3px; font-size: 11px; }
+.sm-right-item img { width: 24px; height: 24px; margin-right: 8px; }
+.sm-right-item:hover { background-color: #2f71cd; color: white; border-color: rgba(0,0,0,0.2); }
+
+/* ==========================================================================
+   APP SPECIFIC STYLES (RUN & NOTEPAD)
+   ========================================================================== */
+.xp-run-layout {
+    display: flex; gap: 15px; padding: 20px; font-size: 11px;
+}
+.xp-run-layout img { width: 32px; height: 32px; }
+.xp-run-content { flex-grow: 1; display: flex; flex-direction: column; gap: 15px; }
+.xp-run-input-group { display: flex; align-items: center; gap: 10px; }
+.xp-run-input-group input { flex-grow: 1; padding: 3px; border: 1px solid #7f9db9; font-family: Tahoma, sans-serif; font-size: 11px; }
+.xp-run-input-group input:focus { border-color: #0058ee; outline: none; }
+
+.xp-notepad-textarea {
+    display: block;
+    overflow-y: auto;
+    width: 100%; 
+    height: 100%;
+    border: none;
+    resize: none; padding: 5px; 
+    font-family:'Lucida Console', Consolas, monospace;
+    font-size: 19px; 
+    font-weight: 550;
+    outline: none; box-sizing: border-box;
+}

@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // DYNAMIC DESKTOP ICON GENERATION FROM DATA.JS
     // ==========================================================================
+// ==========================================================================
+    // DYNAMIC DESKTOP & START MENU GENERATION FROM DATA.JS
+    // ==========================================================================
     const desktopContainer = document.getElementById('desktop-icons-container');
+    const startMenuApps = document.getElementById('start-menu-apps');
 
     // Map your character IDs from data.js to your custom icon filenames
     //CUSTOM ICONS
@@ -37,28 +41,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (typeof galleryData !== 'undefined' && galleryData.categories) {
         galleryData.categories.forEach(character => {
-            //if (character.id === 'misc') return; 
+            const iconSrc = customCharacterIcons[character.id] || "https://win98icons.alexmeub.com/icons/png/directory_closed-4.png";
 
+            // 1. Create Desktop Icon
             const iconDiv = document.createElement('div');
             iconDiv.className = 'desktop-icon';
             iconDiv.dataset.app = character.id; 
             
             // Set the small icon to be used for the window title bar & taskbar
             iconDiv.dataset.smallIcon = 'resources/Menu/small-folder_16x32.png';
-
-            const img = document.createElement('img');
-            // Check if we have a custom icon, otherwise fallback to standard folder
-            img.src = customCharacterIcons[character.id] || "https://win98icons.alexmeub.com/icons/png/directory_closed-4.png";
-            img.alt = character.name;
-
-            const label = document.createElement('span');
-            label.textContent = character.name;
-
-            iconDiv.appendChild(img);
-            iconDiv.appendChild(label);
+            iconDiv.innerHTML = `<img src="${iconSrc}" alt="${character.name}"><span>${character.name}</span>`;
             desktopContainer.appendChild(iconDiv);
+
+            // 2. Create Start Menu Item
+            const smItem = document.createElement('div');
+            smItem.className = 'sm-left-item';
+            smItem.dataset.app = character.id;
+            smItem.dataset.smallIcon = 'resources/Menu/small-folder_16x32.png';
+            smItem.innerHTML = `
+                <img src="${iconSrc}" alt="${character.name}">
+                <div class="sm-item-text">
+                    <strong>${character.name}</strong>
+                    <span>Folder</span>
+                </div>
+            `;
+            startMenuApps.appendChild(smItem);
         });
     }
+
+    // Attach click events to all Start Menu Application buttons
+    document.querySelectorAll('.sm-left-item, .sm-right-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const appId = item.dataset.app;
+            const title = item.querySelector('strong') ? item.querySelector('strong').textContent : item.querySelector('span').textContent;
+            const iconSrc = item.dataset.smallIcon || item.querySelector('img').src;
+            
+            // Close start menu
+            startMenu.classList.remove('show');
+            startButton.classList.remove('active');
+            
+            openWindow(appId, title, iconSrc);
+        });
+    });
 
     // ==========================================================================
     // UPDATE DOUBLE-CLICK LOGIC
@@ -289,12 +313,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+// ==========================================================================
+    // CONTENT INJECTOR
     // ==========================================================================
-    //CONTENT INJECTOR
-    // ==========================================================================
+    
+    // Hash function needed for the Run command (Secret Input)
+    async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Secret destinations map (copied from script.js)
+    const SECRET_DESTINATIONS = {
+        "3cc93b2a02bca5ed6dfd9626007d0c37acc72e87fe3887923ee8de4a52dbb14d": 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08": "sketches.html",
+        "0832c0adf05418144b7b5f01e14600782ba7a302a606b49e3bf26214b765c176": "surprise.html"
+    };
+
     function populateWindowContent(appId, contentContainer) {
         contentContainer.innerHTML = ''; 
 
+        // 1. ABOUT APP
         if (appId === 'about') {
             contentContainer.innerHTML = `
                 <div class="xp-about-layout">
@@ -312,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // 2. GIFTS & FANART APP
         if (appId === 'fanart') {
             const gridWrapper = document.createElement('div');
             gridWrapper.className = 'xp-main-area';
@@ -331,6 +373,62 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // 3. RUN... (CMD) APP
+        if (appId === 'cmd') {
+            contentContainer.innerHTML = `
+                <div class="xp-run-layout">
+                    <img src="https://win98icons.alexmeub.com/icons/png/console_prompt-0.png" alt="Run">
+                    <div class="xp-run-content">
+                        <p>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</p>
+                        <div class="xp-run-input-group">
+                            <strong>Open:</strong>
+                            <input type="text" id="run-command-input" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const runInput = contentContainer.querySelector('#run-command-input');
+            setTimeout(() => runInput.focus(), 100); // Auto focus input
+
+            runInput.addEventListener('input', async (e) => {
+                const val = e.target.value.trim(); 
+                if (val.length === 0) { e.target.style.backgroundColor = ''; return; }
+                
+                const currentHash = await sha256(val);
+                if (SECRET_DESTINATIONS[currentHash]) {
+                    e.target.style.backgroundColor = '#d4ffd4'; // Light green success
+                    setTimeout(() => {
+                        window.location.href = SECRET_DESTINATIONS[currentHash];
+                    }, 300); 
+                } else {
+                    e.target.style.backgroundColor = '';
+                }
+            });
+            return;
+        }
+
+        // 4. NOTEPAD APP
+        if (appId === 'notepad') {
+            contentContainer.innerHTML = `
+                <textarea id="notepad-textarea" class="xp-notepad-textarea" spellcheck="false" placeholder="Type here..."></textarea>
+            `;
+            
+            const textarea = contentContainer.querySelector('#notepad-textarea');
+            // Load saved notes
+            const savedNote = localStorage.getItem('xp-notepad-data');
+            if (savedNote) textarea.value = savedNote;
+
+            // Save notes as you type
+            textarea.addEventListener('input', (e) => {
+                localStorage.setItem('xp-notepad-data', e.target.value);
+            });
+            
+            setTimeout(() => textarea.focus(), 100);
+            return;
+        }
+
+        // 5. CHARACTER FOLDERS
         const characterData = galleryData.categories.find(c => c.id === appId);
         if (characterData) {
             contentContainer.innerHTML = `
@@ -609,5 +707,111 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.height = 'auto';
             display.classList.add('is-zoomed');
         }
+    }
+    // ==========================================================================
+    // START MENU & AUTHENTIC SHUTDOWN SEQUENCE
+    // ==========================================================================
+    const startButton = document.getElementById('start-button');
+    const startMenu = document.getElementById('start-menu');
+    const btnStartTurnOff = document.getElementById('start-btn-turnoff');
+    
+    const shutdownOverlay = document.getElementById('shutdown-overlay');
+    const btnTodCancel = document.getElementById('tod-cancel');
+    const btnTodRestart = document.getElementById('tod-restart');
+    const btnTodShutdown = document.getElementById('tod-shutdown');
+    
+    const logoffScreen = document.getElementById('logoff-screen');
+    const taskbarElement = document.getElementById('taskbar');
+    // Note: desktopContainer is already defined higher up in the file as 'desktopContainer' or 'desktopIcons'
+    const desktopElement = document.getElementById('desktop-icons-container');
+
+    // Toggle Start Menu
+    if (startButton) {
+        startButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            startMenu.classList.toggle('show');
+            startButton.classList.toggle('active');
+        });
+    }
+
+    // Close Start Menu when clicking anywhere else
+    document.addEventListener('click', (e) => {
+        if (startMenu && startButton && !startMenu.contains(e.target) && !startButton.contains(e.target)) {
+            startMenu.classList.remove('show');
+            startButton.classList.remove('active');
+        }
+    });
+
+    // "Turn Off Computer" inside Start Menu
+    if (btnStartTurnOff) {
+        btnStartTurnOff.addEventListener('click', () => {
+            startMenu.classList.remove('show');
+            startButton.classList.remove('active');
+            
+            // Activate the grayscale backdrop & dialog
+            if (shutdownOverlay) {
+                shutdownOverlay.classList.add('show');
+            } else {
+                console.error("Shutdown overlay HTML missing");
+            }
+        });
+    }
+
+    // "Cancel" on Dialog Box
+    if (btnTodCancel) {
+        btnTodCancel.addEventListener('click', () => {
+            shutdownOverlay.classList.remove('show');
+        });
+    }
+
+    //"Restart" on Dialog Box
+    if (btnTodRestart) {
+        btnTodRestart.addEventListener('click', () => {
+            location.reload(); 
+        });
+    }
+
+    // "Turn Off" on Dialog Box
+    if (btnTodShutdown) {
+        btnTodShutdown.addEventListener('click', () => {
+            // Fade out the overlay/dialog first
+            shutdownOverlay.classList.remove('show');
+            
+            setTimeout(() => {
+                
+                //Close every open window
+                Object.values(openWindows).forEach(win => {
+                    win.windowEl.style.display = 'none';
+                });
+                
+                // Hide Desktop icons after 400ms
+                setTimeout(() => {
+                    if (desktopElement) desktopElement.style.display = 'none';
+                    
+                    //Hide Taskbar after another 400ms
+                    setTimeout(() => {
+                        if (taskbarElement) taskbarElement.style.display = 'none';
+                        
+                        // Turn the background black briefly
+                        document.body.style.backgroundImage = 'none';
+                        document.body.style.backgroundColor = '#000';
+                        
+                        //Reveal the Blue "Shutting Down" screen
+                        setTimeout(() => {
+                            logoffScreen.classList.add('show');
+                            
+                            //Redirect to main site
+                            setTimeout(() => {
+                                window.location.href = "https://bryancontador.github.io/index.html";
+                            }, 3500);
+                            
+                        }, 600); // Delay before blue screen appears
+                        
+                    }, 400); // Delay before taskbar disappears
+                    
+                }, 400); // Delay before icons disappear
+                
+            }, 500); // Wait for the grayscale dialog to disappear
+        });
     }
 }); 
