@@ -20,17 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock(); // Run immediately on load
 
     // ==========================================================================
-    // DYNAMIC DESKTOP ICON GENERATION (Using your data.js)
+    // DYNAMIC DESKTOP ICON GENERATION FROM DATA.JS
     // ==========================================================================
     const desktopContainer = document.getElementById('desktop-icons-container');
 
     // Map your character IDs from data.js to your custom icon filenames
+    //CUSTOM ICONS
     const customCharacterIcons = {
         'sunshine': 'resources/Menu/sunshine_48x48x32.png',
         'jamol': 'resources/Menu/jamol_48x48x32.png',
         'berkut': 'resources/Menu/berkut_48x48x32.png',
         'bertie': 'resources/Menu/bertie_48x48x32.png',
-        'demon_girl': 'resources/Menu/demon_48x48x32.png'
+        'demon_girl': 'resources/Menu/demon_48x48x32.png',
+        'misc': 'resources/Menu/others-48x48x32.png'
     };
 
     if (typeof galleryData !== 'undefined' && galleryData.categories) {
