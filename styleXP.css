@@ -499,12 +499,28 @@ body {
     max-height: 100%;
     object-fit: contain;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-    transition: filter 0.3s ease;
+    /*transition: filter 0.2s ease, opacity 0.2s ease; */
 }
 
-/* Sensitive Content Blur */
 .xp-picture-display img.blurred {
-    filter: blur(15px);
+    filter: blur(20px) saturate(0.8);
+}
+
+/* Zoom & Pan Styles */
+.xp-picture-display.is-zoomed {
+    overflow: auto; /* Allows scrolling */
+    align-items: flex-start; /* Fixes scrolling bounds */
+    justify-content: flex-start;
+}
+
+.xp-picture-display.is-zoomed img {
+    max-width: none;
+    max-height: none;
+    cursor: grab;
+}
+
+.xp-picture-display.is-zoomed img:active {
+    cursor: grabbing;
 }
 
 .sensitive-warning {

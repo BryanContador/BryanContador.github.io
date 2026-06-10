@@ -391,14 +391,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // WINDOWS PICTURE AND FAX VIEWER
+    // WINDOWS PICTURE AND FAX VIEWER (With Zoom, Alt, and Blur Flash Fix)
     // ==========================================================================
     let viewerCurrentArray = [];
     let viewerCurrentIndex = 0;
+    let viewerAltIndex = 0; // Tracks which alt image we are on
+    let viewerZoomLevel = 1; // Tracks zoom multiplier
+    
+    // Panning variables
+    let isPanning = false, panStartX, panStartY, scrollLeft, scrollTop;
 
     function openPictureViewer(itemArray, startIndex) {
         viewerCurrentArray = itemArray;
         viewerCurrentIndex = startIndex;
+        viewerAltIndex = 0; // Reset alt on new open
+        viewerZoomLevel = 1; // Reset zoom on new open
         
         const appId = 'pictureViewer';
         const title = "Windows Picture and Fax Viewer";
@@ -410,6 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!windowEl) return;
         const contentContainer = windowEl.querySelector('.window-content');
         
+        // Inject UI if it doesn't exist
         if(!contentContainer.querySelector('.xp-picture-viewer')) {
             contentContainer.innerHTML = `
                 <div class="xp-picture-viewer">
@@ -418,31 +426,86 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="pv-desc"></span>
                     </div>
                     <div class="xp-picture-display">
+                        <div class="pv-loader" style="position: absolute; color: #555; font-family: Tahoma, 'Segoe UI', Geneva, sans-serif; display: none;">Loading...</div>
                         <img class="pv-img" src="" alt="">
                         <div class="sensitive-warning">Sensitive Content - Click to View</div>
                     </div>
                     <div class="xp-picture-toolbar">
                         <button class="xp-toolbar-btn pv-prev" title="Previous Image">◄</button>
                         <button class="xp-toolbar-btn pv-next" title="Next Image">►</button>
+                        <div style="width: 1px; height: 20px; background: #7f9db9; margin: 0 5px;"></div>
+                        <button class="xp-toolbar-btn pv-zoom-in" title="Zoom In">＋</button>
+                        <button class="xp-toolbar-btn pv-zoom-out" title="Zoom Out">－</button>
+                        <button class="xp-toolbar-btn pv-zoom-reset" title="Fit to Window">▢</button>
+                        <div style="width: 1px; height: 20px; background: #7f9db9; margin: 0 5px;"></div>
+                        <button class="xp-toolbar-btn pv-alt" title="View Alternative" style="display:none; font-size:12px; font-weight:bold;">ALT</button>
                     </div>
                 </div>
             `;
             
+            // --- EVENT LISTENERS ---
+            const displayArea = contentContainer.querySelector('.xp-picture-display');
+            const imgEl = contentContainer.querySelector('.pv-img');
+            const warningBtn = contentContainer.querySelector('.sensitive-warning');
+
+            // Navigation
             contentContainer.querySelector('.pv-prev').addEventListener('click', () => {
                 viewerCurrentIndex = (viewerCurrentIndex - 1 + viewerCurrentArray.length) % viewerCurrentArray.length;
+                viewerAltIndex = 0; // Reset alt source
+                viewerZoomLevel = 1; // Reset zoom
+                imgEl.removeAttribute('data-revealed'); // Re-hide sensitive content
                 updatePictureViewerUI();
             });
+            
             contentContainer.querySelector('.pv-next').addEventListener('click', () => {
                 viewerCurrentIndex = (viewerCurrentIndex + 1) % viewerCurrentArray.length;
+                viewerAltIndex = 0; 
+                viewerZoomLevel = 1; 
+                imgEl.removeAttribute('data-revealed');
                 updatePictureViewerUI();
             });
 
-            const warningBtn = contentContainer.querySelector('.sensitive-warning');
-            const imgEl = contentContainer.querySelector('.pv-img');
+            // Alt Sources
+            contentContainer.querySelector('.pv-alt').addEventListener('click', () => {
+                viewerAltIndex++; 
+                viewerZoomLevel = 1;
+                // The bounds check for this index happens inside updatePictureViewerUI
+                updatePictureViewerUI(); 
+            });
+
+            // Zoom Controls
+            contentContainer.querySelector('.pv-zoom-in').addEventListener('click', () => { viewerZoomLevel += 0.5; applyZoom(); });
+            contentContainer.querySelector('.pv-zoom-out').addEventListener('click', () => { if(viewerZoomLevel > 0.5) viewerZoomLevel -= 0.5; applyZoom(); });
+            contentContainer.querySelector('.pv-zoom-reset').addEventListener('click', () => { viewerZoomLevel = 1; applyZoom(); });
+
+            // Sensitive Content un-blur
             warningBtn.addEventListener('click', () => {
                 imgEl.classList.remove('blurred');
                 warningBtn.style.display = 'none';
+                imgEl.setAttribute('data-revealed', 'true');
             });
+
+            // Panning Logic (Click and Drag when zoomed)
+            imgEl.addEventListener('mousedown', (e) => {
+                if (viewerZoomLevel > 1) {
+                    isPanning = true;
+                    panStartX = e.pageX - displayArea.offsetLeft;
+                    panStartY = e.pageY - displayArea.offsetTop;
+                    scrollLeft = displayArea.scrollLeft;
+                    scrollTop = displayArea.scrollTop;
+                }
+            });
+            displayArea.addEventListener('mousemove', (e) => {
+                if (!isPanning) return;
+                e.preventDefault();
+                const x = e.pageX - displayArea.offsetLeft;
+                const y = e.pageY - displayArea.offsetTop;
+                const walkX = (x - panStartX);
+                const walkY = (y - panStartY);
+                displayArea.scrollLeft = scrollLeft - walkX;
+                displayArea.scrollTop = scrollTop - walkY;
+            });
+            window.addEventListener('mouseup', () => isPanning = false);
         }
         
         updatePictureViewerUI();
@@ -455,19 +518,92 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = viewerCurrentArray[viewerCurrentIndex];
         const imgEl = windowEl.querySelector('.pv-img');
         const warningBtn = windowEl.querySelector('.sensitive-warning');
+        const altBtn = windowEl.querySelector('.pv-alt');
+        const loaderText = windowEl.querySelector('.pv-loader');
         
-        windowEl.querySelector('.pv-title').textContent = item.title || 'Untitled';
-        windowEl.querySelector('.pv-desc').textContent = item.description || '';
-        windowEl.querySelector('.window-title').textContent = `${item.title || 'Image'} - Windows Picture and Fax Viewer`;
-        
-        imgEl.src = item.highRes || item.thumb;
+        let sources = [item.highRes || item.thumb];
+        let sensitivities = [item.sensitive === true];
 
-        if (item.sensitive) {
-            imgEl.classList.add('blurred');
-            warningBtn.style.display = 'block';
+        if (item.altSources && item.altSources.length > 0) {
+            item.altSources.forEach(alt => {
+                if (typeof alt === 'string') {
+                    sources.push(alt);
+                    sensitivities.push(item.sensitive === true); // Inherit main sensitivity
+                } else if (typeof alt === 'object') {
+                    sources.push(alt.src);
+                    sensitivities.push(alt.sensitive !== undefined ? alt.sensitive : item.sensitive === true);
+                }
+            });
+        }
+
+        // Show/Hide Alt Button
+        if (sources.length > 1) {
+            altBtn.style.display = 'flex';
         } else {
-            imgEl.classList.remove('blurred');
-            warningBtn.style.display = 'none';
+            altBtn.style.display = 'none';
+            viewerAltIndex = 0;
+        }
+
+        // Ensure Alt index wraps around correctly
+        if (viewerAltIndex >= sources.length) viewerAltIndex = 0;
+
+        const currentSrc = sources[viewerAltIndex];
+        const currentSensitive = sensitivities[viewerAltIndex];
+
+        // Update Text
+        windowEl.querySelector('.pv-title').textContent = item.title || 'Untitled';
+        let descText = item.description || '';
+        if (sources.length > 1) descText += ` (Showing alt ${viewerAltIndex + 1}/${sources.length})`;
+        windowEl.querySelector('.pv-desc').textContent = descText;
+        windowEl.querySelector('.window-title').textContent = `${item.title || 'Image'} - Windows Picture and Fax Viewer`;
+
+        // --- INSTANT IMAGE SWAP LOGIC ---
+        
+        //Hide image and warning instantly, show Loading text
+        imgEl.style.visibility = 'hidden'; 
+        imgEl.classList.remove('blurred');
+        warningBtn.style.display = 'none';
+        loaderText.style.display = 'block';
+        loaderText.textContent = 'Loading...';
+        
+        applyZoom();
+
+        imgEl.src = currentSrc;
+
+        imgEl.onload = () => {
+            loaderText.style.display = 'none';
+
+            if (currentSensitive && !imgEl.getAttribute('data-revealed')) {
+                imgEl.classList.add('blurred');
+                warningBtn.style.display = 'block';
+            } else {
+                imgEl.classList.remove('blurred');
+            }
+            
+            imgEl.style.visibility = 'visible';
+        };
+
+        imgEl.onerror = () => {
+            loaderText.textContent = 'Error loading image.';
+        };
+    }
+
+    function applyZoom() {
+        const windowEl = document.getElementById('window-pictureViewer');
+        if(!windowEl) return;
+        const display = windowEl.querySelector('.xp-picture-display');
+        const img = windowEl.querySelector('.pv-img');
+        
+        if (viewerZoomLevel <= 1) {
+            // Reset to fit window
+            img.style.width = 'auto';
+            img.style.height = 'auto';
+            display.classList.remove('is-zoomed');
+        } else {
+            // Apply Zoom
+            img.style.width = `${viewerZoomLevel * 100}%`;
+            img.style.height = 'auto';
+            display.classList.add('is-zoomed');
         }
     }
-});
+}); 
