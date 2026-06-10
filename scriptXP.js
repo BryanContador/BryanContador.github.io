@@ -298,11 +298,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (appId === 'about') {
             contentContainer.innerHTML = `
                 <div class="xp-about-layout">
-                    <img src="resources/logo.png" alt="Benjamin Counter">
+                    <img src="resources/Menu/logoXP_bc.png" alt="Benjamin Counter">
                     <h2>Benjamin Counter</h2>
                     <p>Welcome to my portfolio, here you will find my latest artwork and creative projects.</p>
-                    <p>Created and maintained by Bryan Benjamin Counter. This platform serves as a digital portfolio for my projects and artwork.</p>
+                    <p>Created and maintained by Bryan Benjamin Counter. This platform serves as a digital portfolio for my projects and artwork.
+                    For inquiries, collaborations, or suggestions to improve the site, please use the contact details listed below.</p>
                     <p>Discord: bryancontador</p>
+                    <p>Email: bryan.virtuales@gmail.com</p>
                     <a href="https://github.com/BryanContador" target="_blank" style="color: blue;">GitHub Profile</a> | 
                     <a href="https://x.com/BejaminCounter" target="_blank" style="color: blue;">Twitter/X</a>
                 </div>
