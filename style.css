@@ -568,6 +568,36 @@ footer p {
     cursor: pointer;
 }
 
+/* WinXP  Button */
+.xp-time-machine-btn {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(to bottom, #419631 0%, #46a434 8%, #368525 25%, #3c8a2e 90%, #17490a 100%);
+    border: 1px solid #1a3c0e;
+    border-radius: 0 10px 10px 0; /* Authentic XP curved edge */
+    padding: 5px 20px 5px 15px;
+    text-decoration: none;
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.xp-time-machine-btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+.xp-time-machine-btn span {
+    color: white;
+    font-family: Tahoma, 'Segoe UI', sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+    margin-left: 8px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-transform: none; /* overrides modern uppercase */
+    letter-spacing: normal;
+}
+
 /* About Page Styles */
 .about-content {
     max-width: 800px;
