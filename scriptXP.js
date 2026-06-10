@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-// ==========================================================================
+    // ==========================================================================
     // UPDATE DOUBLE-CLICK LOGIC
     // ==========================================================================
     const allIcons = document.querySelectorAll('.desktop-icon');
@@ -243,8 +243,20 @@ document.addEventListener('DOMContentLoaded', () => {
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
             pos4 = e.clientY;
-            windowEl.style.top = (windowEl.offsetTop - pos2) + "px";
-            windowEl.style.left = (windowEl.offsetLeft - pos1) + "px";
+            
+            let newTop = windowEl.offsetTop - pos2;
+            let newLeft = windowEl.offsetLeft - pos1;
+
+            // BOUNDARY CHECK: Top ceiling
+            if (newTop < 0) newTop = 0; 
+            
+            // BOUNDARY CHECK: Bottom floor (Keep title bar accessible above taskbar)
+            // 60 = 30px taskbar + 30px safe space for the title bar
+            const maxTop = Math.max(0, window.innerHeight - 60); 
+            if (newTop > maxTop) newTop = maxTop;
+
+            windowEl.style.top = newTop + "px";
+            windowEl.style.left = newLeft + "px";
         }
 
         function elementTouchDrag(e) {
@@ -252,8 +264,19 @@ document.addEventListener('DOMContentLoaded', () => {
             pos2 = pos4 - e.touches[0].clientY;
             pos3 = e.touches[0].clientX;
             pos4 = e.touches[0].clientY;
-            windowEl.style.top = (windowEl.offsetTop - pos2) + "px";
-            windowEl.style.left = (windowEl.offsetLeft - pos1) + "px";
+            
+            let newTop = windowEl.offsetTop - pos2;
+            let newLeft = windowEl.offsetLeft - pos1;
+
+            //bondary top
+            if (newTop < 0) newTop = 0;
+
+            //boundary bottom
+            const maxTop = Math.max(0, window.innerHeight - 60); 
+            if (newTop > maxTop) newTop = maxTop;
+
+            windowEl.style.top = newTop + "px";
+            windowEl.style.left = newLeft + "px";
         }
 
         function closeDragElement() {
