@@ -1648,3 +1648,130 @@ body.dark-mode {
     0% { transform: scaleX(1); }
     100% { transform: scaleX(0); }
 }
+
+
+/* ==========================================================================
+   XP BOOT SEQUENCE ANIMATIONS
+   ========================================================================== */
+
+/* black boot screen */
+#xp-boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 999999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.xp-boot-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: -50px;
+}
+
+.xp-boot-center img {
+    width: 200px; 
+    max-width: 80vw;
+    opacity: 0;
+    animation: xpLogoFadeIn 4s ease-in-out forwards; /* 3-second fade */
+}
+
+@keyframes xpLogoFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* loading bar box */
+.xp-loading-bar-container {
+    width: 150px;
+    height: 15px;
+    border: 2px solid #b2b2b2;
+    border-radius: 5px;
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    padding: 2px;
+}
+
+/*moving blue squares */
+.xp-loading-blocks {
+    height: 100%;
+    width: 35px;
+    background: repeating-linear-gradient(
+        to right,
+        #2838c7 0%,
+        #2838c7 8px,
+        transparent 8px,
+        transparent 11px
+    );
+    position: absolute;
+    left: -40px;
+    animation: xp-load-slide 2.5s infinite linear;
+}
+
+@keyframes xp-load-slide {
+    0% { left: -40px; }
+    100% { left: 160px; }
+}
+
+.xp-boot-copyright {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    font-family: Tahoma, 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+/* blue welcome screen */
+#xp-welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #5a7edc;
+    z-index: 999999;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: wait;
+}
+
+#xp-welcome-screen .logoff-bar {
+    height: 12%;
+    width: 100%;
+}
+
+#xp-welcome-screen .logoff-bar.top {
+    background: linear-gradient(to right, #00136b 0%, #00339c 100%);
+    border-bottom: 2px solid #f38a00;
+}
+
+#xp-welcome-screen .logoff-bar.bottom {
+    background: linear-gradient(to right, #00136b 0%, #00339c 100%);
+    border-top: 2px solid #f38a00;
+}
+
+#xp-welcome-screen .logoff-center {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-text {
+    color: white;
+    font-family: Tahoma, 'Segoe UI', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    letter-spacing: 1px;
+}

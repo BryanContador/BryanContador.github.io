@@ -1184,4 +1184,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadCharacterProfile();
+
+    // ==========================================================================
+    // XP BOOT SEQUENCE ANIMATION (index.html)
+    // ==========================================================================
+    const xpBootBtn = document.querySelector('.xp-time-machine-btn');
+    const xpBootScreen = document.getElementById('xp-boot-screen');
+    const xpWelcomeScreen = document.getElementById('xp-welcome-screen');
+
+    if (xpBootBtn && xpBootScreen && xpWelcomeScreen) {
+        xpBootBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop instant redirect
+            
+            // Show black bootup screen
+            xpBootScreen.style.display = 'flex';
+            
+            // wait then switch to Blue Welcome Screen
+            setTimeout(() => {
+                xpBootScreen.style.display = 'none';
+                xpWelcomeScreen.style.display = 'flex';
+                
+                // wait on Welcome Screen, then actually redirect
+                setTimeout(() => {
+                    window.location.href = xpBootBtn.href;
+                }, 2000);
+                
+            }, 3200); // 3.2 seconds
+        });
+    }
 });
