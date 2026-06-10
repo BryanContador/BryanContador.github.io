@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (typeof galleryData !== 'undefined' && galleryData.categories) {
         galleryData.categories.forEach(character => {
-            if (character.id === 'misc') return; 
+            //if (character.id === 'misc') return; 
 
             const iconDiv = document.createElement('div');
             iconDiv.className = 'desktop-icon';
