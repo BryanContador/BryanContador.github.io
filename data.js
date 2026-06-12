@@ -1097,7 +1097,7 @@ const galleryData = {
             thumb: "sketches/thumb/Imagen_ (14)_thumb.jpg",
             highRes: "sketches/Imagen_(14).jpg",
             altSources:["sketches/Imagen_(13).jpg"],
-            title: "Camila The Kat and Lil Dream",
+            title: "Camila The Cat and Lil Dream",
             description: "Girlfriends. I made them when i was on my lasts years of preparatory. A little slice of my life when things were better.",
             status: "sketch",
             date: "2022-05-14"
