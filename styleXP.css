@@ -792,3 +792,26 @@ body {
     font-weight: 550;
     outline: none; box-sizing: border-box;
 }
+
+body {
+    overflow: hidden !important; 
+}
+
+body::after {
+    content: "Thanks for being here :)";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif,'Patrick Hand';
+    font-size: 2rem;
+    z-index: 2147483647;
+    pointer-events: all !important;
+    backdrop-filter: blur(10px);
+}
