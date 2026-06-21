@@ -792,7 +792,7 @@ body {
     font-weight: 550;
     outline: none; box-sizing: border-box;
 }
-
+/*
 body {
     overflow: hidden !important; 
 }
@@ -814,4 +814,4 @@ body::after {
     z-index: 2147483647;
     pointer-events: all !important;
     backdrop-filter: blur(10px);
-}
+} */

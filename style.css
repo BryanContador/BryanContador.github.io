@@ -1777,7 +1777,7 @@ body.dark-mode {
 }
 
 
-
+/* Just in case. maybe never, but who knows
 body {
     overflow: hidden !important; 
 }
@@ -1799,4 +1799,4 @@ body::after {
     z-index: 2147483647;
     pointer-events: all !important;
     backdrop-filter: blur(10px);
-}
+} */
