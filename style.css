@@ -26,6 +26,8 @@
     --bg-gradient-end: #cacaca;
     --header-bg: #ffffff;
     --header-text: #000000;
+
+    --shine-color: #aaaaaa; 
 }
 
 /* Dark Theme Variables */
@@ -46,6 +48,8 @@ body.dark-mode {
     --bg-gradient-end: #484848;
     --header-bg: #000000;
     --header-text: #ffffff;
+
+    --shine-color: #333333; 
 }
 
 /* Base Styles */
@@ -93,13 +97,25 @@ header {
 }
 
 .logo-container h1 {
-    color: var(--header-text);
     font-family: 'ND Logos', 'Arial', sans-serif;
     font-size: 4rem;
     margin: 0;
     letter-spacing: 2px;
     margin-bottom: 15px;
-    transition: color 0.3s ease;
+    
+    background: linear-gradient(
+        110deg,
+        var(--header-text) 30%,
+        var(--shine-color) 50%,
+        var(--header-text) 70%
+    );
+    background-size: 200% auto;
+    color: transparent; 
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    animation: shineEffect 8s ease-in-out infinite;
+    transition: background 0.3s ease;
 }
 
 /* Navigation Styles */
@@ -812,6 +828,18 @@ footer p {
     }
     100% {
         transform: translateY(0);
+    }
+}
+
+@keyframes shineEffect {
+    0% {
+        background-position: 150% center;
+    }
+    20% {
+        background-position: -50% center;
+    }
+    100% {
+        background-position: -50% center;
     }
 }
 
