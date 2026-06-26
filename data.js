@@ -1094,6 +1094,16 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "drawings/thumb/camila_lili_thumb.jpg",
+            highRes: "drawings/camila_lili2.jpg",
+            altSources:[{src: "drawings/camila_lili.jpg", sensitive: true}],
+            title: "Cause of death",
+            description: "It was meant to be...",
+            status: "finished",
+            date: "2026-06-14"
+        },
+        {
+            type: "image",
             thumb: "sketches/thumb/Imagen_ (14)_thumb.jpg",
             highRes: "sketches/Imagen_(14).jpg",
             altSources:["sketches/Imagen_(13).jpg"],
