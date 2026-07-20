@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // List all your character links here
+        const links = [
+            "https://artfight.net/character/2729694.sunshine",
+            "https://artfight.net/character/8149728.jamol",
+            "https://artfight.net/character/8149716.berkut",
+            "https://artfight.net/character/8149732.demon-girl",
+            "https://artfight.net/character/8350582.bertie"
+        ];
+
+        // Pick a random index and redirect
+        const randomLink = links[Math.floor(Math.random() * links.length)];
+        window.location.href = randomLink;
+    </script>
+</head>
+<body>
+    <p>Redirecting to a random character...</p>
+</body>
+</html>
