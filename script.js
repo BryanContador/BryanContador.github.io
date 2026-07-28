@@ -1186,6 +1186,96 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCharacterProfile();
 
     // ==========================================================================
+    // RECENT UPDATE POPUP (TOP LEFT)
+    // ==========================================================================
+    
+    function checkRecentUpdates() {
+        const username = 'BryanContador';
+        const repo = 'BryanContador.github.io';
+        const branch = 'main';
+        const cacheKey = 'bc_github_commit_cache';
+        const dismissKey = 'bc_dismissed_update_sha';
+
+        const now = new Date().getTime();
+        const cachedDataStr = localStorage.getItem(cacheKey);
+        let cachedData = null;
+
+        if (cachedDataStr) {
+            try { cachedData = JSON.parse(cachedDataStr); } catch (e) {}
+        }
+
+        // Use cache if less than 1 hour old to avoid GitHub API limits
+        if (cachedData && (now - cachedData.timestamp < 3600000)) {
+            processCommitData(cachedData.data);
+        } else {
+            fetch(`https://api.github.com/repos/${username}/${repo}/commits/${branch}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("API rate limit or network error");
+                    return res.json();
+                })
+                .then(data => {
+                    // Save to cache
+                    localStorage.setItem(cacheKey, JSON.stringify({ timestamp: now, data: data }));
+                    processCommitData(data);
+                })
+                .catch(err => console.warn("Update popup skipped: ", err));
+        }
+
+        function processCommitData(data) {
+            if (!data || !data.commit) return;
+
+            const commitSha = data.sha;
+            const commitDate = new Date(data.commit.author.date);
+            const timeDiff = now - commitDate.getTime();
+            const daysDiff = timeDiff / (1000 * 3600 * 24);
+
+            //20 days limit
+            if (daysDiff > 20) return;
+
+            const dismissedSha = localStorage.getItem(dismissKey);
+            if (dismissedSha === commitSha) return;
+
+            renderUpdatePopup(commitSha);
+        }
+
+        function renderUpdatePopup(commitSha) {
+            const popup = document.createElement('div');
+            popup.id = 'update-popup';
+            popup.innerHTML = `
+                <div class="update-popup-header">
+                    <span>Site Updated!</span>
+                    <button class="update-popup-close" aria-label="Close popup">&times;</button>
+                </div>
+                <div class="update-popup-text">
+                    Check out what changed! Last update available on the <a href="about.html">ABOUT</a> tab.
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+
+            // Trigger CSS slide-in animation after a slight delay
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 800);
+
+            // Handle the close button click
+            const closeBtn = popup.querySelector('.update-popup-close');
+            closeBtn.addEventListener('click', () => {
+                popup.classList.remove('show');
+                
+                localStorage.setItem(dismissKey, commitSha);
+                
+                // Remove from DOM after animation finishes
+                setTimeout(() => {
+                    popup.remove();
+                }, 600);
+            });
+        }
+    }
+
+    checkRecentUpdates();
+
+    // ==========================================================================
     // XP BOOT SEQUENCE ANIMATION (index.html)
     // ==========================================================================
     const xpBootBtn = document.querySelector('.xp-time-machine-btn');
