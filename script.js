@@ -1101,53 +1101,77 @@ document.addEventListener('DOMContentLoaded', () => {
             document.title = `${character.name} - Benjamin Counter`;
             charNameEl.textContent = character.name;
             
+            //handle bio logic
             const bioEl = document.getElementById('char-bio');
-            if (bioEl) bioEl.textContent = character.bio || "No bio available.";
-
-            // --- Updated Lore Logic ---
-            const loreEl = document.getElementById('char-lore');
-            if (loreEl) {
-                loreEl.textContent = character.lore || "No story available yet.";
-
-                if (loreWrapper && loreBtn) {
-                     // Reset to default state first (collapsed)
-                     loreWrapper.classList.add('collapsed');
-                     loreWrapper.classList.remove('expanded');
-                     loreBtn.style.display = 'none'; // Hide initially to prevent jump
-                     if(loreFade) loreFade.style.display = 'block';
-
-                     // Wait for render to calculate height
-                     setTimeout(() => {
-                        const fullHeight = loreEl.scrollHeight;
-                        const collapsedHeight = 250;
-
-                        if (fullHeight <= collapsedHeight + 50) {
-                            // Text is short
-                            loreWrapper.classList.remove('collapsed');
-                            loreWrapper.classList.add('expanded');
-                            loreBtn.style.display = 'none';
-                            if(loreFade) loreFade.style.display = 'none';
-                        } else {
-                            // Text is long
-                            loreBtn.style.display = 'block';
-                            if(loreFade) loreFade.style.display = 'block';
-                        }
-                     }, 50);
+            if (bioEl) {
+                if (character.bio) {
+                    bioEl.textContent = character.bio;
+                    bioEl.style.display = 'block';
+                } else {
+                    bioEl.style.display = 'none';
                 }
             }
 
-            const imgEl = document.getElementById('char-profile-img');
-            if (imgEl) {
-                imgEl.src = character.profileImage || character.thumb || 'resources/logo.png';
-                imgEl.alt = character.name;
+            const loreSection = document.querySelector('.profile-lore-section');
+            const loreEl = document.getElementById('char-lore');
+            if (loreEl && loreSection) {
+                if (character.lore) {
+                    loreSection.style.display = 'block';
+                    loreEl.textContent = character.lore;
+
+                    if (loreWrapper && loreBtn) {
+                         loreWrapper.classList.add('collapsed');
+                         loreWrapper.classList.remove('expanded');
+                         loreBtn.style.display = 'none'; 
+                         if(loreFade) loreFade.style.display = 'block';
+
+                         setTimeout(() => {
+                            const fullHeight = loreEl.scrollHeight;
+                            const collapsedHeight = 250;
+
+                            if (fullHeight <= collapsedHeight + 50) {
+                                loreWrapper.classList.remove('collapsed');
+                                loreWrapper.classList.add('expanded');
+                                loreBtn.style.display = 'none';
+                                if(loreFade) loreFade.style.display = 'none';
+                            } else {
+                                loreBtn.style.display = 'block';
+                                if(loreFade) loreFade.style.display = 'block';
+                            }
+                         }, 50);
+                    }
+                } else {
+                    // Hide lore entirely if it doesn't exist
+                    loreSection.style.display = 'none';
+                }
             }
 
+            // --- NEW: Project vs Character Layout ---
+            const imgSection = document.querySelector('.profile-image-section');
+            const bioSection = document.querySelector('.profile-bio-section');
+            const headerSection = document.querySelector('.profile-header');
+            const imgEl = document.getElementById('char-profile-img');
+
+            if (character.isProject) {
+                // It's a project (like 3D Renders): Hide image, center title
+                if (imgSection) imgSection.style.display = 'none';
+                if (bioSection) bioSection.style.textAlign = 'center';
+                if (headerSection) headerSection.style.marginBottom = '20px';
+            } else {
+                // It's a normal character: Show profile image
+                if (imgSection) imgSection.style.display = 'flex';
+                if (bioSection) bioSection.style.textAlign = ''; // Reset to CSS default
+                if (imgEl) {
+                    imgEl.src = character.profileImage || character.thumb || 'resources/logo.png';
+                    imgEl.alt = character.name;
+                }
+            }
+
+            // --- Gallery Initialization ---
             const galleryContainer = document.getElementById('dynamic-gallery-container');
             if (galleryContainer && character.galleryKey) {
                 galleryContainer.dataset.category = character.galleryKey;
-                
                 renderGallery();
-                
                 initializeGalleryModal();
             } else {
                 document.querySelector('.gallery').style.display = 'none';
@@ -1168,7 +1192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
         } else {
-            charNameEl.textContent = "CHARACTER NOT FOUND";
+            charNameEl.textContent = "CHARACTER / PROJECT NOT FOUND";
         }
 
         // Add Event Listener to button (prevent duplicate listeners)

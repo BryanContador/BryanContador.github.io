@@ -311,6 +311,17 @@ const galleryData = {
             bio: "Various works and experiments.",
             lore: "A collection of drawings that don't fit into the main character categories. Mostly single characters and random doodles."
         },
+        {
+            type: "category",
+            id: "3d-renders",
+            name: "3D Renders",
+            thumb: "renders/aster_1.jpg",
+
+
+            galleryKey: "renders3d_art",
+            isProject: true, // This new flag tells the scripts to hide the bio/lore layout
+            desc: "A collection of my 3D renders and Blender projects."
+        },
     ],
 
     // ==========================================================================
@@ -1437,5 +1448,42 @@ const galleryData = {
             title: "Bear girl",
             description: "Original Character \nOne of my first drawings. Damn."
         }
+    ],
+
+    // ==========================================================================
+    // 3D RENDERS DATA
+    // ==========================================================================
+    renders3d_art: [
+        {
+            type: "image",
+            thumb: "renders/thumb/sona_thumb.jpg",
+            highRes: "renders/sona.jpg",
+            altSources: ["renders/sona2.jpg","renders/sona3.jpg","renders/sona4.jpg","renders/sona5.jpg","renders/sona6.jpg","renders/sona7.jpg",],
+            title: "First renders",
+            description: "My first 3D renders in Blender. First time i touched Blender; the model was made using the VRoid Studio program, but i created the textures for the shirt and face.",
+            status: "finished",
+            date: "2026-08-10",
+        },
+        {
+            type: "image",
+            thumb: "renders/aster.jpg",
+            highRes: "renders/aster.jpg",
+            altSources: ["renders/aster_1.jpg","renders/aster_2.jpg",],
+            title: "Aster",
+            description: "Renders I did for my friend Andrew of his character Aster. I made the model the same way I did my own, using VRoid Studio and Blender. I also made the textures for the shirt, shoes and face. The horns were made by the artist CocoRohan (Rohan#4214) on BOOTH. Raven's Horns (https://booth.pm/en/items/4062293).",
+            status: "finished",
+            date: "2026-08-11"
+        },
+        {
+            type: "image",
+            thumb: "renders/back5.jpg",
+            highRes: "renders/back.jpg",
+            altSources: ["renders/back1.jpg","renders/back2.jpg","renders/back3.jpg","renders/back4.jpg","renders/back5.jpg"],
+            title: "Backrooms",
+            description: "An attempt to recreate the Backrooms aesthetic. Followed this YouTube guide: https://www.youtube.com/watch?v=u7iSKif7npY , but I believe that the power of my laptop made it look worse than I imagined.",
+            status: "finished",
+            date: "2026-08-12"
+        },
+
     ]
 };

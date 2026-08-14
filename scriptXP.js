@@ -428,16 +428,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 5. CHARACTER FOLDERS
+        // 5. CHARACTER & PROJECT FOLDERS
         const characterData = galleryData.categories.find(c => c.id === appId);
         if (characterData) {
+            let sidebarInfo = '';
+            
+            // Adjust sidebar based on if it's a Project or a Character
+            if (characterData.isProject) {
+                sidebarInfo = `<p><strong>Description:</strong><br>${characterData.desc || 'Project folder.'}</p>`;
+            } else {
+                sidebarInfo = `
+                    <p><strong>Bio:</strong><br>${characterData.bio || 'No bio available.'}</p><br>
+                    <p><strong>Lore:</strong><br>${characterData.lore || 'No story available.'}</p>
+                `;
+            }
+
             contentContainer.innerHTML = `
                 <div class="xp-explorer-layout">
                     <div class="xp-sidebar">
-                        <img src="${characterData.profileImage || characterData.thumb}" alt="${characterData.name}">
-                        <h3>${characterData.name} Details</h3>
-                        <p><strong>Bio:</strong><br>${characterData.bio || 'No bio available.'}</p><br>
-                        <p><strong>Lore:</strong><br>${characterData.lore || 'No story available.'}</p>
+                        <img src="${characterData.profileImage || characterData.thumb || 'resources/logo.png'}" alt="${characterData.name}">
+                        <h3>${characterData.name}</h3>
+                        ${sidebarInfo}
                     </div>
                     <div class="xp-main-area">
                         <h2 style="margin-bottom: 15px;">${characterData.name} Gallery</h2>
