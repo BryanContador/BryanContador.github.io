@@ -1484,6 +1484,16 @@ const galleryData = {
             status: "finished",
             date: "2026-08-12"
         },
+        {
+            type: "image",
+            thumb: "renders/thumb/look_at_what_you_did_to_me_thumb.jpg",
+            highRes: "renders/look_at_what_you_did_to_me.jpg",
+            altSources: ["renders/look_at_what_you_did_to_me2.jpg","renders/look_at_what_you_did_to_me3.jpg","renders/look_at_what_you_did_to_me4.jpg"],
+            title: "Look at what you did to me",
+            description: "This piece comes from the depths of my heart. Sadden, heartbroken and betrayed. This images is my attempt on 3D to express those feelings without lashing out on myself. Deep cuts on his wrists and blood on hands and head. I went thru a lot of different attemps at making this render. Blender kept deleting my edits on the textures.",
+            status: "finished",
+            date: "2026-08-14"
+        },
 
     ]
 };
