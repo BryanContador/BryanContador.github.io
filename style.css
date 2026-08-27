@@ -639,7 +639,8 @@ footer p {
     font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
     font-weight: 400; /* Added normal weight */
     text-align: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .intro-text {
@@ -680,7 +681,7 @@ footer p {
 
 /* Social Links Styles */
 .social-links {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .social-links h3 {
@@ -735,8 +736,8 @@ footer p {
 }
 
 .repo-info {
-    margin-top: 30px;
-    padding-top: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
     border-top: 1px dashed var(--separator-color);
     max-width: 500px;
     margin-left: auto;
@@ -1885,6 +1886,54 @@ body.dark-mode {
     #update-popup {
         top: 75px; 
     }
+}
+
+/* ==========================================================================
+   STATUS WIDGET weather and time
+   ========================================================================== */
+.status-widget {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 10px auto 10px auto;
+    padding: 6px 16px;
+    
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-color);
+}
+
+.status-divider {
+    width: 1px;
+    height: 16px;
+    background-color: var(--text-color);
+    opacity: 0.2;
 }
 
 

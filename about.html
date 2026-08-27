@@ -77,6 +77,29 @@
                         </a>
                     </li>
                 </ul>
+
+                <!-- Widget de Hora y Clima Minimalista -->
+                <div class="status-widget">
+                    <div class="status-item">
+                        <!-- Ícono de Reloj -->
+                        <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span id="local-time">--:--</span>
+                    </div>
+                    
+                    <div class="status-divider"></div>
+                    
+                    <div class="status-item">
+                        <!-- Ícono de Clima (Sol y Nube) -->
+                        <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="M20 12h2"></path><path d="m19.07 4.93-1.41 1.41"></path>
+                            <path d="M15.94 13A5.96 5.96 0 0 0 12 8c-2.43 0-4.52 1.45-5.46 3.54A4 4 0 0 0 7 19h11a3 3 0 0 0 0-6h-2.06z"></path>
+                        </svg>
+                        <span id="local-weather">--°C</span>
+                    </div>
+                </div>
                 
                 <div class="repo-info">
                     <p class="about-text">Want to see what's under the hood? See the repo <a href="https://github.com/BryanContador/BryanContador.github.io" target="_blank" class="underline-link repo-link">HERE</a></p>
@@ -139,6 +162,61 @@
                     console.error('Error fetching last commit:', error);
                     document.getElementById('last-commit').innerHTML = 'Latest update data currently unavailable.';
                 });
+        });
+
+
+        // widget time and wather
+        document.addEventListener("DOMContentLoaded", function() {
+            const timeEl = document.getElementById('local-time');
+            if (timeEl) {
+                const timeOptions = { 
+                    timeZone: 'America/Mexico_City', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    //second: '2-digit',
+                    hour12: true 
+                };
+                const timeFormatter = new Intl.DateTimeFormat('en-US', timeOptions);
+                
+                setInterval(() => {
+                    timeEl.textContent = `My time is: ${timeFormatter.format(new Date())}`;
+                }, 1000);
+                timeEl.textContent = `My time is: ${timeFormatter.format(new Date())}`;
+            }
+
+            // wather with Open-Meteo API
+            const weatherEl = document.getElementById('local-weather');
+            if (weatherEl) {
+                // michoacan coordinates
+                const lat = 19.7008;
+                const lon = -101.1828;
+                
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const temp = data.current_weather.temperature;
+                        const weatherCode = data.current_weather.weathercode;
+                        
+                        // dictionary mapping WMO weather codes to text
+                        const weatherMap = {
+                            0: 'Clear sky',
+                            1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast',
+                            45: 'Foggy', 48: 'Foggy',
+                            51: 'Light drizzle', 53: 'Drizzle', 55: 'Heavy drizzle',
+                            61: 'Light rain', 63: 'Rain', 65: 'Heavy rain',
+                            71: 'Light snow', 73: 'Snow', 75: 'Heavy snow',
+                            80: 'Rain showers', 81: 'Rain showers', 82: 'Heavy rain showers',
+                            95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Thunderstorm with heavy hail'
+                        };
+                        
+                        const description = weatherMap[weatherCode] || 'Unknown conditions';
+                        weatherEl.textContent = `My weather is: ${temp}°C, ${description}`;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching weather:", error);
+                        weatherEl.textContent = "My weather is: Unavailable right now";
+                    });
+            }
         });
     </script>
     
