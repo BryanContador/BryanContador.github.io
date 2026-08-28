@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.innerHTML = ''; // Clear existing content before rendering new items
 
-        // --- LIST LAYOUT (Characters / Categories) ---
+        // --- LIST LAYOUT (Characters / Categories Hover Accordion) ---
         if (layout === 'list') {
             if (actionFabsWrapper) actionFabsWrapper.style.display = 'none'; 
             container.className = 'category-list-grid';
@@ -268,14 +268,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 }
                 
-                //  Thumbnail Container
-                const imgContainer = document.createElement('div');
-                imgContainer.className = 'category-thumb-container';
-
+                // Imagen de fondo de la tarjeta
                 const img = document.createElement('img');
                 img.className = 'category-thumb';
                 
-                if (item.thumb) {
+                // Use profileImage if available, otherwise fallback to thumb, otherwise default logo
+                if (item.profileImage) {
+                    img.src = item.profileImage;
+                } else if (item.thumb) {
                     img.src = item.thumb;
                 } else {
                     img.src = 'resources/logo.png'; 
@@ -284,14 +284,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.alt = item.name;
                 img.loading = 'lazy';
 
-                imgContainer.appendChild(img);
+                // vertical name for hover effect when collapsed
+                const verticalName = document.createElement('span');
+                verticalName.className = 'category-name-vertical';
+                verticalName.textContent = item.name;
+
+                //info container visible on PC hover or always on mobile
+                const infoContainer = document.createElement('div');
+                infoContainer.className = 'category-info';
 
                 const nameTag = document.createElement('h3');
                 nameTag.className = 'category-name';
                 nameTag.textContent = item.name;
 
-                card.appendChild(imgContainer);
-                card.appendChild(nameTag);
+                infoContainer.appendChild(nameTag);
+
+                // card 
+                card.appendChild(img);
+                card.appendChild(verticalName);
+                card.appendChild(infoContainer);
 
                 container.appendChild(card);
             });

@@ -243,7 +243,8 @@ const galleryData = {
             thumb: "drawings/thumb/124_sin_titulo_Restaurado_20230902020738_thumb.png",
             
             // --- profile data---
-            profileImage: "drawings/sunshine/124_sin_titulo_Restaurado_20230902020738.jpg", // big image on profile page
+            //profileImage: "drawings/sunshine/124_sin_titulo_Restaurado_20230902020738.jpg"
+            profileImage: "drawings/sunshine/sunshine_main.jpg", // big image on profile page
             galleryKey: "sunshine_art", // array name
             bio: "Species: Omiltemi rabbit (Sylvilagus insonus)\nAge: Mid twenties (unspecified)\nLikes: loose clothes, Music, Sleeping.\n\nA cheerful bunny trying her best.",
             lore:"Born on the West Coast of Mexico. Growing up in a relatively small city, she often felt like an outsider due to her bubbly personality. Despite the challenges, she remained optimistic and kind-hearted, always looking for the silver lining.\nAs she grew older, Sunshine discovered a passion for math and turned it into a career by earning a degree in accounting. She currently works as an accounting team leader for a world wide car company, where she loves working with numbers, especially those that make a real life impact.\nIt was also pure luck that led her to the love of her life. While out for a weekend jog, Sunshine literally stumbled into romance, tripping over her own feet and falling right into Janet. A cat girl who is Sunshine's polar opposite, Janet is shy, reserved, and carries a sadness in her eyes. Yet, from that chaotic first moment, they both knew they were meant for each other. Sunshine embodies the spirit of hope and reminds us all to find the light, even in the darkest of times.\n\nOn a personal level, Sunshine is one of my main characters. She is the hope I wish to have when things get rough; she represents the light at the end of the tunnel and the warmth that keeps me going. She is my literal sunshine on a cloudy day.\nI gave her this basic but unique design for two reasons: one, I simply love bunnies, and two, I wanted her to be easily recognizable and memorable (Keep It Simple, Stupid). Throughout the years, drawing her has always brought a smile to my face, and she has been a true beacon of hope in my life. I hope she can do the same for others.\nRegarding Janet: I haven't drawn her much recently, mostly due to a lack of personal motivation, but her design is out there. She remains an integral part of Sunshine’s story.",        
@@ -254,7 +255,8 @@ const galleryData = {
             name: "Jamol",
             thumb: "drawings/thumb/1739986621233_thumb.jpg",
             
-            profileImage: "drawings/jamol/1739986621233.jpg",
+            //profileImage: "drawings/jamol/1739986621233.jpg",
+            profileImage:"drawings/jamol/1739986680341.jpg",
             galleryKey: "jamol_art",
             bio: "Species: Tehuantepec jackrabbit\nAge: Early twenties (unspecified)\n\n\"Maybe this suffering is what I deserve. Otherwise, why would God let me live through this pain?\"",
             lore:"Born in Mexico, she crossed north to live on the fringes of the US border at age 19, following her mother's death. She was left to care for the plantation her father and brother left behind.A legacy she never wanted. She has no real interest in the rancher life, but this is no ordinary plantation. While legitimate crops grow on the outside, in the heart of the land, illegal plants are grown and sold. Not by her hand, but by the people running the borders.\nDreaming of a better life, she tries to stay in the city for as long as she can, returning only when the cartel calls to make new deals. She has her hands tied. Nowhere to run. Nowhere to scream for help.\nWhen treating with the cartels, she uses her brother's name, Iván, donning a turban to keep her identity a secret. But words spread fast. In a game of telephone, locals referred to her as 'el tal Iván' (that Ivan guy). Misinterpretations twisted this into a more infamous name: 'The Taliban.'\nHer existence is suffering. Every day she wakes up to face the harsh reality of the border. Her only hope is to surrender herself to the feds and live the rest of her life behind bars. But for her, this is not an option. Not for now.\n\nI created this character as a vessel for my depression during a time when life felt relentless. She became my primary outlet. A way to externalize the pain when things were beating me down without stop. Many of my drawings reflect that suffering. Because she helped me carry that weight, she holds a special place in my heart, just like many of my other characters.",
@@ -266,7 +268,8 @@ const galleryData = {
             name: "Berkut ",
             thumb: "drawings/thumb/berkut_thumb.jpg",
             
-            profileImage: "drawings/berkut/berkut.jpg",
+            //profileImage: "drawings/berkut/berkut.jpg",
+            profileImage: "drawings/berkut/window.jpg",
             galleryKey: "berkut_art",
             bio: "Berkut Kalashnikov\nSpecies:  Felis catus (Household cat)\nAge: 20\n\n'Still in the closet...'\n\nMy flower.",
             lore: "Berkut is the very definition of an average guy; there's nothing about him that screams extraordinary. He lives alone in a modest apartment that, by his own standards, feels like a palace. He gets by working at a fast-food chain, rotating between flipping burgers and forcing smiles at the cash register. It's not his dream job, but it pays the bills and funds what truly matters to him: booze and parties.\nHe dropped out of school convinced that academic life wasn't for him, and he doesn't regret it. Still, behind that simple contentment lies a deep fear of loneliness. Berkut fills that silence with noise, friends, and liquor. Anything to avoid hearing his own thoughts. That said, his loyalty is unbreakable: he will always look out for his people. If you're his friend, rest assured he'll never turn his back on you\n\nIn a personal note. Berkut wasn't originally meant to be a character. He was just a drawing i made for fun. But as time passed, he grew on me. I don't draw him that much, but from the times I have, he became a fully fledged character with his own personality and lore.\nBerkut is my representation of hope. He embodies a mix of aloofness, curiosity, and being honest, a bit of heartache.",
@@ -282,8 +285,8 @@ const galleryData = {
             name: "Bertie",
             thumb: "drawings/thumb/bertie_thumb.jpg",
 
-            //profileImage: "drawings/bertie/bertie.jpg",
-            profileImage: "drawings/bertie/lil_bertie.jpg",
+            //profileImage: "drawings/bertie/lil_bertie.jpg",
+            profileImage: "drawings/bertie/lil_bertie_main.jpg",
             galleryKey: "bertie_art",
             bio: "Pushie boy with a big heart and a bigger hat.\nTADC Original Character\nDesigned by artist Ghoulish Badger.",
             lore: "Placeholder for lore, sorry. WILL change this line later, pinkie promise."
@@ -306,7 +309,8 @@ const galleryData = {
             name: "Others",
             thumb: "drawings/thumb/152 sin título_20241231203824_thumb.jpg",
             
-            profileImage: "drawings/152 sin título_20241231203824.jpg",
+            //profileImage: "drawings/152 sin título_20241231203824.jpg",
+            profileImage:"drawings/others_thumb.jpg",
             galleryKey: "misc_art",
             bio: "Various works and experiments.",
             lore: "A collection of drawings that don't fit into the main character categories. Mostly single characters and random doodles."
