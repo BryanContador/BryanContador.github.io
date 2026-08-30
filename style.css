@@ -1998,6 +1998,73 @@ footer p {
 }
 
 /* ==========================================================================
+   MOBILE DATA WARNING BANNER
+   ========================================================================== */
+.mobile-data-warning {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    padding: 15px 20px 25px 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.mobile-data-warning.show {
+    transform: translateY(0);
+}
+
+.mdw-content {
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.mdw-content strong {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.mdw-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 10px;
+    line-height: 0.8;
+    opacity: 1;
+    margin: -10px 25px 0 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mdw-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* not show on PC */
+@media (min-width: 769px) {
+    .mobile-data-warning {
+        display: none !important; 
+    }
+}
+
+/* ==========================================================================
    STATUS WIDGET weather and time
    ========================================================================== */
 .status-widget {

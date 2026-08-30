@@ -1337,4 +1337,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3200); // 3.2 seconds
         });
     }
+
+    // ==========================================================================
+    // MOBILE DATA WARNING NOTIFICATION
+    // ==========================================================================
+    
+    function checkMobileDataWarning() {
+        if (window.innerWidth > 768) return;
+
+        //if user closed it before, don't show again
+        const dismissKey = 'bc_dismissed_data_warning';
+        if (localStorage.getItem(dismissKey) === 'true') return;
+
+        //banner
+        const warningDiv = document.createElement('div');
+        warningDiv.className = 'mobile-data-warning';
+        warningDiv.innerHTML = `
+            <div class="mdw-content">
+                <strong>MOBILE DATA NOTICE:</strong>
+                Warning for mobile data usage: if possible, use a Wi-Fi connection. This site might use more mobile data than normal, since images both in their thumbnail and high quality versions could be rendered.
+            </div>
+            <button class="mdw-close" aria-label="Close warning">&times;</button>
+        `;
+
+        // add to HTML
+        document.body.appendChild(warningDiv);
+
+        // anima after a second
+        setTimeout(() => {
+            warningDiv.classList.add('show');
+        }, 1000);
+
+        // close button logic
+        const closeBtn = warningDiv.querySelector('.mdw-close');
+        closeBtn.addEventListener('click', () => {
+            //anim
+            warningDiv.classList.remove('show');
+            
+            //save on localStorage to not show again
+            localStorage.setItem(dismissKey, 'true'); 
+            
+            //remove from DOM after animation
+            setTimeout(() => warningDiv.remove(), 500);
+        });
+    }
+
+    checkMobileDataWarning();
 });
