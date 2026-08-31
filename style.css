@@ -1226,7 +1226,8 @@ footer p {
         transform: translateY(-3px); 
     }
     
-    .category-card::after {
+    .category-card::after,
+    .category-card:hover::after {
         height: 100%;
         background: rgba(0,0,0,0.5); 
         opacity: 1;
@@ -1236,7 +1237,8 @@ footer p {
         display: none; 
     }
 
-    .category-name {
+    .category-name,
+    .category-card:hover .category-name {
         opacity: 1;
         transform: translateY(0);
         font-size: 2.2rem;
