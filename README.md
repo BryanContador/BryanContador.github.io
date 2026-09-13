@@ -131,4 +131,4 @@ The underlying source code (HTML, CSS, JavaScript, etc.) used to build the struc
 If you have feedback, suggestions for expanding the site, or would like to reach out for any other reason, feel free to do so:
 
 * **Email:** bryan.virtuales@gmail.com
-* **Discord:** bryancontador
+* **Discord:** bryancontador - *(Currently inactive - please use email)*
