@@ -32,7 +32,8 @@ To add new artwork or characters, you only need to modify `data.js`. The JavaScr
 
 ### 1. Adding a Standard Image
 Inside an array (like `fanart` or `drawings`), add an object with this structure:
-\`\`\`javascript
+
+```javascript
 {
     type: "image",
     thumb: "path/to/thumb.jpg",
@@ -42,11 +43,12 @@ Inside an array (like `fanart` or `drawings`), add an object with this structure
     status: "finished", // "finished" or "sketch" (used for filtering)
     date: "2024-05-12"  // YYYY-MM-DD (used for sorting)
 }
-\`\`\`
+```
 
 ### 2. Adding Alternative / Sensitive Images
 If an image has alternative versions (like a sketch version or a sensitive version), use the `altSources` array and the `sensitive` flag:
-\`\`\`javascript
+
+```javascript
 {
     type: "image",
     thumb: "path/to/thumb.jpg",
@@ -62,11 +64,12 @@ If an image has alternative versions (like a sketch version or a sensitive versi
         }
     ]
 }
-\`\`\`
+```
 
 ### 3. Adding a New Category / Character
 To add a new character profile or project folder, add an object to the `categories` array:
-\`\`\`javascript
+
+```javascript
 {
     type: "category",
     id: "new_character_id",
@@ -78,7 +81,7 @@ To add a new character profile or project folder, add an object to the `categori
     lore: "Character lore goes here...",
     isProject: false // Set to true to hide the bio/lore UI (e.g., for 3D Renders)
 }
-\`\`\`
+```
 
 ---
 
@@ -87,23 +90,27 @@ To add a new character profile or project folder, add an object to the `categori
 The site features a "User String" input (and a WinXP "Run" command) that takes secret codes. To prevent users from reading the source code to find the secrets, the codes are hashed using SHA-256.
 
 ### How to add a new secret code:
+
 1. Open your browser's Developer Console (F12).
 2. Paste and run this temporary function to generate a hash for your new secret word:
-\`\`\`javascript
-async function getHash(text) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  console.log(Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(''));
-}
-getHash("my_secret_password"); // Replace with your secret word
-\`\`\`
+
+   ```javascript
+   async function getHash(text) {
+     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+     console.log(Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(''));
+   }
+   getHash("my_secret_password"); // Replace with your secret word
+   ```
+
 3. Copy the resulting hash.
 4. In `script.js` and `scriptXP.js`, locate the `SECRET_DESTINATIONS` object and add your hash and destination URL:
-\`\`\`javascript
-const SECRET_DESTINATIONS = {
-    // ...existing codes
-    "your_new_hash_here": "https://example.com/surprise"
-};
-\`\`\`
+
+   ```javascript
+   const SECRET_DESTINATIONS = {
+       // ...existing codes
+       "your_new_hash_here": "[https://example.com/surprise](https://example.com/surprise)"
+   };
+   ```
 
 ---
 
