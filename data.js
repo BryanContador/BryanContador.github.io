@@ -789,6 +789,14 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "sketches/thumb/Imagen (9)_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (9).jpg",
+            title: "No title",
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
             thumb: "resources/warning.png",
             highRes: "sketches/jamol/Imagen (10).jpg",
             title: "Blood",
@@ -814,6 +822,15 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "sketches/thumb/Imagen (3)_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (3).jpg",
+            title: "No title",
+            description: "Yes, she started with very raw violence.",
+            status: "sketch",
+            sensitive: true,
+        },
+        {
+            type: "image",
             thumb: "sketches/thumb/Imagen (4)_jamol_thumb.jpg",
             highRes: "sketches/jamol/Imagen (4).jpg",
             title: "No title",
@@ -834,7 +851,7 @@ const galleryData = {
             thumb: "sketches/thumb/Imagen (2)_jamol_thumb.jpg",
             highRes: "sketches/jamol/Imagen (2).jpg",
             title: "No title",
-            description: "Very first drawing of Jamol",
+            description: "Very first drawing of Jamol. \nI created her first inspired by the rapper Yeat; all of his outfits and style were a big inspiration for her design.",
             status: "sketch"
         },
         {
@@ -868,6 +885,22 @@ const galleryData = {
             highRes: "sketches/jamol/Imagen (11)_gun.jpg",
             title: "No title",
             sensitive: true,
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (12)_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (12).jpg",
+            title: "No title",
+            description: "No description",
+            status: "sketch"
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/Imagen (8)_thumb.jpg",
+            highRes: "sketches/jamol/Imagen (8).jpg",
+            title: "No title",
             description: "No description",
             status: "sketch"
         },
@@ -986,6 +1019,16 @@ const galleryData = {
             date: "2025-07-21",
             sensitive: true
         },
+        {
+            type: "image",
+            thumb: "sketches/thumb/note-censor_thumb.jpg",
+            highRes: "sketches/berkut/note-censor.jpg",
+            title: "No title",
+            description: "No description",
+            status: "sketch",
+            date: "2026-05-02",
+            sensitive: true,
+        }
     ],
 
     bertie_art: [
@@ -1121,7 +1164,7 @@ const galleryData = {
             type: "image",
             thumb: "sketches/thumb/Imagen_ (14)_thumb.jpg",
             highRes: "sketches/Imagen_(14).jpg",
-            altSources:["sketches/Imagen_(13).jpg"],
+            altSources:["sketches/Imagen_(13).jpg", "sketches/Imagen (12)_lesb.jpg"],
             title: "Camila The Cat and Lil Dream",
             description: "Girlfriends. I made them when i was on my lasts years of preparatory. A little slice of my life when things were better.",
             status: "sketch",
