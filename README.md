@@ -15,6 +15,7 @@ Please note that all content is subject to change or removal at any time without
 * **Content Warning System:** Built-in blurring and consent checks for sensitive artwork.
 * **API Integrations:** Utilizes the GitHub API to display the latest repository commit and the Open-Meteo API for real-time local weather.
 * **Theming & Layout:** CSS-variable powered Light/Dark mode and dynamic grid layouts (OG, Large, Small) saved via `localStorage`.
+* **Featured Artwork Carousel:** An auto-playing cinematic showcase for top-tier artworks, featuring progress-bar tracking, ambient blurred backgrounds for seamless aspect-ratio handling, and direct modal integration.
 
 ## Architecture & Tech Stack
 This project is built using **Vanilla HTML5, CSS3, and JavaScript**. No heavy frameworks (like React or Vue) or CSS libraries (like Tailwind or Bootstrap) were used. 
@@ -42,6 +43,7 @@ Inside an array (like `fanart` or `drawings`), add an object with this structure
     description: "Your description here.\nLine breaks are supported.",
     status: "finished", // "finished" or "sketch" (used for filtering)
     date: "2024-05-12"  // YYYY-MM-DD (used for sorting)
+    featured: true      // (Optional) Set to true to display in the top page carousel
 }
 ```
 
