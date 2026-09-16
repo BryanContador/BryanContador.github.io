@@ -1384,3 +1384,136 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkMobileDataWarning();
 });
+// ==========================================================================
+// FEATURED CAROUSEL LOGIC
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const featuredCarousel = document.getElementById('featured-carousel');
+    if (!featuredCarousel) return;
+
+    if (typeof galleryData === 'undefined' || !galleryData.fanart) return;
+
+    // Get featured items
+    const featuredItems = galleryData.fanart.filter(item => item.featured === true);
+    if (featuredItems.length === 0) return;
+
+    featuredCarousel.style.display = 'block';
+
+    const track = document.getElementById('carousel-track');
+    const dotsContainer = document.getElementById('carousel-dots');
+    const titleEl = document.getElementById('carousel-title');
+    const progressEl = document.getElementById('carousel-progress');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    let currentIndex = 0;
+    let timer;
+    const intervalTime = 6000;
+
+    // Build slides and dots
+    featuredItems.forEach((item, index) => {
+        const slide = document.createElement('div');
+        slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+        
+        // NEW: Create the blurred background layer
+        const bgBlur = document.createElement('div');
+        bgBlur.className = 'carousel-bg-blur';
+        // Set the background image to match the artwork
+        bgBlur.style.backgroundImage = `url('${item.highRes || item.thumb}')`;
+        slide.appendChild(bgBlur);
+
+        // Keep the original image layer
+        const img = document.createElement('img');
+        img.src = item.highRes || item.thumb;
+        img.alt = item.title || 'Featured Fan Art';
+        img.loading = 'lazy';
+        slide.appendChild(img);
+
+        // Click handler to open modal
+        slide.addEventListener('click', () => {
+            const highRes = item.highRes;
+            const galleryImgs = document.querySelectorAll(`.gallery-image[data-high-res-src="${highRes}"]`);
+            if (galleryImgs.length > 0) {
+                const modal = document.getElementById('modal');
+                if (modal) modal.setAttribute('data-carousel-mode', 'true');
+                galleryImgs[0].click();
+            }
+        });
+
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    // Reset modal mode when regular gallery image clicked
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('gallery-image')) {
+            const modal = document.getElementById('modal');
+            if (modal && e.isTrusted) {
+                modal.removeAttribute('data-carousel-mode');
+            }
+        }
+    });
+
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+    function updateCarousel() {
+        slides.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        titleEl.textContent = featuredItems[currentIndex].title || '';
+
+        // Reset progress animation
+        progressEl.classList.remove('animate');
+        void progressEl.offsetWidth; // trigger reflow
+        progressEl.classList.add('animate');
+        progressEl.style.animationDuration = `${intervalTime}ms`;
+    }
+
+    function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+        resetTimer();
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % featuredItems.length;
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + featuredItems.length) % featuredItems.length;
+        updateCarousel();
+    }
+
+    function startTimer() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(() => {
+            nextSlide();
+        }, intervalTime);
+        progressEl.classList.add('animate');
+        progressEl.style.animationDuration = `${intervalTime}ms`;
+    }
+
+    function resetTimer() {
+        startTimer();
+    }
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetTimer();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetTimer();
+    });
+
+    // Initialize
+    updateCarousel();
+    startTimer();
+});

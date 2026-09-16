@@ -34,6 +34,7 @@ const galleryData = {
             thumb: "fanart/thumb/fanta_thumb.jpg",
             highRes: "fanart/fanta.jpg",
             title: "Fanta!",
+            featured: true,
             description: "Character property of Ghoulish Badger.\n@missbadgers on TikTok\nhttps://ko-fi.com/missbadgers"
 
         },
@@ -70,13 +71,15 @@ const galleryData = {
             thumb: "fanart/thumb/baconz_sona_thumb.jpg",
             highRes: "fanart/baconz_sona.jpg",
             title: "Rinn",
-            description: "Character property of The48Baconz \nthe48baconz on Discord."
+            description: "Character property of The48Baconz \nthe48baconz on Discord.",
+            featured: true,
         },
         {
             type: "image",
             thumb: "fanart/thumb/158 sin título_20241001122235_thumb.jpg",
             highRes: "fanart/158 sin título_20241001122235.jpg",
             title: "Bunlith",
+            featured: true,
             description: "Character property of Lilith Walther.\nb0tster on Youtube. \nFrom the time around this piece was finished, I was (and still am) completly in love with this character's desing. Really beautifully made.\nyoutube.com/@b0tster"
         },
         {
@@ -85,6 +88,7 @@ const galleryData = {
             highRes: "fanart/HIM.jpg",
             altSources: ["sketches/Sin título_5_scaled.png", "sketches/idk._2png_scaled_4x_pngcrushed.png"],
             title: "El Rudy",
+            featured: true,
             description: "Inspired by the early 2000's aesthetic and reinforced by Lucy Bedroque's song Hot Boy.\nFeaturing Rudy3rASMR on YouTube.\nyoutube.com/@Rud3yASMR"
         },
         {
@@ -113,6 +117,7 @@ const galleryData = {
             thumb: "fanart/thumb/167 sin título_20240123052223_thumbnail.jpg",
             highRes: "fanart/167 sin título_20240123052223.jpg",
             title: "Woofle",
+            featured: true,
             description: "Character property of DarkViperAU.\nDarkViperAU on youtube\nyoutube.com/@DarkViperAU"
         },
         {
@@ -120,6 +125,7 @@ const galleryData = {
             thumb: "fanart/thumb/Meowfurshot_final_thumb.jpg",
             highRes: "fanart/Meowfurshot_final.jpg",
             title: "MeowFurShot",
+            featured: true,
             description: "Sona property of MeowFurShot.\nMeowFurShot on Youtube. \nInspired by the song Expression On Your Face\nyoutube.com/@Meowfurshot"
         },
         {
@@ -178,6 +184,7 @@ const galleryData = {
             highRes: "fanart/47_sin_titulo_20230710011059.jpg",
             altSources: ["fanart/sketches/47 sin título_20230706231130.jpg","fanart/sketches/47 sin título_20220710005425.jpg"],
             title: "Lillybee",
+            featured: true,
             description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons",
             date: "2023-07-10",
             status: "sketch"
