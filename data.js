@@ -31,6 +31,37 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "fanart/thumb/octopeachy_thumb.jpg",
+            highRes: "fanart/octopeachy.jpg",
+            featured: true,
+            title: "Octopeachy",
+            description: "Character property of Octopeachy.\ntiktok.com/@octoprichap3"
+        },
+        {
+            type: "image",
+            thumb: "fanart/thumb/artfight_football_thumb.jpg",
+            highRes: "fanart/artfight_football.jpg",
+            featured: true,
+            title: "Artight - Football",
+            description: "The characters presented are not my property, as they belong to their respective owners.\nArtfight 2026"
+        },
+        {
+            type: "image",
+            thumb: "fanart/thumb/artfight_massattack_thumb.jpg",
+            highRes: "fanart/artfight_massattack.jpg",
+            featured: true,
+            title: "Artight - Mass attack",
+            description: "Picnic scene.\nThe characters presented are not my property, as they belong to their respective owners.\nArtfight 2026"
+        },
+        {
+            type: "image",
+            thumb: "fanart/thumb/felisha_thumb.jpg",
+            highRes: "fanart/felisha.jpg",
+            title: "Artight - Felisha",
+            description: "Character property of Alreadyish\nyoutube.com/@Alreadyish\nArtfight 2026"
+        },
+        {
+            type: "image",
             thumb: "fanart/thumb/fanta_thumb.jpg",
             highRes: "fanart/fanta.jpg",
             title: "Fanta!",
