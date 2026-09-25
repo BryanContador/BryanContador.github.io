@@ -10,26 +10,25 @@ Please note that all content is subject to change or removal at any time without
 ---
 
 ## Features
-* **Dual-Interface System:** Contains a modern, glassmorphic UI and a fully functional Windows XP Desktop simulation (`WinXP.html`).
+* **Modern Glassmorphic UI:** A sleek, responsive interface with CSS-variable powered Light/Dark mode and dynamic grid layouts (OG, Large, Small) saved via `localStorage`.
 * **Custom Image Modal:** A from-scratch gallery viewer that supports zooming, panning, and seamlessly switching between alternative versions of an image.
 * **Content Warning System:** Built-in blurring and consent checks for sensitive artwork.
 * **API Integrations:** Utilizes the GitHub API to display the latest repository commit and the Open-Meteo API for real-time local weather.
-* **Theming & Layout:** CSS-variable powered Light/Dark mode and dynamic grid layouts (OG, Large, Small) saved via `localStorage`.
 * **Featured Artwork Carousel:** An auto-playing cinematic showcase for top-tier artworks, featuring progress-bar tracking, ambient blurred backgrounds for seamless aspect-ratio handling, and direct modal integration.
+* **Windows XP Easter Egg:** A link to a fully functional [Windows XP Desktop simulation](https://bryancontador.github.io/winxp-portfolio/) (hosted in a separate repository) that acts as an alternative interface for this portfolio.
 
 ## Architecture & Tech Stack
 This project is built using **Vanilla HTML5, CSS3, and JavaScript**. No heavy frameworks (like React or Vue) or CSS libraries (like Tailwind or Bootstrap) were used. 
 
-The site operates on a "Headless CMS" style approach using a single JavaScript file:
+The site operates on a "Headless CMS" style approach using a central JavaScript file:
 * **`data.js`**: Acts as the central database. It stores all metadata (titles, descriptions, lore, file paths, alternative versions, etc.).
 * **`script.js`**: The controller for the modern web UI. It reads `data.js` and dynamically generates the HTML grids, modals, and character pages.
-* **`scriptXP.js`**: The controller for the Windows XP simulation. It reads the *exact same* `data.js` file but renders it into Draggable Windows, Desktop Icons, and Start Menu items.
 
 ---
 
 ## Developer Guide: Updating Content (`data.js`)
 
-To add new artwork or characters, you only need to modify `data.js`. The JavaScript will automatically render it across both the modern site and the WinXP OS.
+To add new artwork or characters, you only need to modify `data.js`. 
 
 ### 1. Adding a Standard Image
 Inside an array (like `fanart` or `drawings`), add an object with this structure:
@@ -42,7 +41,7 @@ Inside an array (like `fanart` or `drawings`), add an object with this structure
     title: "Artwork Title",
     description: "Your description here.\nLine breaks are supported.",
     status: "finished", // "finished" or "sketch" (used for filtering)
-    date: "2024-05-12"  // YYYY-MM-DD (used for sorting)
+    date: "2024-05-12", // YYYY-MM-DD (used for sorting)
     featured: true      // (Optional) Set to true to display in the top page carousel
 }
 ```
@@ -89,7 +88,7 @@ To add a new character profile or project folder, add an object to the `categori
 
 ## Developer Guide: Easter Eggs & Secret Codes
 
-The site features a "User String" input (and a WinXP "Run" command) that takes secret codes. To prevent users from reading the source code to find the secrets, the codes are hashed using SHA-256.
+The site features a "User String" input that takes secret codes. To prevent users from reading the source code to find the secrets, the codes are hashed using SHA-256.
 
 ### How to add a new secret code:
 
@@ -105,12 +104,12 @@ The site features a "User String" input (and a WinXP "Run" command) that takes s
    ```
 
 3. Copy the resulting hash.
-4. In `script.js` and `scriptXP.js`, locate the `SECRET_DESTINATIONS` object and add your hash and destination URL:
+4. In `script.js`, locate the `SECRET_DESTINATIONS` object and add your hash and destination URL:
 
    ```javascript
    const SECRET_DESTINATIONS = {
        // ...existing codes
-       "your_new_hash_here": "[https://example.com/surprise](https://example.com/surprise)"
+       "your_new_hash_here": "https://example.com/surprise"
    };
    ```
 
