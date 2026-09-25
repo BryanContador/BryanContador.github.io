@@ -2,6 +2,12 @@
 
 This repository contains the source code and assets for my personal website, hosted via GitHub Pages.
 
+![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-121013?logo=github&logoColor=white)
+![License](https://img.shields.io/badge/License-Dual_License-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+
 ## About This Site
 This website is developed and maintained exclusively by **Bryan Benjamin Counter**. It serves as a personal portfolio to showcase my work, art, and creative projects, while also functioning as a sandbox for web development, design experimentation, and hands-on coding.
 
