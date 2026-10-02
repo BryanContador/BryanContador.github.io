@@ -39,6 +39,13 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "fanart/thumb/ray_silly_thumb.jpg",
+            highRes: "fanart/ray_silly.jpg",
+            title: "Ray being silly",
+            description: "Character property of Ray.\ngreymamour on discord"
+        },
+        {
+            type: "image",
             thumb: "fanart/thumb/artfight_football_thumb.jpg",
             highRes: "fanart/artfight_football.jpg",
             featured: true,
@@ -575,6 +582,15 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "drawings/sunshine/286 sin título.jpg",
+            highRes: "drawings/sunshine/286 sin título.jpg",
+            title: "XMAS 2019",
+            description: "Xmas sunshine",
+            status: "finished",
+            date: "2002-01-01"
+        },
+        {
+            type: "image",
             thumb: "drawings/thumb/288 sin título(2019)_thumb.jpg",
             highRes: "drawings/sunshine/288 sin título(2019).jpg",
             title: "XMAS 2019",
@@ -768,6 +784,16 @@ const galleryData = {
             title: "Smile.",
             description: "No description",
             date: "2025-02-13",
+            status: "sketch"
+
+        },
+        {
+            type: "image",
+            thumb: "sketches/thumb/80 sin título_20221102065043_thumb.jpg",
+            highRes: "sketches/jamol/80 sin título_20221102065043.jpg",
+            title: "Threat.",
+            description: "No description",
+            date: "2022-01-11",
             status: "sketch"
 
         },
@@ -1311,13 +1337,31 @@ const galleryData = {
         },
         {
             type: "image",
+            thumb: "drawings/thumb/cat_276 sin título_thumb.jpg",
+            highRes: "drawings/cat_276 sin título.jpg",
+            title: "Cat girl",
+            description: "Who is this and why was she crying? I don't remember. \nOld drawing.",
+            status: "finished",
+            date: "2019-12-01"
+        },
+        {
+            type: "image",
+            thumb: "drawings/thumb/deer_209 sin título_thumb.jpg",
+            highRes: "drawings/deer_209 sin título.jpg",
+            title: "Deer girl",
+            description: "Can't remember when i did this, but it certainly was on xmas.\nOld drawing.",
+            status: "finished",
+            date: "2019-12-01"
+        },
+        {
+            type: "image",
             thumb: "drawings/thumb/248 sin título_thumb.jpg",
             highRes: "drawings/248 sin título.jpg",
             title: "Bear girl",
             description: "One of my first (digital) drawings.",
             status: "finished",
             date: "2019-05-14"
-        }
+        },
     ],
 
     // ==========================================================================
