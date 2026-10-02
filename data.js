@@ -326,15 +326,14 @@ const galleryData = {
         },
         {
             type: "category",
-            id: "bertie",
-            name: "Bertie",
+            id: "persona",
+            name: "Persona",
             thumb: "drawings/thumb/bertie_thumb.jpg",
 
-            //profileImage: "drawings/bertie/lil_bertie.jpg",
-            profileImage: "drawings/bertie/lil_bertie_main.jpg",
-            galleryKey: "bertie_art",
-            bio: "Pushie boy with a big heart and a bigger hat.\nTADC Original Character\nDesigned by artist Ghoulish Badger.",
-            lore: "Placeholder for lore, sorry. WILL change this line later, pinkie promise."
+            profileImage: "drawings/persona/prof_image.jpg",
+            galleryKey: "persona_art",
+            bio: "Persona character.\nOriginal Character.",
+            lore: "Persona I use to represent myself."
 
         },
         {
@@ -1095,24 +1094,25 @@ const galleryData = {
         }
     ],
 
-    bertie_art: [
+    persona_art: [
         {
             type: "image",
-            thumb: "drawings/thumb/bertie_thumb.jpg",
-            highRes: "drawings/bertie/bertie.jpg",
-            title: "Bertie",
-        description: "Character sheet for Bertie.\nMade by Ghoulish Badger.\n@missbadgers on TikTok. ",
+            thumb: "drawings/thumb/ref_clothes_thumb.jpg",
+            highRes: "drawings/persona/ref_clothes.jpg",
+            altSources:["drawings/persona/ref_nude.jpg", "sketches/persona/nose3.jpg"],
+            title: "Persona reference sheet",
+            description: "Character sheet for my persona.",
             status: "finished",
-            date: "2026-05-05"
+            date: "2026-09-29"
         },
         {
             type:"image",
-            thumb:"drawings/thumb/bertie_pose_thumb.jpg",
-            highRes: "sketches/bertie/bertie_pose.jpg",
-            title: "Bertie Pose",
-            description: "Little Bertie boy pose. Finished version in progress. \nSketch by Goulish Badger.\n@missbadgers on TikTok. ",
-            status: "sketch",
-            date: "2026-01-01"
+            thumb:"drawings/thumb/escena_final2_thumb.jpg",
+            highRes: "drawings/persona/escena_final2.jpg",
+            title: "Sticks and stones",
+            description: "May brake my bones but words will always hurt me. \nVent art.",
+            status: "finished",
+            date: "2026-09-30"
         }
     ],
 
@@ -1178,6 +1178,15 @@ const galleryData = {
     ],
 
     misc_art: [
+        {
+            type: "image",
+            thumb: "drawings/thumb/animal-hospital-final_thumb.jpg",
+            highRes: "drawings/animal-hospital-final.jpg",
+            title: "Life, is roblox",
+            description: "My roblox character along side another character from the game Animal Hospital..",
+            status: "finished",
+            date: "2026-06-28"
+        },
         {
             type: "image",
             thumb: "drawings/thumb/152 sin título_20241231203824_thumb.jpg",
@@ -1253,6 +1262,24 @@ const galleryData = {
         },*/
         {
             type: "image",
+            thumb: "drawings/thumb/bertie_thumb.jpg",
+            highRes: "drawings/bertie.jpg",
+            title: "Bertie",
+        description: "Character sheet for Bertie.\nMade by Ghoulish Badger.\n@missbadgers on TikTok. ",
+            status: "finished",
+            date: "2026-05-05"
+        },
+        {
+            type:"image",
+            thumb:"sketches/thumb/bertie_pose_thumb.jpg",
+            highRes: "sketches/bertie_pose.jpg",
+            title: "Bertie Pose",
+            description: "Little Bertie boy pose. Finished version in progress. \nSketch by Ghoulish Badger.\n@missbadgers on TikTok. ",
+            status: "sketch",
+            date: "2026-01-01"
+        },
+        {
+            type: "image",
             thumb: "sketches/thumb/84 sin título_thumb.jpg",
             highRes: "sketches/84 sin título.jpg",
             title: "Janet",
@@ -1324,7 +1351,6 @@ const galleryData = {
             status: "sketch",
             date:"2025-08-03"
         },
-        /*Roblox character */
         {
             type: "image",
             thumb: "drawings/thumb/634 sin título_thumb.jpg",
