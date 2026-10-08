@@ -1109,6 +1109,7 @@ const galleryData = {
             type:"image",
             thumb:"drawings/thumb/escena_final2_thumb.jpg",
             highRes: "drawings/persona/escena_final2.jpg",
+            altSources:["sketches/persona/escena_sketch.jpg"],
             title: "Sticks and stones",
             description: "May brake my bones but words will always hurt me. \nVent art.",
             status: "finished",
