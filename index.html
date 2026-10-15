@@ -56,6 +56,22 @@
     
     <main>
         <h2>WELCOME</h2>
+
+        <!-- Featured Carousel Container -->
+        <section class="featured-showcase" id="featured-carousel" style="display: none;">
+            <div class="carousel-track" id="carousel-track"></div>
+            <div class="carousel-overlay">
+                <h3 class="carousel-title" id="carousel-title"></h3>
+                <div class="carousel-controls">
+                    <button class="carousel-arrow prev" id="carousel-prev">❮</button>
+                    <div class="carousel-dots" id="carousel-dots"></div>
+                    <button class="carousel-arrow next" id="carousel-next">❯</button>
+                </div>
+                <div class="carousel-progress-container">
+                    <div class="carousel-progress-bar" id="carousel-progress"></div>
+                </div>
+            </div>
+        </section>
         <p class="intro-text"> <!--<p class="intro-text" id="intro-text-randomizer"> -->
             Welcome to my portfolio, here you will find my latest artwork and creative projects.<br>
             This site is under constant development, so don't freak out if it doesn't look the same each time you visit.
@@ -79,6 +95,37 @@
             <span>?</span><span>?</span><span>?</span>
         </div>
         <input type="text" id="secret-input" placeholder="" autocomplete="off">
+    </div>
+
+    <!-- ==========================================
+         MODAL OVERLAY (FOR CAROUSEL)
+         ========================================== -->
+    <div class="modal" id="modal">
+        <button class="modal-close" id="modal-close">×</button>
+        <button class="modal-nav prev" id="modal-prev">❮</button>
+        <button class="modal-nav next" id="modal-next">❯</button>
+        <button id="modal-alt-btn">View Alternative</button>
+
+        <div id="modal-image-container">
+            <div id="modal-loader">LOADING...</div>
+            <img id="modal-img" src="">
+            <img id="modal-img-next" src="">
+
+            <div id="modal-warning" class="modal-warning-overlay">
+                <div class="modal-warning-content">
+                    <p>
+                        This post may contain images that some viewers find offensive or unsettling.<br>
+                        Do you wish to proceed?
+                    </p>
+                    <button id="warning-continue-btn">View</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-info">
+            <h3 id="modal-title">No title</h3>
+            <p id="modal-description">No description</p>
+        </div>
     </div>
 
     <footer>

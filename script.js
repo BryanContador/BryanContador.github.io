@@ -665,9 +665,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 revealedMap: new Array(sensitivityMap.length).fill(false) 
             });
 
-            img.addEventListener('click', () => {
-                openModalAtIndex(index);
-            });
+            // Update dynamic index to prevent stale data
+            img.setAttribute('data-gallery-index', index);
+
+            // Bind click event only once per image
+            if (!img.hasAttribute('data-modal-bound')) {
+                img.setAttribute('data-modal-bound', 'true');
+                img.addEventListener('click', () => {
+                    const currentIndex = parseInt(img.getAttribute('data-gallery-index'), 10);
+                    openModalAtIndex(currentIndex);
+                });
+            }
         });
         
         function linkify(text) {
@@ -1009,6 +1017,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isModalInitialized = true; // <--Declarar modal como inicializado para no duplicar eventos
         }
     }
+    window.initializeGalleryModal = initializeGalleryModal;
     initializeGalleryModal();
 
     // ==========================================================================
@@ -1427,18 +1436,39 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = item.highRes || item.thumb;
         img.alt = item.title || 'Featured Fan Art';
         img.loading = 'lazy';
-        slide.appendChild(img);
+        
+        // Add gallery classes and modal dataset attributes directly to the carousel image
+        img.classList.add('gallery-image');
+        img.dataset.highResSrc = item.highRes;
+        img.dataset.title = item.title || '';
+        img.dataset.description = item.description || '';
 
-        // Click handler to open modal
-        slide.addEventListener('click', () => {
-            const highRes = item.highRes;
-            const galleryImgs = document.querySelectorAll(`.gallery-image[data-high-res-src="${highRes}"]`);
-            if (galleryImgs.length > 0) {
-                const modal = document.getElementById('modal');
-                if (modal) modal.setAttribute('data-carousel-mode', 'true');
-                galleryImgs[0].click();
-            }
+        // Inherit sensitivity settings seamlessly
+        let sourceSensitivities = [item.sensitive === true];
+        let altSrcs = [];
+
+        if (item.altSources && item.altSources.length > 0) {
+            item.altSources.forEach(alt => {
+                if (typeof alt === 'string') {
+                    altSrcs.push(alt);
+                    sourceSensitivities.push(item.sensitive === true); 
+                } else if (typeof alt === 'object') {
+                    altSrcs.push(alt.src);
+                    sourceSensitivities.push(alt.sensitive !== undefined ? alt.sensitive : item.sensitive === true);
+                }
+            });
+            img.dataset.altSources = altSrcs.join(',');
+        }
+        
+        img.dataset.sensitiveMap = sourceSensitivities.join(',');
+
+        // Set carousel-mode flag when clicked
+        img.addEventListener('click', () => {
+            const modal = document.getElementById('modal');
+            if (modal) modal.setAttribute('data-carousel-mode', 'true');
         });
+
+        slide.appendChild(img);
 
         track.appendChild(slide);
 
@@ -1516,4 +1546,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     updateCarousel();
     startTimer();
+
+    // Tell the modal to scan the DOM again and hook the carousel images
+    if (typeof window.initializeGalleryModal === 'function') {
+        window.initializeGalleryModal();
+    }
 });

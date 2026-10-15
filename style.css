@@ -658,6 +658,8 @@ footer p {
     font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
     font-weight: 400; /* Added normal weight */
     text-align: center;
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .last-commit-box {
@@ -2151,7 +2153,7 @@ body::after {
 .featured-showcase {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto 40px;
+    margin: 0 auto 20px;
     position: relative;
     aspect-ratio: 21/9;
     background: var(--nav-bg);
