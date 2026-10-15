@@ -623,31 +623,48 @@ footer p {
 
 /* About Page Styles */
 .about-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    text-align: center;
+}
+
+.about-bio-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.about-text-section {
+    flex: 1;
+}
+
+.about-image-section {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-picture {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 0%;
     object-fit: cover;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeInImage 1.2s ease-out 0.3s forwards;
+    /* Fade-in animation removed */
 }
 
 .about-text {
     font-size: 1.1rem;
     color: var(--text-color-light);
     line-height: 1.7;
-    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
-    font-weight: 400; /* Added normal weight */
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    font-family: "Roboto Flex", sans-serif;
+    font-weight: 400;
+    text-align: left; /* Left-aligned */
+    margin: 0;
 }
 
 .intro-text {
@@ -691,10 +708,16 @@ footer p {
 /* Social Links Styles */
 .social-links {
     margin-top: 50px;
+    text-align: center; /* Centers the heading, lists, and status widget */
+}
+
+/* Ensures the contact info and repo text inside this section remain centered */
+.social-links .about-text {
+    text-align: center;
 }
 
 .social-links h3 {
-    font-family: "Roboto Flex", sans-serif; /* before 'Patrick Hand', cursive;*/
+    font-family: "Roboto Flex", sans-serif;
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: var(--text-color);
@@ -705,6 +728,7 @@ footer p {
     padding: 0;
     margin: 0;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .social-links ul li {
@@ -751,6 +775,7 @@ footer p {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .repo-link {
@@ -855,6 +880,16 @@ footer p {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+    .about-bio-wrapper {
+        flex-direction: column-reverse;
+        gap: 25px;
+    }
+
+    .about-image-section {
+        width: 100%;
+    }
+    
     .logo-container h1 {
         font-size: 1.4rem;
         white-space: nowrap;
