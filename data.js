@@ -56,7 +56,6 @@ const galleryData = {
             type: "image",
             thumb: "fanart/thumb/artfight_massattack_thumb.jpg",
             highRes: "fanart/artfight_massattack.jpg",
-            featured: true,
             title: "Artight - Mass attack",
             description: "Picnic scene.\nThe characters presented are not my property, as they belong to their respective owners.\nArtfight 2026"
         },
@@ -1112,6 +1111,7 @@ const galleryData = {
             altSources:["sketches/persona/escena_sketch.jpg"],
             title: "Sticks and stones",
             description: "May brake my bones but words will always hurt me. \nVent art.",
+            featured: true,
             status: "finished",
             date: "2026-09-30"
         }
@@ -1126,6 +1126,7 @@ const galleryData = {
             title: "Pray for me",
             description: "Drawing originally intended as a gift. Reused as vent art. \nThe girl, sitting in the middle of nowhere, looks up, praying to God for forgiveness.",
             status: "finished",
+            featured: true,
             date: "2025-11-25"
             
         },

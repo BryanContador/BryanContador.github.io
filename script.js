@@ -1400,10 +1400,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const featuredCarousel = document.getElementById('featured-carousel');
     if (!featuredCarousel) return;
 
-    if (typeof galleryData === 'undefined' || !galleryData.fanart) return;
+    if (typeof galleryData === 'undefined') return;
 
-    // Get featured items
-    const featuredItems = galleryData.fanart.filter(item => item.featured === true);
+    // Collect all items marked with 'featured: true' from EVERY array in galleryData
+    const featuredItems = [];
+    const seenSources = new Set(); // Prevents duplicate slides if an artwork exists in multiple lists
+
+    Object.values(galleryData).forEach(list => {
+        if (Array.isArray(list)) {
+            list.forEach(item => {
+                if (item && item.featured === true) {
+                    const uniqueKey = item.highRes || item.thumb;
+                    if (uniqueKey && !seenSources.has(uniqueKey)) {
+                        seenSources.add(uniqueKey);
+                        featuredItems.push(item);
+                    }
+                }
+            });
+        }
+    });
+
     if (featuredItems.length === 0) return;
 
     featuredCarousel.style.display = 'block';
