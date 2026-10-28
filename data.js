@@ -13,21 +13,21 @@ const galleryData = {
             thumb: "fanart/thumb/PUTO_thumb.jpg",
             highRes: "fanart/PUTO.jpg",
             title: "Margrave",
-            description: "Character property of Alex C. (countdooku on Discord) \nfiverr.com/tempallus. \nFirst piece of a set of 3"
+            description: "Character property of Alex C.\ndiscord: countdooku\nFirst piece of a set of 3"
         },
         {
             type: "image",
             thumb: "fanart/thumb/piece_of_cake_thumb.jpg",
             highRes: "fanart/piece_of_cake.jpg",
             title: "Aster",
-            description: "Character property of Andrew.\nasterbuds on Discord. \nSecond piece of a set of 3"
+            description: "Character property of Andrew.\ndiscord: asterbuds.\nSecond piece of a set of 3"
         },
         {
             type: "image",
             thumb: "fanart/thumb/3rd_boyfriend_thumb.png",
             highRes: "fanart/3rd_boyfriend.jpg",
             title: "Bel",
-            description: "Character property of Danny.\ndanfromarbys on Discord. \nThird piece of a set of 3"
+            description: "Character property of Danny.\ndiscord: danfromarbys.\nThird piece of a set of 3"
         },
         {
             type: "image",
@@ -35,14 +35,14 @@ const galleryData = {
             highRes: "fanart/octopeachy.jpg",
             featured: true,
             title: "Octopeachy",
-            description: "Character property of Octopeachy.\ntiktok.com/@octoprichap3"
+            description: "Character property of Octopeachy.\ntiktok: octoprichap3"
         },
         {
             type: "image",
             thumb: "fanart/thumb/ray_silly_thumb.jpg",
             highRes: "fanart/ray_silly.jpg",
             title: "Ray being silly",
-            description: "Character property of Ray.\ngreymamour on discord"
+            description: "Character property of Ray.\ndiscord: greymamour"
         },
         {
             type: "image",
@@ -72,43 +72,43 @@ const galleryData = {
             highRes: "fanart/fanta.jpg",
             title: "Fanta!",
             featured: true,
-            description: "Character property of Ghoulish Badger.\n@missbadgers on TikTok"
+            description: "Character property of Ghoulish Badger.\ntiktok: missbadgers"
 
         },
         {
             type: "image",
             thumb: "fanart/thumb/homies_thumb.jpg",
             highRes: "fanart/homies.jpg",
-            title: "Fanart for homies",
-            description: "Art for the homeboys.\n@missbadgers on TikTok \n(Don't look at the guy on the center he's up to no good...)"
+            title: "Homies",
+            description: "Art for the homeboys.\ntiktok: missbadgers \n(Don't look at the guy on the center he's up to no good...)"
         },
         {
             type: "image",
             thumb: "fanart/thumb/Badger_zombie_slayer_thumb.jpg",
             highRes: "fanart/Badger_zombie_slayer.jpg",
-            title: "Fanart for the Alix (ZOMBIE SLAYER)",
-            description: "Art for with Ghoulish Badger.\n@missbadgers on TikTok\n  "
+            title: "Zombie Apocalipse",
+            description: "Character property of Ghoulish Badger.\ntiktok: missbadgers"
         },
         {
             type: "image",
             thumb: "fanart/thumb/Liam_chuky_thumb.jpg",
             highRes: "fanart/Liam_chuky.jpg",
-            title: "Fanart for the Liam (CHUKY)",
-            description: "Art for William Londington.\n@missbadgers on TikTok"
+            title: "Halloween fanart",
+            description: "Character property of Ghoulish Badger.\ntiktok: missbadgers"
         },
         {
             type: "image",
             thumb: "fanart/thumb/Liam_feet_love_thumb.jpg",
             highRes: "fanart/Liam_feet_love.jpg",
-            title: "Art Trade (FEET)",
-            description: "Art Trade with Ghoulish Badger.\n@missbadgers on TikTok"
+            title: "Art Trade",
+            description: "Art Trade with Ghoulish Badger.\ntiktok: missbadgers"
         },
         {
             type: "image",
             thumb: "fanart/thumb/baconz_sona_thumb.jpg",
             highRes: "fanart/baconz_sona.jpg",
             title: "Rinn",
-            description: "Character property of The48Baconz \nthe48baconz on Discord.",
+            description: "Character property of The48Baconz \ndiscord: the48baconz",
             featured: true,
         },
         {
@@ -133,21 +133,21 @@ const galleryData = {
             thumb: "fanart/thumb/HERB_true_sona_kitty_cat_thumb.jpg",
             highRes: "fanart/HERB_true_sona_kitty_cat.jpg",
             title: "Herb",
-            description: "Character property of FoxDied\ninstagram.com/fox._diedxd"
+            description: "Character property of FoxDied\ninstagram: fox._diedxd"
         },
         {
             type: "image",
             thumb: "fanart/thumb/56 sin título_20220827024832_thumb.jpg",
             highRes: "fanart/56 sin título_20220827024832.jpg",
             title: "Cute couple",
-            description: "Character property of deadlightswitch"
+            description: "Character property of deadlightswitch\ndiscord: deadlightswitch"
         },
         {
             type: "image",
             thumb: "fanart/thumb/169 sin título_20240204111530_thumb.jpg",
             highRes: "fanart/169 sin título_20240204111530.jpg",
             title: "Yogurt Male",
-            description: "Sona property of Melody NoSureName. \nFeaturing Melody NoSureName on YouTube.\nyoutube.com/@MelodyNosurname"
+            description: "Sona property of Melody NoSureName.\nYoutube: MelodyNosurname"
         },
         {
             type: "image",
@@ -155,7 +155,7 @@ const galleryData = {
             highRes: "fanart/167 sin título_20240123052223.jpg",
             title: "Woofle",
             featured: true,
-            description: "Character property of DarkViperAU.\nDarkViperAU on youtube\nyoutube.com/@DarkViperAU"
+            description: "Character property of DarkViperAU.\nYoutube: DarkViperAU"
         },
         {
             type: "image",
@@ -163,7 +163,7 @@ const galleryData = {
             highRes: "fanart/Meowfurshot_final.jpg",
             title: "MeowFurShot",
             featured: true,
-            description: "Sona property of MeowFurShot.\nMeowFurShot on Youtube. \nInspired by the song Expression On Your Face\nyoutube.com/@Meowfurshot"
+            description: "Sona property of MeowFurShot.\nMeowFurShot on Youtube.\nInspired by the song Expression On Your Face\nYoutube: Meowfurshot"
         },
         {
             type: "image",
@@ -191,14 +191,14 @@ const galleryData = {
             thumb: "fanart/thumb/maple_thumb.jpg",
             highRes: "fanart/maple.jpg",
             title: "Maple",
-            description: "Original Character property of Squarecatz (Fetch).\nhttps://fetchdog.straw.page\nartfight.net/~Squarecatz"
+            description: "Original Character property of Squarecatz (Fetch).\nartfight.net/~Squarecatz"
         },
         {
             type: "image",
             thumb: "fanart/thumb/lamb_thumb.jpg",
             highRes: "fanart/lamb.jpg",
             title: "Faulthy Heart",
-            description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons"
+            description: "Original Character property of Pilferpup Draws. \nYoutube: PilferpupCartoons"
         },
         {
             type: "image",
@@ -206,14 +206,14 @@ const galleryData = {
             highRes: "fanart/176 sin título_20240704015305.jpg",
             altSources:["fanart/sketches/176 sin título_20240702142444.jpg"],
             title: "Lullaby",
-            description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons"
+            description: "Original Character property of Pilferpup Draws. \nYoutube: PilferpupCartoons"
         },
         {
             type: "image",
             thumb: "fanart/thumb/165 sin título_20240729013124_thumb.jpg",
             highRes: "fanart/165 sin título_20240729013124.jpg",
             title: "Cotton Pon",
-            description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons"
+            description: "Original Character property of Pilferpup Draws. \nYoutube: PilferpupCartoons"
         },
         {
             type: "image",
@@ -222,7 +222,7 @@ const galleryData = {
             altSources: ["fanart/sketches/47 sin título_20230706231130.jpg","fanart/sketches/47 sin título_20220710005425.jpg"],
             title: "Lillybee",
             featured: true,
-            description: "Original Character property of Pilferpup Draws. \nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons",
+            description: "Original Character property of Pilferpup Draws. \nYoutube: PilferpupCartoons",
             date: "2023-07-10",
             status: "sketch"
         },
@@ -231,7 +231,7 @@ const galleryData = {
             thumb: "fanart/thumb/excited_thumb.jpg",
             highRes: "fanart/excited.jpg",
             title: "excited",
-            description: "Original Character property of Pilferpup Draws. \nHorrible.\nPilferpup Draws on Youtube.\nyoutube.com/@PilferpupCartoons"
+            description: "Original Character property of Pilferpup Draws. \nHorrible.\nYoutube: PilferpupCartoons"
         },
         {
             type: "image",
@@ -1267,7 +1267,7 @@ const galleryData = {
             thumb: "drawings/thumb/bertie_thumb.jpg",
             highRes: "drawings/bertie.jpg",
             title: "Bertie",
-        description: "Character sheet for Bertie.\nMade by Ghoulish Badger.\n@missbadgers on TikTok. ",
+        description: "Character sheet for Bertie.\nMade by Ghoulish Badger.\ntiktok: missbadgers. ",
             status: "finished",
             date: "2026-05-05"
         },
@@ -1276,7 +1276,7 @@ const galleryData = {
             thumb:"sketches/thumb/bertie_pose_thumb.jpg",
             highRes: "sketches/bertie_pose.jpg",
             title: "Bertie Pose",
-            description: "Little Bertie boy pose. Finished version in progress. \nSketch by Ghoulish Badger.\n@missbadgers on TikTok. ",
+            description: "Little Bertie boy pose. Finished version in progress. \nSketch by Ghoulish Badger.\ntiktok: missbadgers. ",
             status: "sketch",
             date: "2026-01-01"
         },
