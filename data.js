@@ -191,7 +191,7 @@ const galleryData = {
             thumb: "fanart/thumb/maple_thumb.jpg",
             highRes: "fanart/maple.jpg",
             title: "Maple",
-            description: "Original Character property of Squarecatz (Fetch).\nartfight.net/~Squarecatz"
+            description: "Original Character property of Squarecatz (Fetch).\nartfight: Squarecatz"
         },
         {
             type: "image",
@@ -616,7 +616,8 @@ const galleryData = {
             title: "Ref Sheet for Jamol",
             description: "Been wanting to get her done for a while.",
             date: "2026-05-24",
-            status: "finished" 
+            status: "finished",
+            featured: true
 
         },
         {
