@@ -1106,6 +1106,16 @@ const galleryData = {
             date: "2026-09-29"
         },
         {
+            type: "image",
+            thumb: "drawings/thumb/yours-final-text_thumb.jpg",
+            highRes: "drawings/persona/yours-final-text.jpg",
+            altSources:["drawings/persona/yours-final.jpg"],
+            title: "Yours",
+            description: "You don't have to love me.\nI just wanted to be yours.",
+            status: "finished",
+            date: "2026-11-09"
+        },
+        {
             type:"image",
             thumb:"drawings/thumb/escena_final2_thumb.jpg",
             highRes: "drawings/persona/escena_final2.jpg",
